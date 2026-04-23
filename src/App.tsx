@@ -123,7 +123,7 @@ function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full py-4 text-center bg-brand-black text-white rounded-full font-bold mt-2"
             >
-              Ikut Melayani
+              Contact Us
             </a>
           </motion.div>
         )}
