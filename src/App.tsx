@@ -722,9 +722,11 @@ function Interaction() {
               return (
                 <div
                   key={i}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     const items = containerRef.current?.querySelectorAll('.cta-card');
-                    items?.[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                    items?.[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                   }}
                   className={`
                   cta-card shrink-0
@@ -766,6 +768,7 @@ function Interaction() {
 
                   {/* BUTTON */}
                   <button
+                    type="button"
                     className={`
                     w-full py-4 rounded-full font-bold text-lg
                     transition-all duration-300
