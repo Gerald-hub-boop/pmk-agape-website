@@ -712,8 +712,8 @@ function Interaction() {
             ref={containerRef}
             onScroll={handleScroll}
             className="
-            flex gap-4 md:gap-6 overflow-x-auto pb-8
-            snap-x snap-mandatory no-scrollbar
+            flex gap-6 md:gap-8 overflow-x-auto pb-10 px-10
+            snap-x snap-mandatory no-scrollbar scroll-px-10
           "
           >
             {cards.map((c, i) => {
@@ -730,7 +730,7 @@ function Interaction() {
                   }}
                   className={`
                   cta-card shrink-0
-                  w-[85vw] sm:w-[320px] md:w-[380px] lg:w-[400px]
+                  w-[80vw] sm:w-[320px] md:w-[380px] lg:w-[400px]
                   snap-center rounded-[2rem]
                   p-6 md:p-8
                   flex flex-col items-center justify-center
