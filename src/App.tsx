@@ -300,30 +300,30 @@ function Activities() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="py-10 md:py-12 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 my-6 overflow-hidden scroll-mt-20"
+      className="pt-6 pb-2 md:pt-10 md:pb-8 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 my-6 overflow-hidden scroll-mt-20"
     >
       <div className="max-w-[1500px] mx-auto">
 
         <div className="flex flex-col md:flex-row justify-between items-end mb-6 px-6 lg:px-16">
           <div className="max-w-2xl">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4 tracking-tight text-brand-black">What We Do?</h2>
+            <h2 className="text-2xl md:text-4xl font-bold mb-3 tracking-tight text-brand-black">What We Do?</h2>
             <p className="text-gray-500 font-medium text-base md:text-lg leading-relaxed opacity-90">Growing together in every gathering and every shared journey.</p>
           </div>
         </div>
 
         {/* Horizontal Scroll Layout */}
         <div className="relative w-full">
-          <div className="flex overflow-x-auto gap-4 md:gap-6 pb-12 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
+          <div className="flex overflow-x-auto gap-4 md:gap-6 pb-4 md:pb-8 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
             {activities.map((act, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white rounded-2xl md:rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 ease-in-out cursor-pointer group flex flex-col border border-gray-100/50 shrink-0 w-[80vw] md:w-[48vw] lg:w-[42vw] max-w-[650px] snap-start overflow-hidden"
+                className="bg-white rounded-2xl md:rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 ease-in-out cursor-pointer group flex flex-col border border-gray-100/50 shrink-0 w-[80vw] md:w-[48vw] lg:w-[42vw] max-w-[650px] snap-start overflow-hidden h-fit"
               >
                 {/* Immersive Image Header */}
-                <div className="relative w-full h-[220px] md:h-[340px] overflow-hidden">
+                <div className="relative w-full h-[200px] md:h-[340px] overflow-hidden">
                   <img
                     src={act.image}
                     alt={act.title}
@@ -335,13 +335,13 @@ function Activities() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-4 md:p-5 flex flex-col flex-1 relative bg-white">
+                <div className="p-4 md:p-6 flex flex-col relative bg-white">
                   <div className="flex gap-4 md:gap-6 items-start">
                     <div className="w-10 h-10 md:w-14 md:h-14 bg-[#FFF0F2] text-[#5A1E1E] rounded-xl flex items-center justify-center shrink-0 border border-[#FADADD]/20 shadow-sm">
                       {React.cloneElement(act.icon as React.ReactElement, { className: 'w-5 h-5 md:w-7 md:h-7' })}
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
+                      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
                       <p className="text-gray-500 font-medium text-sm md:text-base leading-relaxed opacity-80">{act.desc}</p>
                     </div>
                   </div>
