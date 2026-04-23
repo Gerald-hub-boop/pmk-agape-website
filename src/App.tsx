@@ -300,7 +300,7 @@ function Activities() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="pt-6 pb-2 md:pt-10 md:pb-8 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 my-6 overflow-hidden scroll-mt-20"
+      className="pt-8 pb-10 md:pt-12 md:pb-14 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 my-6 overflow-hidden scroll-mt-20"
     >
       <div className="max-w-[1500px] mx-auto">
 
@@ -313,7 +313,7 @@ function Activities() {
 
         {/* Horizontal Scroll Layout */}
         <div className="relative w-full">
-          <div className="flex overflow-x-auto gap-4 md:gap-6 pb-4 md:pb-8 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
+          <div className="flex overflow-x-auto gap-4 md:gap-6 pb-4 md:pb-10 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
             {activities.map((act, idx) => (
               <motion.div
                 key={idx}
@@ -497,7 +497,7 @@ function Leadership() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="py-10 md:py-14 px-6 bg-white overflow-hidden scroll-mt-20"
+      className="pt-8 pb-10 md:pt-12 md:pb-14 px-6 bg-white overflow-hidden scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 px-4">
@@ -578,11 +578,11 @@ function Testimonials() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="py-10 md:py-14 px-6 bg-[#FAFAFA] rounded-[3rem] mx-2 md:mx-6 my-6"
+      className="pt-8 pb-10 md:pt-12 md:pb-14 px-6 bg-[#FAFAFA] rounded-[3rem] mx-2 md:mx-6 my-6"
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">What They Say?</h2>
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-3 md:gap-4 pb-8 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth no-scrollbar">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-3 md:gap-4 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth no-scrollbar">
           {stories.map((story, i) => (
             <motion.div
               key={i}
@@ -602,7 +602,7 @@ function Testimonials() {
               <div className="flex gap-1 mb-6">
                 {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-brand-pink text-brand-pink" />)}
               </div>
-              <p className="text-lg font-medium text-brand-black flex-1 italic mb-8 relative z-10">"{story.text}"</p>
+              <p className="text-lg font-medium text-brand-black flex-1 italic mb-6 relative z-10">"{story.text}"</p>
               <p className="font-bold text-brand-black">— {story.author}</p>
             </motion.div>
           ))}
@@ -682,7 +682,7 @@ function Interaction() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="py-10 md:py-14 bg-white relative overflow-hidden scroll-mt-20"
+      className="pt-8 pb-10 md:pt-12 md:pb-14 bg-white relative overflow-hidden scroll-mt-20"
     >
       {/* Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -708,7 +708,7 @@ function Interaction() {
             ref={containerRef}
             onScroll={handleScroll}
             className="
-            flex gap-6 md:gap-8 overflow-x-auto pb-8
+            flex gap-4 md:gap-6 overflow-x-auto pb-8
             snap-x snap-mandatory no-scrollbar
           "
           >
