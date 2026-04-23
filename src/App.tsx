@@ -89,7 +89,7 @@ function Header() {
             </a>
           ))}
           <a href="#connect" className="px-6 py-2.5 bg-[#FFF0F2] text-brand-black hover:bg-brand-pink hover:text-white rounded-full text-sm font-bold transition-colors">
-            Ikut Melayani
+            Contact Us
           </a>
         </nav>
 
