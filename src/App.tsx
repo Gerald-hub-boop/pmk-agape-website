@@ -707,13 +707,16 @@ function Interaction() {
         </div>
 
         {/* RIGHT */}
-        <div className="w-full lg:w-7/12">
+        <div className="w-full lg:w-7/12 relative">
+          {/* Fade Indicator (Mobile Only) */}
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white via-white/40 to-transparent z-20 pointer-events-none md:hidden" />
+          
           <div
             ref={containerRef}
             onScroll={handleScroll}
             className="
-            flex gap-6 md:gap-8 overflow-x-auto pb-10 px-10
-            snap-x snap-mandatory no-scrollbar scroll-px-10
+            flex gap-5 md:gap-8 overflow-x-auto pb-10 px-8
+            snap-x snap-mandatory no-scrollbar scroll-px-8
           "
           >
             {cards.map((c, i) => {
@@ -730,17 +733,17 @@ function Interaction() {
                   }}
                   className={`
                   cta-card shrink-0
-                  w-[80vw] sm:w-[320px] md:w-[380px] lg:w-[400px]
+                  w-[82vw] sm:w-[320px] md:w-[380px] lg:w-[400px]
                   snap-center rounded-[2rem]
                   p-6 md:p-8
                   flex flex-col items-center justify-center
                   min-h-[280px] md:min-h-[320px]
                   cursor-pointer border-2
-                  transition-all duration-500 ease-out
+                  transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
 
                   ${isActive
-                      ? c.activeStyle + ' scale-[1.03] z-10'
-                      : c.inactiveStyle + ' scale-95 z-0'}
+                      ? c.activeStyle + ' scale-[1.02] shadow-xl z-10 opacity-100 blur-0'
+                      : c.inactiveStyle + ' scale-[0.92] opacity-60 blur-[0.5px] z-0'}
                 `}
                 >
 
