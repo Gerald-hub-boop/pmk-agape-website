@@ -445,8 +445,13 @@ interface LeadershipCardProps {
 function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
+  const [isTouch, setIsTouch] = useState(false);
 
   const backImages = m.backImages || BACKGROUND_IMAGES;
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -463,8 +468,12 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
   return (
     <motion.div
       className="group snap-start shrink-0 w-[240px] md:w-full h-[300px] [perspective:1200px] cursor-pointer"
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      onMouseEnter={() => {
+        if (!isTouch) setIsFlipped(true);
+      }}
+      onMouseLeave={() => {
+        if (!isTouch) setIsFlipped(false);
+      }}
       onClick={() => setIsFlipped(!isFlipped)}
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
@@ -820,7 +829,7 @@ function Interaction() {
                   <button
                     type="button"
                     className={`
-                    w-full py-4 rounded-full font-bold text-lg
+                    w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
                     transition-all duration-300
                     ${isActive
                         ? 'translate-y-0 opacity-100'

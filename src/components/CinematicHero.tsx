@@ -119,8 +119,8 @@ export const CinematicHero: React.FC = () => {
             {/* Supporting text — one or two sentences, matches p style below */}
             <Rise delay={0.42} className="mt-6">
               <p
-                className="font-medium leading-relaxed text-gray-500"
-                style={{ fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)', maxWidth: '420px' }}
+                className="font-semibold leading-relaxed text-brand-black/80"
+                style={{ fontSize: 'clamp(1.1rem, 1.9vw, 1.3rem)', maxWidth: '430px' }}
               >
                 Here, you can grow in faith, make new friends, and walk through university with people who truly care.
               </p>
