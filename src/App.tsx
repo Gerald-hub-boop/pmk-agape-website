@@ -266,7 +266,7 @@ function About() {
         </motion.div>
 
         {/* Misi Grid */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 pb-3 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory scroll-smooth no-scrollbar md:overflow-visible">
+        <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-4 md:pt-0 md:pb-0 -mt-3 md:mt-0 md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory scroll-smooth no-scrollbar md:overflow-visible">
           {missions.map((misi, idx) => (
             <motion.div
               key={idx}
@@ -362,7 +362,7 @@ function Activities() {
 
         {/* Horizontal Scroll Layout */}
         <div className="relative w-full">
-          <div className="flex overflow-x-auto gap-4 md:gap-6 pb-4 md:pb-10 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
+          <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-6 md:pt-0 md:pb-10 -mt-3 md:mt-0 gap-4 md:gap-6 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
             {activities.map((act, idx) => (
               <motion.div
                 key={idx}
@@ -543,7 +543,7 @@ function Leadership() {
         </div>
 
         {/* Horizontal scroll on mobile, wrap on desktop */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 pb-12 px-4 no-scrollbar -mx-4 md:mx-0 snap-x scroll-smooth">
+        <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-12 -mt-3 md:pt-0 md:mt-0 md:grid md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 px-4 no-scrollbar -mx-4 md:mx-0 snap-x scroll-smooth">
           {members.map((m, i) => {
             const avatarUrl = m.avatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${m.name}-${i}&backgroundColor=FADADD`;
             return <LeadershipCard key={i} m={m} avatarUrl={avatarUrl} />;
