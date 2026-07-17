@@ -349,7 +349,7 @@ function Activities() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="pt-8 pb-10 md:pt-12 md:pb-14 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 my-6 overflow-hidden scroll-mt-20"
+      className="pt-8 pb-4 md:pt-12 md:pb-6 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 mt-6 mb-2 overflow-hidden scroll-mt-20"
     >
       <div className="max-w-[1500px] mx-auto">
 
@@ -534,7 +534,7 @@ function Leadership() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="pt-8 pb-10 md:pt-12 md:pb-14 px-6 bg-white overflow-hidden scroll-mt-20"
+      className="pt-3 pb-10 md:pt-4 md:pb-14 px-6 bg-white overflow-hidden scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 px-4">
