@@ -1,7 +1,52 @@
 import React, { useState, useEffect, useRef } from 'react';
+// Team Images 1-45
+import img1 from './images/1.png';
+import img2 from './images/2.png';
+import img3 from './images/3.png';
+import img4 from './images/4.png';
+import img5 from './images/5.png';
+import img6 from './images/6.png';
+import img7 from './images/7.png';
+import img8 from './images/8.png';
+import img9 from './images/9.png';
+import img10 from './images/10.png';
+import img11 from './images/11.png';
+import img12 from './images/12.png';
+import img13 from './images/13.png';
+import img14 from './images/14.png';
+import img15 from './images/15.png';
+import img16 from './images/16.png';
+import img17 from './images/17.png';
+import img18 from './images/18.png';
+import img19 from './images/19.png';
+import img20 from './images/20.png';
+import img21 from './images/21.png';
+import img22 from './images/22.png';
+import img23 from './images/23.png';
+import img24 from './images/24.png';
+import img25 from './images/25.png';
+import img26 from './images/26.png';
+import img27 from './images/27.png';
+import img28 from './images/28.png';
+import img29 from './images/29.png';
+import img30 from './images/30.png';
+import img31 from './images/31.png';
+import img32 from './images/32.png';
+import img33 from './images/33.png';
+import img34 from './images/34.png';
+import img35 from './images/35.png';
+import img36 from './images/36.png';
+import img37 from './images/37.png';
+import img38 from './images/38.png';
+import img39 from './images/39.png';
+import img40 from './images/40.png';
+import img41 from './images/41.png';
+import img42 from './images/42.png';
+import img43 from './images/43.png';
+import img44 from './images/44.png';
+import img45 from './images/45.png';
 import logo from './logo.png';
 import { CinematicHero } from './components/CinematicHero';
-
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -93,7 +138,7 @@ function Header() {
             </a>
           ))}
           <a href="#connect" className="px-6 py-2.5 bg-[#FFF0F2] text-brand-black hover:bg-brand-pink hover:text-white rounded-full text-sm font-bold transition-colors">
-            Contact Us
+            Join Us
           </a>
         </nav>
 
@@ -127,7 +172,7 @@ function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full py-4 text-center bg-brand-black text-white rounded-full font-bold mt-2"
             >
-              Contact Us
+              Join Us
             </a>
           </motion.div>
         )}
@@ -401,21 +446,23 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
 
+  const backImages = m.backImages || BACKGROUND_IMAGES;
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (isFlipped) {
+    if (isFlipped && backImages.length > 0) {
       interval = setInterval(() => {
-        setImgIndex(prev => (prev + 1) % BACKGROUND_IMAGES.length);
+        setImgIndex(prev => (prev + 1) % backImages.length);
       }, 1000);
     } else {
       setImgIndex(0);
     }
     return () => clearInterval(interval);
-  }, [isFlipped]);
+  }, [isFlipped, backImages.length]);
 
   return (
     <motion.div
-      className="group snap-start shrink-0 w-[240px] md:w-auto h-[300px] [perspective:1200px] cursor-pointer"
+      className="group snap-start shrink-0 w-[240px] md:w-full h-[300px] [perspective:1200px] cursor-pointer"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
       onClick={() => setIsFlipped(!isFlipped)}
@@ -431,7 +478,7 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
         {/* Front Side */}
         <div className="absolute inset-0 [backface-visibility:hidden] flex flex-col bg-white rounded-3xl overflow-hidden border border-gray-100">
           <div className="h-[150px] w-full bg-[#FFF0F2] relative overflow-hidden flex-shrink-0">
-            <img src={avatarUrl} alt={m.name} className="w-full h-full object-cover scale-110" />
+            <img src={avatarUrl} alt={m.name} className="w-full h-full object-cover object-[center_20%]" />
           </div>
           <div className="p-4 flex-1 flex flex-col items-center justify-center text-center bg-gray-50 relative">
             <h4 className="font-bold text-xl text-brand-black">{m.name}</h4>
@@ -450,7 +497,7 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
         >
           {/* Layer 1: Image Loop */}
           <div className="absolute inset-0 z-0">
-            {BACKGROUND_IMAGES.map((img, idx) => (
+            {backImages.map((img, idx) => (
               <img
                 key={idx}
                 src={img}
@@ -465,9 +512,9 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
 
           {/* Layer 3: Content */}
           <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
-            <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-4 drop-shadow-sm opacity-90" />
-            <p className="text-[15px] font-bold text-brand-black mb-4 leading-relaxed tracking-wide">"{m.message}"</p>
-            <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.name}</p>
+            <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
+            <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
+            <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.author || m.name}</p>
           </div>
         </div>
       </motion.div>
@@ -477,21 +524,21 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
 
 function Leadership() {
   const members = [
-    { name: "Osihanna Meita", role: "President", message: "Melayani dengan hati untuk kemuliaan-Nya dan pertumbuhan komunitas ini." },
-    { name: "Rahel Joicefine", role: "Secretary", message: "Mengelola setiap administrasi dan detail dengan penuh syukur dan ketelitian." },
-    { name: "Yesi Elisabet Lubis", role: "Treasurer", message: "Setia dalam pengelolaan apa yang Tuhan percayakan bagi Kerajaan Allah." },
-    { name: "Gita Kezia Sibarani", role: "Events Coordinator", message: "Menciptakan ruang dan momen berkesan untuk kita semua berjumpa dengan Tuhan." },
-    { name: "Nathanael Dova", role: "Events Staff", message: "Siap mendukung dan menyukseskan setiap kegiatan kebersamaan kita." },
-    { name: "Lundu Anugrah", role: "Events Staff", message: "Bekerja di balik layar agar setiap pelayanan berjalan dengan baik." },
-    { name: "Ruth Keysha Putri", role: "Events Staff", message: "Menghadirkan sukacita dalam setiap persiapan acara keluarga kita." },
-    { name: "Gerald Bradley", role: "Discipleship Coordinator", message: "Rindu melihat kita semua bertumbuh bersama dalam iman, doa, dan kasih Kristus." },
-    { name: "Tikauli Cristina", role: "Discipleship Staff", message: "Berjalan bersama mendampingi setiap langkah dalam perjalanan iman." },
-    { name: "Ferlian Luri Sasta", role: "Discipleship Staff", message: "Membawa setiap pergumulan keluarga ini di dalam doa yang tekun." },
-    { name: "Erta Kiristina", role: "Discipleship Staff", message: "Membangun akar yang kuat dalam firman Tuhan bersama-sama." },
-    { name: "Chris Matthew", role: "Communications & Media Coordinator", message: "Menceritakan kasih Tuhan yang luar biasa melalui kreativitas dan media digital." },
-    { name: "Nova Kristin", role: "Communications & Media Staff", message: "Menghubungkan setiap hati melalui informasi dan publikasi yang hangat." },
-    { name: "Johan Binsar", role: "Communications & Media Staff", message: "Mengabadikan momen indah perjalanan kita untuk menjadi berkat." },
-    { name: "Zipora Andiena Putri", role: "Communications & Media Staff", message: "Melayani dengan visual yang indah untuk memuliakan nama Tuhan." }
+    { name: "Osihanna Meita", role: "President", message: "Sekalipun aku berjalan dalam lembah kekelaman, aku tidak takut bahaya, sebab Engkau besertaku; gada-Mu dan tongkat-Mu, itulah yang menghibur aku.", avatar: img25, backImages: [img25, img26, img27], author: "Mazmur 23:4" },
+    { name: "Rachel Joicefine", role: "Secretary", message: "Aku bersyukur kepada-Mu oleh karena kejadianku dahsyat dan ajaib; ajaib apa yang Kaubuat, dan jiwaku benar-benar menyadarinya.", avatar: img28, backImages: [img28, img29, img30], author: "Mazmur 139:14" },
+    { name: "Yesi Elisabet Lubis", role: "Treasurer", message: "Ia membuat segala sesuatu indah pada waktunya, bahkan Ia memberikan kekekalan dalam hati mereka. Tetapi manusia tidak dapat menyelami pekerjaan yang dilakukan Allah dari awal sampai akhir.", avatar: img31, backImages: [img31, img32, img33], author: "Pengkhotbah 3:11" },
+    { name: "Gita Kezia Sibarani", role: "Events Coordinator", message: "Tetapi carilah dahulu Kerajaan Allah dan kebenarannya, maka semuanya itu akan ditambahkan kepadamu.", avatar: img34, backImages: [img34, img35, img36], author: "Matius 6:33" },
+    { name: "Nathanael Dova", role: "Events Staff", message: "Sebab Aku ini mengetahui rancangan-rancangan apa yang ada pada-Ku mengenai kamu, demikianlah firman TUHAN, yaitu rancangan damai sejahtera dan bukan rancangan kecelakaan, untuk memberikan kepadamu hari depan yang penuh harapan.", avatar: img43, backImages: [img43, img44, img45], author: "Yeremia 29:11" },
+    { name: "Lundu Anugrah", role: "Events Staff", message: "Sekalipun aku berjalan dalam lembah kekelaman, aku tidak takut bahaya, sebab Engkau besertaku; gada-Mu dan tongkat-Mu, itulah yang menghibur aku.", avatar: img40, backImages: [img40, img41, img42], author: "Mazmur 23:4" },
+    { name: "Ruth Keysha Putri", role: "Events Staff", message: "Sebab TUHAN, Dialah yang berjalan di depanmu, Dialah yang menyertai engkau, Dia tidak akan membiarkan engkau dan tidak akan meninggalkan engkau; janganlah takut dan janganlah patah hati.", avatar: img37, backImages: [img37, img38, img39], author: "Ulangan 31:8" },
+    { name: "Gerald Bradley", role: "Discipleship Coordinator", message: "Janganlah menahan kebaikan dari pada orang-orang yang berhak menerimanya, padahal engkau mampu melakukannya.", avatar: img13, backImages: [img13, img14, img15], author: "Amsal 3:27" },
+    { name: "Erta Kiristina", role: "Discipleship Staff", message: "Membangun akar yang kuat dalam firman Tuhan bersama-sama.", avatar: img16, backImages: [img16, img17, img18] },
+    { name: "Tikauli Cristina", role: "Discipleship Staff", message: "Diberkatilah orang yang mengandalkan TUHAN, yang menaruh harapannya pada TUHAN!", avatar: img19, backImages: [img19, img20, img21], author: "Yeremia 17:7" },
+    { name: "Ferlian Luri Sasta", role: "Discipleship Staff", message: "Membawa setiap pergumulan keluarga ini di dalam doa yang tekun.", avatar: img22, backImages: [img22, img23, img24] },
+    { name: "Chris Matthew", role: "Communications & Media Coordinator", message: "Menceritakan kasih Tuhan yang luar biasa melalui kreativitas dan media digital.", avatar: img7, backImages: [img7, img8, img9] },
+    { name: "Zipora Andiena", role: "Communications & Media Staff", message: "Matahari tidak menyakiti engkau pada waktu siang, atau bulan pada waktu malam.", avatar: img10, backImages: [img10, img11, img12], author: "Mazmur 121:6" },
+    { name: "Nova Kristin", role: "Communications & Media Staff", message: "Tetaplah berdoa. Mengucap syukurlah dalam segala hal, sebab itulah yang dikehendaki Allah di dalam Kristus Yesus bagi kamu.", avatar: img1, backImages: [img1, img2, img3], author: "1 Tesalonika 5:17–18" },
+    { name: "Johan Binsar", role: "Communications & Media Staff", message: "Sebab bagi Allah tidak ada yang mustahil.", avatar: img4, backImages: [img4, img5, img6], author: "Lukas 1:37" }
   ];
 
   return (
@@ -512,7 +559,7 @@ function Leadership() {
         {/* Horizontal scroll on mobile, wrap on desktop */}
         <div className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 pb-12 px-4 no-scrollbar -mx-4 md:mx-0 snap-x scroll-smooth">
           {members.map((m, i) => {
-            const avatarUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${m.name}-${i}&backgroundColor=FADADD`;
+            const avatarUrl = m.avatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${m.name}-${i}&backgroundColor=FADADD`;
             return <LeadershipCard key={i} m={m} avatarUrl={avatarUrl} />;
           })}
         </div>
@@ -710,7 +757,7 @@ function Interaction() {
         <div className="w-full lg:w-7/12 relative">
           {/* Fade Indicator (Mobile Only) */}
           <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/20 to-transparent z-20 pointer-events-none md:hidden" />
-          
+
           <div
             ref={containerRef}
             onScroll={handleScroll}

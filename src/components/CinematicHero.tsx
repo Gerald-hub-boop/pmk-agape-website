@@ -1,271 +1,202 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 
-const TOTAL_FRAMES = 79;
-const BACKGROUND_COLOR = "#FFF0F2";
+// ─────────────────────────────────────────────
+// Staggered fade-up — matches the animation
+// style used in every whileInView section below.
+// ─────────────────────────────────────────────
+function Rise({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
+// ─────────────────────────────────────────────
+// HERO
+// ─────────────────────────────────────────────
 export const CinematicHero: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [ready, setReady] = useState(false);
 
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // Subtle scroll-driven parallax on the image only
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
 
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameRef = useRef(0);
-
-  // =========================
-  // LOAD IMAGES
-  // =========================
+  // Mark ready once image loads (prevents flash of broken layout)
+  const onImageLoad = useCallback(() => setReady(true), []);
   useEffect(() => {
-    let loaded = 0;
-    const images: HTMLImageElement[] = [];
-
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.src = `/sequence/Create_smooth_transition_${i}.jpg`;
-
-      img.onload = () => {
-        loaded++;
-        if (loaded === TOTAL_FRAMES) setImagesLoaded(true);
-      };
-
-      img.onerror = () => {
-        console.error("ERROR:", img.src);
-        loaded++;
-      };
-
-      images.push(img);
-    }
-
-    imagesRef.current = images;
+    if (imgRef.current?.complete) setReady(true);
   }, []);
-
-  // =========================
-  // SCROLL (REVERSED)
-  // =========================
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-
-      let progress = -rect.top / total;
-      progress = Math.max(0, Math.min(1, progress));
-
-      setScrollProgress(progress);
-
-      const target = (1 - progress) * (TOTAL_FRAMES - 1);
-      frameRef.current += (target - frameRef.current) * 0.08;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // =========================
-  // CANVAS RENDER
-  // =========================
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const render = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const dpr = window.devicePixelRatio || 1;
-
-      if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-      }
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, width, height);
-
-      const frameIndex = Math.round(frameRef.current);
-      const img = imagesRef.current[frameIndex];
-
-      if (img && img.complete) {
-        const imgAspect = img.width / img.height;
-        const canvasAspect = width / height;
-
-        let drawWidth, drawHeight;
-
-        // FULL COVER (NO BORDER)
-        if (imgAspect > canvasAspect) {
-          drawHeight = height * 1.2;
-          drawWidth = drawHeight * imgAspect;
-        } else {
-          drawWidth = width * 1.2;
-          drawHeight = drawWidth / imgAspect;
-        }
-
-        const floatY = Math.sin(Date.now() / 4000) * (width < 768 ? 2 : 6);
-
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = "high";
-
-        // 🔥 lebih soft & cinematic
-        ctx.globalAlpha = 0.88;
-        ctx.filter = "brightness(1.03) contrast(0.95) saturate(0.95)";
-
-        ctx.drawImage(
-          img,
-          width / 2 - drawWidth / 2,
-          height / 2 - drawHeight / 2 + floatY,
-          drawWidth,
-          drawHeight
-        );
-      }
-
-      requestAnimationFrame(render);
-    };
-
-    render();
-  }, []);
-
-  // =========================
-  // SCENE
-  // =========================
-  const isScene1 = scrollProgress < 0.35;
 
   return (
     <section
-      ref={containerRef}
-      className="relative w-screen h-[450vh]"
-      style={{ backgroundColor: BACKGROUND_COLOR }}
+      ref={sectionRef}
+      id="home"
+      className="relative w-full h-screen min-h-[640px] max-h-[960px] overflow-hidden bg-[#FFF0F2]"
     >
-      <div className="sticky top-0 w-screen h-screen overflow-hidden flex items-center justify-center">
-
-        {/* CANVAS */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-10" />
-
-        {/* CINEMATIC OVERLAY */}
-        <div
-          className="absolute inset-0 z-20 pointer-events-none"
+      {/* ─── BACKGROUND IMAGE (right half, parallax) ──────────── */}
+      {/* Positioned absolutely so the white text panel floats over it */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ y: imgY }}
+        aria-hidden
+      >
+        <img
+          ref={imgRef}
+          src="/hero-belonging.png"
+          alt=""
+          className="w-full h-full object-cover object-center"
           style={{
-            background:
-              "radial-gradient(circle at center, rgba(255,255,255,0) 35%, rgba(255,255,255,0.35) 100%)"
+            // Very slight warm tint to bridge into the pink palette
+            filter: 'brightness(0.97) saturate(0.94)',
+            scale: 1.04,
           }}
+          onLoad={onImageLoad}
         />
 
-        {/* TEXT */}
         <div
-          className="absolute inset-0 flex items-center justify-center z-30 px-6 text-center"
-          style={{ transform: "translateY(-2vh)" }}
-        >
-          <AnimatePresence mode="wait" initial={false}>
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.96) 20%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0) 65%)',
+          }}
+        />
+        {/* Gradient fade — white at the BOTTOM for seamless → Vision section */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 18%, transparent 40%)',
+          }}
+        />
+      </motion.div>
 
-            {/* SCENE 1 */}
-            {isScene1 ? (
-              <motion.h1
-                key="scene1"
-                initial={{ opacity: 0, y: 30, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 1 }}
-                className="leading-[0.95]"
-                style={{
-                  fontFamily: "'Dancing Script', cursive",
-                  fontSize: "clamp(3.4rem, 10vw, 7.6rem)",
-                  color: "#4A1F1F",
-                  textShadow: `
-                    0 1px 0 rgba(255,255,255,0.35),
-                    0 6px 18px rgba(0,0,0,0.08)
-                  `,
+      {/* ─── CONTENT LAYER ────────────────────────────────────── */}
+      <div className="relative z-10 h-full flex items-start" style={{ paddingTop: 'clamp(2.5rem, 8vh, 5.5rem)' }}>
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
+          {/*
+           * Max-width constraint keeps the text panel tight on the left
+           * while the image breathes on the right — intentional asymmetry.
+           */}
+          <div className="max-w-[480px]">
 
-                  WebkitFontSmoothing: "antialiased",
-                  textRendering: "optimizeLegibility"
-                }}
+            {/* Pill label — same style as the section pills below */}
+            <Rise delay={0.1}>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#FFF0F2] border border-[#FADADD] text-[#5A1E1E] text-[10px] font-black tracking-[0.2em] uppercase shadow-sm">
+                PMK Agape · UPNVJ
+              </span>
+            </Rise>
+
+            {/* Headline — Quicksand bold, same scale as H2 sections */}
+            <Rise delay={0.25} className="mt-7">
+              <h1
+                className="font-bold text-brand-black leading-[1.1] tracking-tight"
+                style={{ fontSize: 'clamp(3rem, 6.5vw, 4.6rem)' }}
               >
-                <span className="block">Welcome To</span>
-                <span className="block mt-6 md:mt-10">The Family</span>
-              </motion.h1>
-            ) : (
-              <motion.div
-                key="scene2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex flex-col items-center"
+                You Belong Here.
+              </h1>
+            </Rise>
+
+            {/* Supporting text — one or two sentences, matches p style below */}
+            <Rise delay={0.42} className="mt-6">
+              <p
+                className="font-medium leading-relaxed text-gray-500"
+                style={{ fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)', maxWidth: '420px' }}
               >
+                Here, you can grow in faith, make new friends, and walk through university with people who truly care.
+              </p>
+            </Rise>
 
-                {/* 🔥 TITLE FIXED (TEGAS + ELEGANT) */}
-                <motion.h2
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontWeight: 700,
-                    letterSpacing: "0.04em",
-                    fontSize: "clamp(4rem, 12vw, 10rem)",
-                    lineHeight: 0.95,
-                    color: "#4A1F1F",
-                    textShadow: `
-                      0 1px 0 rgba(255,255,255,0.35),
-                      0 6px 18px rgba(0,0,0,0.08)
-                    `,
-                    textAlign: "center"
-                  }}
-                >
-                  PMK AGAPE
-                </motion.h2>
+            {/* CTA buttons — exact same classes as the site's existing CTAs */}
+            <Rise delay={0.58} className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href="#connect"
+                className="
+                  px-7 py-3.5 rounded-full
+                  bg-[#D88A9A] text-white text-sm font-bold
+                  shadow-[0_4px_20px_rgba(216,138,154,0.4)]
+                  hover:bg-[#C9778A]
+                  hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(216,138,154,0.45)]
+                  transition-all duration-300
+                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D88A9A]
+                "
+              >
+                Join Us
+              </a>
+              <a
+                href="#vision"
+                className="
+                  px-7 py-3.5 rounded-full
+                  bg-white text-[#4A1F1F] text-sm font-bold
+                  border border-[#FADADD]
+                  hover:bg-[#FFF0F2] hover:border-[#D88A9A]
+                  hover:-translate-y-0.5
+                  transition-all duration-300
+                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D88A9A]
+                "
+              >
+                Discover Our Story →
+              </a>
+            </Rise>
 
-                {/* SUBTEXT */}
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 0.95, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontStyle: "italic",
-                    fontWeight: 600,
-                    fontSize: "clamp(1.4rem, 4vw, 2.2rem)",
-                    color: "#5A1E1E",
-                    textShadow: `
-                      0 1px 0 rgba(255,255,255,0.35),
-                      0 6px 18px rgba(0,0,0,0.08)
-                    `,
-                    lineHeight: 1.6,
-                    textAlign: "center",
-                    maxWidth: "90vw"
-                  }}
-                  className="mt-6"
-                >
-                  A place to grow, share, and walk together in Christ
-                </motion.p>
 
-              </motion.div>
-            )}
 
-          </AnimatePresence>
-        </div>
-
-        {/* LOADING */}
-        {!imagesLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#FFF0F2] z-50">
-            <p className="text-sm text-gray-400">Loading...</p>
           </div>
-        )}
-
+        </div>
       </div>
 
-      {/* FONTS */}
-      <style>{`
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
-body {
-  margin: 0;
-  background: #FFF0F2;
-}
-      `}</style>
+
+      {/* ─── SCROLL INDICATOR ─────────────────────────────────── */}
+      <motion.div
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.8 }}
+        aria-hidden
+      >
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.9, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="opacity-30">
+            <path
+              d="M4.5 7L9 11.5L13.5 7"
+              stroke="#4A1F1F"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </motion.div>
+      </motion.div>
+
+      {/*
+       * Invisible preload state — we let the browser paint first
+       * before fading in, preventing a white flash on slow connections.
+       */}
+      {!ready && (
+        <div className="absolute inset-0 z-30 bg-[#FFF0F2]" aria-hidden />
+      )}
     </section>
   );
 };
