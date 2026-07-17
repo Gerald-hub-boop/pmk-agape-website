@@ -407,29 +407,6 @@ function Activities() {
   );
 }
 
-function Marquee() {
-  const items = ["Grow in Faith", "Live in Love", "Walk in Truth", "Serve with Love"];
-
-  return (
-    <div className="py-6 md:py-8 bg-white overflow-hidden border-y border-gray-200 my-6">
-      <div className="flex animate-marquee whitespace-nowrap will-change-transform w-max">
-        {[...Array(2)].map((_, i) => (
-          <div key={i} className="flex items-center shrink-0">
-            {items.map((text, idx) => (
-              <div key={idx} className="flex items-center">
-                <span className="text-2xl md:text-4xl font-bold uppercase tracking-widest text-[#4A1F1F] px-8 md:px-12">
-                  {text}
-                </span>
-                <span className="text-[#D88A9A] text-xl md:text-2xl">•</span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 const BACKGROUND_IMAGES = [
   "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=400",
   "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=400",
@@ -905,7 +882,6 @@ export default function App() {
 
       <About />
       <Activities />
-      <Marquee />
       <Leadership />
       <Statistics />
       <Testimonials />
