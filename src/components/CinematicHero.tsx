@@ -73,11 +73,14 @@ export const CinematicHero: React.FC = () => {
           onLoad={onImageLoad}
         />
 
+        {/* Mobile-only solid white wash for text contrast */}
+        <div className="absolute inset-0 bg-white/85 md:bg-transparent pointer-events-none" />
+
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.96) 20%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0) 65%)',
+              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 35%, rgba(255,255,255,0.85) 55%, rgba(255,255,255,0.3) 75%, rgba(255,255,255,0) 100%)',
           }}
         />
         {/* Gradient fade — white at the BOTTOM for seamless → Vision section */}
@@ -119,8 +122,8 @@ export const CinematicHero: React.FC = () => {
             {/* Supporting text — one or two sentences, matches p style below */}
             <Rise delay={0.42} className="mt-6">
               <p
-                className="font-semibold leading-relaxed text-brand-black/80"
-                style={{ fontSize: 'clamp(1.1rem, 1.9vw, 1.3rem)', maxWidth: '430px' }}
+                className="font-semibold leading-relaxed text-brand-black"
+                style={{ fontSize: 'clamp(1.125rem, 2vw, 1.35rem)', maxWidth: '455px' }}
               >
                 Here, you can grow in faith, make new friends, and walk through university with people who truly care.
               </p>
