@@ -81,7 +81,7 @@ export const CinematicHero: React.FC = () => {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 35%, rgba(255,255,255,0.85) 55%, rgba(255,255,255,0.3) 75%, rgba(255,255,255,0) 100%)',
+              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
           }}
         />
         {/* Gradient fade — white at the BOTTOM for seamless → Vision section */}
