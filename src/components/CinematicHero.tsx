@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import imgLanding from '../images/Landing.png';
 
 // ─────────────────────────────────────────────
 // Staggered fade-up — matches the animation
@@ -62,7 +63,7 @@ export const CinematicHero: React.FC = () => {
       >
         <img
           ref={imgRef}
-          src="/hero-belonging.png"
+          src={imgLanding}
           alt=""
           className="w-full h-full object-cover object-center"
           style={{
