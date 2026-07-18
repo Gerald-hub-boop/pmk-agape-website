@@ -61,7 +61,7 @@ import {
   Heart, Users, BookOpen, MessageCircle, MapPin,
   Calendar, ChevronRight, Star, Mail, ArrowRight,
   HandHeart, Send, Quote, Music, Sparkles, UserPlus, Mountain, Megaphone,
-  Flame, Menu, X, Instagram, Activity
+  Flame, Menu, X, Instagram, Activity, Smile, Handshake
 } from 'lucide-react';
 
 function Header() {
@@ -621,6 +621,7 @@ function Testimonials() {
     { text: `banyak rumah sudah disinggahi, beribu jumpa sudah dialami, banyak yang datang, pergi, dan melampaui, ada juga yang tidak kunjung sama sekali. tapi yang satu ini beda sekali, ini lebih dari sekedar singgah, ini rumah yang berbeda`, author: "Matthew FISIP 21" },
     { text: `PMK Agape adalah tempat Tuhan membentukku. Rumah untuk pulang… di mana aku diingatkan bahwa perjalanan iman tidak dijalani seorang diri. Bersama orang-orang yang Tuhan hadirkan, aku belajar mengasihi Tuhan, mengasihi sesama, dan mengasihi diri sendiri 🩷`, author: "Reynaya FEB 22" },
     { text: `Kabanyakan orang bilang "aku takut ditolak" \ntapi PMK Agape? dengan kasih yang Tuhan berikan menjadi tempat setiap pribadi di terima dengan baik apapun kekurangan nya. Tempat bertumbuh mengenal diri lebih baik dalam kasih Tuhan agar dapat menyebarkan kasih lebih luas`, author: "Davina FEB 22" },
+    { text: `Terkadang Tuhan tidak mengubah jalan yang sedang kita lewati, tetapi menghadirkan tempat untuk beristirahat, bertumbuh, dan dikuatkan. Kebersamaan yang Tuhan berikan di tempat itu begitu hangat, hingga aku belajar bahwa iman bukan hanya tentang berjalan menuju Tuhan, tetapi juga tentang saling menggenggam tangan agar tidak ada yang tertinggal dalam perjalanan.`, author: "Dinda FEB 25" },
   ];
 
   return (
@@ -633,7 +634,7 @@ function Testimonials() {
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">What They Say?</h2>
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-3 md:gap-4 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth no-scrollbar">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth no-scrollbar">
           {stories.map((story, i) => (
             <motion.div
               key={i}
@@ -715,10 +716,30 @@ function Interaction() {
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
     },
     {
+      title: "First Friends",
+      desc: "Tempat untuk mengenal teman baru, terhubung dengan kakak tingkat se-fakultas, dan bertanya segala hal tentang perkuliahan sebelum resmi masuk kampus.",
+      icon: <Smile className="w-8 h-8 md:w-10 md:h-10" />,
+      btn: "Get Connected",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
+      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
+      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
+    },
+    {
       title: "Let’s Talk",
       desc: "If you need someone to listen, we are here for you. Feel free to reach out anytime.",
       icon: <MessageCircle className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Start a Conversation",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
+      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
+      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
+    },
+    {
+      title: "Media Partner",
+      desc: "Kami terbuka untuk berkolaborasi dalam publikasi acara, promosi kegiatan, media partner, maupun kerja sama event demi memberikan dampak positif.",
+      icon: <Handshake className="w-8 h-8 md:w-10 md:h-10" />,
+      btn: "Collaborate With Us",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
