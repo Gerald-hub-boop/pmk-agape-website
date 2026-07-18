@@ -47,6 +47,7 @@ import img44 from './images/44.png';
 import img45 from './images/45.png';
 import logo from './logo.png';
 import imgPersekutuanJumat from './images/PersekutuanJumat.png';
+import imgKelompokKecil from './images/Kelompok Kecil.png';
 import { CinematicHero } from './components/CinematicHero';
 
 import { motion, AnimatePresence } from 'motion/react';
@@ -333,7 +334,7 @@ function Activities() {
       title: "Kelompok Kecil",
       icon: <Users className="w-6 h-6" />,
       desc: "Tempat kita berjalan bersama dalam iman, saling mengenal, dan bertumbuh bersama secara pribadi dalam Tuhan.",
-      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1200"
+      image: imgKelompokKecil
     },
     {
       title: "Pelayanan Pribadi",
