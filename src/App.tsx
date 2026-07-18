@@ -46,6 +46,7 @@ import img43 from './images/43.png';
 import img44 from './images/44.png';
 import img45 from './images/45.png';
 import logo from './logo.png';
+import imgPersekutuanJumat from './images/PersekutuanJumat.png';
 import { CinematicHero } from './components/CinematicHero';
 
 import { motion, AnimatePresence } from 'motion/react';
@@ -53,7 +54,7 @@ import {
   Heart, Users, BookOpen, MessageCircle, MapPin,
   Calendar, ChevronRight, Star, Mail, ArrowRight,
   HandHeart, Send, Quote, Music, Sparkles, UserPlus, Mountain, Megaphone,
-  Flame, Menu, X, Instagram
+  Flame, Menu, X, Instagram, Activity
 } from 'lucide-react';
 
 function Header() {
@@ -308,7 +309,7 @@ function Activities() {
       title: "Persekutuan Jumat",
       icon: <Music className="w-6 h-6" />,
       desc: "Ibadah rutin untuk memuji Tuhan, mendengar firman, dan dikuatkan bersama.",
-      image: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&q=80&w=1200"
+      image: imgPersekutuanJumat
     },
     {
       title: "Ibadah Perayaan Natal & Paskah",
@@ -339,6 +340,12 @@ function Activities() {
       icon: <MessageCircle className="w-6 h-6" />,
       desc: "Ruang aman untuk berbagi cerita, didengarkan, dan didoakan secara pribadi.",
       image: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&q=80&w=1200"
+    },
+    {
+      title: "PMK S33hat",
+      icon: <Activity className="w-6 h-6" />,
+      desc: "Kegiatan olahraga bersama untuk menjaga kesehatan jasmani sekaligus membangun keakraban antar jemaat.",
+      image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&q=80&w=1200"
     },
   ];
 
