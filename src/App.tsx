@@ -46,8 +46,14 @@ import img43 from './images/43.png';
 import img44 from './images/44.png';
 import img45 from './images/45.png';
 import logo from './logo.png';
-import imgPersekutuanJumat from './images/PersekutuanJumat.png';
-import imgKelompokKecil from './images/Kelompok Kecil.png';
+import imgPersekutuanDoaJemaat from './images/WhatWeDo/Persekutuan Doa Jemaat.png';
+import imgPersekutuanJumat from './images/WhatWeDo/Persekutuan Jumat.png';
+import imgNatalPaskah from './images/WhatWeDo/NATAL & PASKAH.png';
+import imgPenyambutanMaba from './images/WhatWeDo/Penyambutan Mahasiswa Baru.png';
+import imgRetreat from './images/WhatWeDo/Retreat.png';
+import imgKelompokKecil from './images/WhatWeDo/Kelompok Kecil.png';
+import imgPelayananPribadi from './images/WhatWeDo/Pelayanan Pribadi.png';
+import imgPMKS33hat from './images/WhatWeDo/PMK S33hat.png';
 import { CinematicHero } from './components/CinematicHero';
 
 import { motion, AnimatePresence } from 'motion/react';
@@ -301,10 +307,16 @@ function About() {
 function Activities() {
   const activities = [
     {
+      title: "Kelompok Kecil",
+      icon: <Users className="w-6 h-6" />,
+      desc: "Tempat kita berjalan bersama dalam iman, saling mengenal, dan bertumbuh bersama secara pribadi dalam Tuhan.",
+      image: imgKelompokKecil
+    },
+    {
       title: "Persekutuan Doa Jemaat",
       icon: <Heart className="w-6 h-6" />,
       desc: "Ruang untuk saling mendoakan, membawa setiap pergumulan kepada Tuhan bersama-sama.",
-      image: "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&q=80&w=1200"
+      image: imgPersekutuanDoaJemaat
     },
     {
       title: "Persekutuan Jumat",
@@ -316,37 +328,31 @@ function Activities() {
       title: "Ibadah Perayaan Natal & Paskah",
       icon: <Sparkles className="w-6 h-6" />,
       desc: "Momen spesial untuk merayakan kasih Tuhan bersama seluruh komunitas.",
-      image: "https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=1200"
+      image: imgNatalPaskah
     },
     {
       title: "Ibadah Penyambutan Mahasiswa Baru",
       icon: <UserPlus className="w-6 h-6" />,
       desc: "Tempat pertama untuk mengenal komunitas ini dan mulai perjalanan bersama.",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1200"
+      image: imgPenyambutanMaba
     },
     {
       title: "Retreat",
       icon: <Mountain className="w-6 h-6" />,
       desc: "Waktu khusus untuk berhenti sejenak, dipulihkan, dan kembali dekat dengan Tuhan.",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=80&w=1200"
-    },
-    {
-      title: "Kelompok Kecil",
-      icon: <Users className="w-6 h-6" />,
-      desc: "Tempat kita berjalan bersama dalam iman, saling mengenal, dan bertumbuh bersama secara pribadi dalam Tuhan.",
-      image: imgKelompokKecil
+      image: imgRetreat
     },
     {
       title: "Pelayanan Pribadi",
       icon: <MessageCircle className="w-6 h-6" />,
       desc: "Ruang aman untuk berbagi cerita, didengarkan, dan didoakan secara pribadi.",
-      image: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&q=80&w=1200"
+      image: imgPelayananPribadi
     },
     {
       title: "PMK S33hat",
       icon: <Activity className="w-6 h-6" />,
       desc: "Kegiatan olahraga bersama untuk menjaga kesehatan jasmani sekaligus membangun keakraban antar jemaat.",
-      image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&q=80&w=1200"
+      image: imgPMKS33hat
     },
   ];
 
@@ -612,9 +618,9 @@ function Statistics() {
 
 function Testimonials() {
   const stories = [
-    { text: "Waktu awal masuk kampus rasanya hilang arah banget. Agape bukan cuma wadah mahasiswa, tapi jadi keluarga. Berbagi cerita di sini bikin aku ngerti arti rentan yang sebenarnya.", author: "Grace, FIK 23" },
-    { text: "Bukan cuma soal ibadah besar. Obrolan-obrolan dalam setelah persekutuan itu yang beneran berkesan. Kerasa banget bertumbuh secara rohani di sini.", author: "Joshua, FIK 23" },
-    { text: "Dulu aku pemalu banget, tapi komunitas ini nerima dengan sangat hangat. Sekarang aku bisa melayani dan ngerasa ini rumahku.", author: "Sarah, FIK 23" },
+    { text: `banyak rumah sudah disinggahi, beribu jumpa sudah dialami, banyak yang datang, pergi, dan melampaui, ada juga yang tidak kunjung sama sekali. tapi yang satu ini beda sekali, ini lebih dari sekedar singgah, ini rumah yang berbeda`, author: "Matthew FISIP 21" },
+    { text: `PMK Agape adalah tempat Tuhan membentukku. Rumah untuk pulang… di mana aku diingatkan bahwa perjalanan iman tidak dijalani seorang diri. Bersama orang-orang yang Tuhan hadirkan, aku belajar mengasihi Tuhan, mengasihi sesama, dan mengasihi diri sendiri 🩷`, author: "Reynaya FEB 22" },
+    { text: `Kabanyakan orang bilang "aku takut ditolak" \ntapi PMK Agape? dengan kasih yang Tuhan berikan menjadi tempat setiap pribadi di terima dengan baik apapun kekurangan nya. Tempat bertumbuh mengenal diri lebih baik dalam kasih Tuhan agar dapat menyebarkan kasih lebih luas`, author: "Davina FEB 22" },
   ];
 
   return (
