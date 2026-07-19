@@ -759,7 +759,7 @@ function Interaction() {
     },
     {
       title: "First Friends",
-      desc: "Tempat untuk mengenal teman baru, terhubung dengan kakak tingkat se-fakultas, dan bertanya tentang kampus.",
+      desc: "Have a question, need someone to talk to, or just want to get to know us? We'd love to hear from you.",
       icon: <Smile className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Get Connected",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
@@ -779,7 +779,7 @@ function Interaction() {
     },
     {
       title: "Media Partner",
-      desc: "Kami terbuka untuk berkolaborasi dalam publikasi acara, promosi kegiatan, media partner, maupun kerja sama event demi memberikan dampak positif.",
+      desc: "We're always open to collaborating on events, promotions, media partnerships, and other initiatives that create a positive impact.",
       icon: <Handshake className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Collaborate With Us",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
@@ -932,40 +932,40 @@ function Footer() {
           <h3 className="font-semibold text-lg mb-4">Get Involved</h3>
           <ul className="space-y-2 text-sm text-white/60">
             <li>
-              <button 
-                onClick={() => triggerScrollToConnectCard(2)} 
+              <button
+                onClick={() => triggerScrollToConnectCard(2)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
                 Join First Friends
               </button>
             </li>
             <li>
-              <button 
-                onClick={() => triggerScrollToConnectCard(1)} 
+              <button
+                onClick={() => triggerScrollToConnectCard(1)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
                 Request Prayer
               </button>
             </li>
             <li>
-              <button 
-                onClick={() => triggerScrollToConnectCard(3)} 
+              <button
+                onClick={() => triggerScrollToConnectCard(3)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
                 Start a Conversation
               </button>
             </li>
             <li>
-              <button 
-                onClick={() => triggerScrollToConnectCard(0)} 
+              <button
+                onClick={() => triggerScrollToConnectCard(0)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
                 Start Serving
               </button>
             </li>
             <li>
-              <button 
-                onClick={() => triggerScrollToConnectCard(4)} 
+              <button
+                onClick={() => triggerScrollToConnectCard(4)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
                 Media Partner
