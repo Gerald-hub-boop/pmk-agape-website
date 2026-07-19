@@ -618,23 +618,23 @@ function Statistics() {
 
 function Testimonials() {
   const stories = [
-    { 
-      text: `banyak rumah sudah disinggahi, beribu jumpa sudah dialami, banyak yang datang, pergi, dan melampaui, ada juga yang tidak kunjung sama sekali. tapi yang satu ini beda sekali, ini lebih dari sekedar singgah, ini rumah yang berbeda`, 
+    {
+      text: `banyak rumah sudah disinggahi, beribu jumpa sudah dialami, banyak yang datang, pergi, dan melampaui, ada juga yang tidak kunjung sama sekali. tapi yang satu ini beda sekali, ini lebih dari sekedar singgah, ini rumah yang berbeda`,
       author: "Matthew FISIP 21",
       widthClass: "w-[85vw] sm:w-[380px] md:w-[420px]"
     },
-    { 
-      text: `PMK Agape adalah tempat Tuhan membentukku. Rumah untuk pulang… di mana aku diingatkan bahwa perjalanan iman tidak dijalani seorang diri. Bersama orang-orang yang Tuhan hadirkan, aku belajar mengasihi Tuhan, mengasihi sesama, dan mengasihi diri sendiri 🩷`, 
+    {
+      text: `PMK Agape adalah tempat Tuhan membentukku. Rumah untuk pulang… di mana aku diingatkan bahwa perjalanan iman tidak dijalani seorang diri. Bersama orang-orang yang Tuhan hadirkan, aku belajar mengasihi Tuhan, mengasihi sesama, dan mengasihi diri sendiri 🩷`,
       author: "Reynaya FEB 22",
       widthClass: "w-[85vw] sm:w-[400px] md:w-[450px]"
     },
-    { 
-      text: `Kabanyakan orang bilang "aku takut ditolak" \ntapi PMK Agape? dengan kasih yang Tuhan berikan menjadi tempat setiap pribadi di terima dengan baik apapun kekurangan nya. Tempat bertumbuh mengenal diri lebih baik dalam kasih Tuhan agar dapat menyebarkan kasih lebih luas`, 
+    {
+      text: `Kabanyakan orang bilang "aku takut ditolak" \ntapi PMK Agape? dengan kasih yang Tuhan berikan menjadi tempat setiap pribadi di terima dengan baik apapun kekurangan nya. Tempat bertumbuh mengenal diri lebih baik dalam kasih Tuhan agar dapat menyebarkan kasih lebih luas`,
       author: "Davina FEB 22",
       widthClass: "w-[85vw] sm:w-[440px] md:w-[500px]"
     },
-    { 
-      text: `Terkadang Tuhan tidak mengubah jalan yang sedang kita lewati, tetapi menghadirkan tempat untuk beristirahat, bertumbuh, dan dikuatkan. Kebersamaan yang Tuhan berikan di tempat itu begitu hangat, hingga aku belajar bahwa iman bukan hanya tentang berjalan menuju Tuhan, tetapi juga tentang saling menggenggam tangan agar tidak ada yang tertinggal dalam perjalanan.`, 
+    {
+      text: `Terkadang Tuhan tidak mengubah jalan yang sedang kita lewati, tetapi menghadirkan tempat untuk beristirahat, bertumbuh, dan dikuatkan. Kebersamaan yang Tuhan berikan di tempat itu begitu hangat, hingga aku belajar bahwa iman bukan hanya tentang berjalan menuju Tuhan, tetapi juga tentang saling menggenggam tangan agar tidak ada yang tertinggal dalam perjalanan.`,
       author: "Dinda FEB 25",
       widthClass: "w-[85vw] sm:w-[520px] md:w-[640px]"
     },
@@ -683,6 +683,27 @@ function Testimonials() {
 function Interaction() {
   const [activeIdx, setActiveIdx] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScrollToCard = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const index = customEvent.detail;
+      if (typeof index !== 'number') return;
+
+      const items = containerRef.current?.querySelectorAll('.cta-card');
+      if (items && items[index]) {
+        items[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        setActiveIdx(index);
+      }
+
+      document.getElementById('connect')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.addEventListener('scroll-to-connect-card', handleScrollToCard);
+    return () => {
+      window.removeEventListener('scroll-to-connect-card', handleScrollToCard);
+    };
+  }, []);
 
   const handleScroll = () => {
     if (!containerRef.current) return;
@@ -733,7 +754,7 @@ function Interaction() {
     },
     {
       title: "First Friends",
-      desc: "Tempat untuk mengenal teman baru, terhubung dengan kakak tingkat se-fakultas, dan bertanya segala hal tentang perkuliahan sebelum resmi masuk kampus.",
+      desc: "Tempat untuk mengenal teman baru, terhubung dengan kakak tingkat se-fakultas, dan bertanya tentang kampus.",
       icon: <Smile className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Get Connected",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
@@ -879,6 +900,11 @@ function Interaction() {
   );
 }
 
+const triggerScrollToConnectCard = (index: number) => {
+  const event = new CustomEvent('scroll-to-connect-card', { detail: index });
+  window.dispatchEvent(event);
+};
+
 function Footer() {
   return (
     <footer className="bg-[#111111] text-white py-16 px-6 relative overflow-hidden">
@@ -900,9 +926,46 @@ function Footer() {
         <div>
           <h3 className="font-semibold text-lg mb-4">Get Involved</h3>
           <ul className="space-y-2 text-sm text-white/60">
-            <li><a href="#" className="hover:text-white transition-colors">Start Serving</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Request Prayer</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Start a Conversation</a></li>
+            <li>
+              <button 
+                onClick={() => triggerScrollToConnectCard(2)} 
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              >
+                Join First Friends
+              </button>
+            </li>
+            <li>
+              <button 
+                onClick={() => triggerScrollToConnectCard(1)} 
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              >
+                Request Prayer
+              </button>
+            </li>
+            <li>
+              <button 
+                onClick={() => triggerScrollToConnectCard(3)} 
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              >
+                Start a Conversation
+              </button>
+            </li>
+            <li>
+              <button 
+                onClick={() => triggerScrollToConnectCard(0)} 
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              >
+                Start Serving
+              </button>
+            </li>
+            <li>
+              <button 
+                onClick={() => triggerScrollToConnectCard(4)} 
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              >
+                Media Partner
+              </button>
+            </li>
           </ul>
         </div>
 
