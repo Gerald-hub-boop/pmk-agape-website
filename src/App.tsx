@@ -634,7 +634,7 @@ function Testimonials() {
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">What They Say?</h2>
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth no-scrollbar">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 items-start gap-3 md:gap-4 pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth no-scrollbar">
           {stories.map((story, i) => (
             <motion.div
               key={i}
@@ -649,12 +649,12 @@ function Testimonials() {
                 stiffness: 300,
                 damping: 20
               }}
-              className="bg-white p-4 md:p-6 rounded-3xl shadow-sm flex flex-col h-full border border-gray-50 shrink-0 w-[80vw] md:w-auto snap-start cursor-pointer"
+              className="bg-white p-4 md:p-6 rounded-3xl shadow-sm flex flex-col border border-gray-50 shrink-0 w-[80vw] md:w-auto snap-start cursor-pointer h-fit"
             >
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-4">
                 {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-brand-pink text-brand-pink" />)}
               </div>
-              <p className="text-lg font-medium text-brand-black flex-1 italic mb-6 relative z-10">"{story.text}"</p>
+              <p className="text-lg font-medium text-brand-black italic mb-4 relative z-10">"{story.text}"</p>
               <p className="font-bold text-brand-black">— {story.author}</p>
             </motion.div>
           ))}
