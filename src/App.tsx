@@ -638,6 +638,11 @@ function Testimonials() {
       author: "Dinda FEB 25",
       widthClass: "w-[85vw] sm:w-[520px] md:w-[640px]"
     },
+    {
+      text: `super happy karena bisa kenal orang baru di PMK Agape yang very welcome and warm. hopefully after this, more and more "reasons" will appear to make me be here and grow in God together w them`,
+      author: "Natta FH 25",
+      widthClass: "w-[85vw] sm:w-[380px] md:w-[400px]"
+    },
   ];
 
   return (
