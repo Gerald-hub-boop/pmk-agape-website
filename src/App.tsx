@@ -548,7 +548,7 @@ function Leadership() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="pt-3 pb-10 md:pt-4 md:pb-14 px-6 bg-white overflow-hidden scroll-mt-20"
+      className="pt-4 pb-6 md:pt-6 md:pb-10 px-6 bg-white overflow-hidden scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 px-4">
@@ -557,7 +557,7 @@ function Leadership() {
         </div>
 
         {/* Horizontal scroll on mobile, wrap on desktop */}
-        <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-12 -mt-3 md:pt-0 md:mt-0 md:grid md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 px-4 no-scrollbar -mx-4 md:mx-0 snap-x scroll-smooth">
+        <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-8 -mt-3 md:pt-0 md:mt-0 md:grid md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 px-4 no-scrollbar -mx-4 md:mx-0 snap-x scroll-smooth">
           {members.map((m, i) => {
             const avatarUrl = m.avatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${m.name}-${i}&backgroundColor=FADADD`;
             return <LeadershipCard key={i} m={m} avatarUrl={avatarUrl} />;
@@ -565,57 +565,6 @@ function Leadership() {
         </div>
       </div>
     </motion.section>
-  );
-}
-
-function Statistics() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const stats = [
-    { value: "15", label: "Pengurus" },
-    { value: "4", label: "Divisi" },
-    { value: "1", label: "Tubuh Kristus" },
-    { value: "∞", label: "Kasih" }
-  ];
-
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-14 md:-mt-18 relative z-10">
-      <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar sm:grid sm:grid-cols-2 lg:grid-cols-4 border border-gray-100 rounded-3xl sm:rounded-[2rem] overflow-hidden shadow-sm bg-white scroll-smooth">
-        {stats.map((stat, i) => {
-          const isActive = activeIndex === i;
-          return (
-            <div
-              key={i}
-              onClick={() => setActiveIndex(isActive ? null : i)}
-              className={`
-                group
-                flex flex-col items-center justify-center 
-                py-5 md:py-10 text-center 
-                cursor-pointer transition-all duration-300 ease-out
-                shrink-0 w-[55vw] sm:w-auto snap-center
-                ${i !== stats.length - 1 ? 'border-r sm:border-r-0' : ''}
-                ${i < 2 ? 'sm:border-b' : 'sm:border-b-0'}
-                ${i % 2 === 0 ? 'sm:border-r' : ''}
-                ${i < 3 ? 'lg:border-r lg:border-b-0' : 'lg:border-r-0 lg:border-b-0'}
-                ${isActive
-                  ? 'bg-[#D88A9A] text-white z-10 scale-[1.02] shadow-md'
-                  : 'bg-white text-brand-black hover:bg-[#D88A9A] hover:text-white hover:scale-[1.02] hover:shadow-md hover:z-10'}
-              `}
-            >
-              <span className="text-4xl sm:text-5xl md:text-6xl font-bold mb-1 md:mb-2 tracking-tighter transition-transform duration-300">
-                {stat.value}
-              </span>
-              <span className={`
-                text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-colors duration-300
-                ${isActive ? 'text-white/80' : 'text-gray-400 group-hover:text-white/80'}
-              `}>
-                {stat.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
   );
 }
 
@@ -1007,7 +956,6 @@ export default function App() {
       <About />
       <Activities />
       <Leadership />
-      <Statistics />
       <Testimonials />
       <Interaction />
       <Footer />
