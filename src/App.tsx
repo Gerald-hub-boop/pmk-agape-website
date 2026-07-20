@@ -1144,16 +1144,6 @@ function Interaction() {
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
     },
     {
-      title: "Let’s Talk",
-      desc: "If you need someone to listen, we are here for you. Feel free to reach out anytime.",
-      icon: <MessageCircle className="w-8 h-8 md:w-10 md:h-10" />,
-      btn: "Start a Conversation",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
-      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
-      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
-      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
-    },
-    {
       title: "Serve With Us",
       desc: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
       icon: <Users className="w-8 h-8 md:w-10 md:h-10" />,
@@ -1168,6 +1158,16 @@ function Interaction() {
       desc: "You don’t have to carry everything alone. We are here to pray with you and stand with you.",
       icon: <Heart className="w-8 h-8 md:w-10 md:h-10 fill-[#4A1F1F]" />,
       btn: "Send Prayer Request",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
+      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
+      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
+    },
+    {
+      title: "Let’s Talk",
+      desc: "If you need someone to listen, we are here for you. Feel free to reach out anytime.",
+      icon: <MessageCircle className="w-8 h-8 md:w-10 md:h-10" />,
+      btn: "Start a Conversation",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
