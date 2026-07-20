@@ -579,8 +579,8 @@ function Statistics() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 -mt-14 md:-mt-18 relative z-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-gray-100 rounded-[2rem] overflow-hidden shadow-sm bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-14 md:-mt-18 relative z-10">
+      <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar sm:grid sm:grid-cols-2 lg:grid-cols-4 border border-gray-100 rounded-3xl sm:rounded-[2rem] overflow-hidden shadow-sm bg-white scroll-smooth">
         {stats.map((stat, i) => {
           const isActive = activeIndex === i;
           return (
@@ -590,16 +590,19 @@ function Statistics() {
               className={`
                 group
                 flex flex-col items-center justify-center 
-                py-8 md:py-10 text-center 
+                py-5 md:py-10 text-center 
                 cursor-pointer transition-all duration-300 ease-out
-                border-gray-100
-                ${i !== stats.length - 1 ? 'border-b sm:border-b-0 sm:border-r' : ''}
+                shrink-0 w-[55vw] sm:w-auto snap-center
+                ${i !== stats.length - 1 ? 'border-r sm:border-r-0' : ''}
+                ${i < 2 ? 'sm:border-b' : 'sm:border-b-0'}
+                ${i % 2 === 0 ? 'sm:border-r' : ''}
+                ${i < 3 ? 'lg:border-r lg:border-b-0' : 'lg:border-r-0 lg:border-b-0'}
                 ${isActive
                   ? 'bg-[#D88A9A] text-white z-10 scale-[1.02] shadow-md'
                   : 'bg-white text-brand-black hover:bg-[#D88A9A] hover:text-white hover:scale-[1.02] hover:shadow-md hover:z-10'}
               `}
             >
-              <span className="text-5xl md:text-6xl font-bold mb-2 tracking-tighter transition-transform duration-300">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-bold mb-1 md:mb-2 tracking-tighter transition-transform duration-300">
                 {stat.value}
               </span>
               <span className={`
@@ -621,27 +624,27 @@ function Testimonials() {
     {
       text: `banyak rumah sudah disinggahi, beribu jumpa sudah dialami, banyak yang datang, pergi, dan melampaui, ada juga yang tidak kunjung sama sekali. tapi yang satu ini beda sekali, ini lebih dari sekedar singgah, ini rumah yang berbeda`,
       author: "Matthew FISIP 21",
-      widthClass: "w-[85vw] sm:w-[380px] md:w-[420px]"
+      widthClass: "w-[84vw] sm:w-[380px] md:w-[420px]"
     },
     {
       text: `PMK Agape adalah tempat Tuhan membentukku. Rumah untuk pulang… di mana aku diingatkan bahwa perjalanan iman tidak dijalani seorang diri. Bersama orang-orang yang Tuhan hadirkan, aku belajar mengasihi Tuhan, mengasihi sesama, dan mengasihi diri sendiri 🩷`,
       author: "Reynaya FEB 22",
-      widthClass: "w-[85vw] sm:w-[400px] md:w-[450px]"
+      widthClass: "w-[90vw] sm:w-[400px] md:w-[450px]"
     },
     {
       text: `Kabanyakan orang bilang "aku takut ditolak" \ntapi PMK Agape? dengan kasih yang Tuhan berikan menjadi tempat setiap pribadi di terima dengan baik apapun kekurangan nya. Tempat bertumbuh mengenal diri lebih baik dalam kasih Tuhan agar dapat menyebarkan kasih lebih luas`,
       author: "Davina FEB 22",
-      widthClass: "w-[85vw] sm:w-[440px] md:w-[500px]"
+      widthClass: "w-[96vw] sm:w-[440px] md:w-[500px]"
     },
     {
       text: `Terkadang Tuhan tidak mengubah jalan yang sedang kita lewati, tetapi menghadirkan tempat untuk beristirahat, bertumbuh, dan dikuatkan. Kebersamaan yang Tuhan berikan di tempat itu begitu hangat, hingga aku belajar bahwa iman bukan hanya tentang berjalan menuju Tuhan, tetapi juga tentang saling menggenggam tangan agar tidak ada yang tertinggal dalam perjalanan.`,
       author: "Dinda FEB 25",
-      widthClass: "w-[85vw] sm:w-[520px] md:w-[640px]"
+      widthClass: "w-[118vw] sm:w-[520px] md:w-[640px]"
     },
     {
       text: `super happy karena bisa kenal orang baru di PMK Agape yang very welcome and warm. hopefully after this, more and more "reasons" will appear to make me be here and grow in God together w them`,
       author: "Natta FH 25",
-      widthClass: "w-[85vw] sm:w-[380px] md:w-[400px]"
+      widthClass: "w-[76vw] sm:w-[380px] md:w-[400px]"
     },
   ];
 
@@ -670,13 +673,15 @@ function Testimonials() {
                 stiffness: 300,
                 damping: 20
               }}
-              className={`bg-white p-4 md:p-6 rounded-3xl shadow-sm flex flex-col border border-gray-50 shrink-0 snap-start cursor-pointer min-h-[350px] sm:min-h-[310px] md:min-h-[260px] ${story.widthClass}`}
+              className={`bg-white p-5 md:p-6 rounded-3xl shadow-sm flex flex-col justify-between border border-gray-100 shrink-0 snap-start cursor-pointer h-[260px] sm:h-[280px] md:h-[270px] ${story.widthClass}`}
             >
-              <div className="flex gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-brand-pink text-brand-pink" />)}
+              <div>
+                <div className="flex gap-1 mb-3">
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-brand-pink text-brand-pink" />)}
+                </div>
+                <p className="text-sm sm:text-base md:text-lg font-medium text-brand-black italic relative z-10 leading-relaxed">"{story.text}"</p>
               </div>
-              <p className="text-lg font-medium text-brand-black italic mb-4 relative z-10">"{story.text}"</p>
-              <p className="font-bold text-brand-black">— {story.author}</p>
+              <p className="font-bold text-brand-black text-sm sm:text-base pt-2 shrink-0">— {story.author}</p>
             </motion.div>
           ))}
         </div>
@@ -759,7 +764,7 @@ function Interaction() {
     },
     {
       title: "First Friends",
-      desc: "Have a question, need someone to talk to, or just want to get to know us? We'd love to hear from you.",
+      desc: "Meet new friends, connect with others, and start your journey together.",
       icon: <Smile className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Get Connected",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
