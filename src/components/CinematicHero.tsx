@@ -82,12 +82,12 @@ export const CinematicHero: React.FC = () => {
               'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
           }}
         />
-        {/* Mobile horizontal gradient overlay — 95-98% opacity white covering 75-80% of screen left to right */}
+        {/* Mobile horizontal gradient overlay — ultra-smooth multi-stop easing transition */}
         <div
           className="absolute inset-0 pointer-events-none md:hidden"
           style={{
             background:
-              'linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.96) 55%, rgba(255,255,255,0.92) 75%, rgba(255,255,255,0.3) 92%, rgba(255,255,255,0) 100%)',
+              'linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.97) 20%, rgba(255,255,255,0.94) 38%, rgba(255,255,255,0.88) 52%, rgba(255,255,255,0.76) 65%, rgba(255,255,255,0.55) 76%, rgba(255,255,255,0.32) 85%, rgba(255,255,255,0.12) 93%, rgba(255,255,255,0.03) 97%, rgba(255,255,255,0) 100%)',
           }}
         />
 
