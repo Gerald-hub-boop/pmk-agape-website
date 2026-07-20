@@ -194,6 +194,10 @@ export interface FeaturedCampaignConfig {
   badge: string;
   title: string;
   description: string;
+  modalDetails?: {
+    subtitle: string;
+    paragraphs: string[];
+  };
   buttonText: string;
   buttonLink: string;
   icon?: React.ReactNode;
@@ -203,78 +207,229 @@ export const featuredCampaignConfig: FeaturedCampaignConfig = {
   enabled: true,
   badge: "NOW OPEN",
   title: "First Friends",
-  description: "Meet new friends, build genuine connections, and feel right at home. Join a welcoming community where you can get to know fellow students before and during your university journey.",
+  description: "Meet new friends, connect with others, and start your journey together.",
+  modalDetails: {
+    subtitle: "Teman pertama untuk memulai perjalananmu di PMK Agape.",
+    paragraphs: [
+      "First Friends adalah program penyambutan bagi mahasiswa baru agar tidak menjalani awal perkuliahan sendirian.",
+      "Melalui program ini, kamu akan dipertemukan dengan teman-teman PMK Agape yang siap menyambutmu, mengenalkan lingkungan kampus, menjawab hal-hal sederhana yang mungkin masih membingungkan, serta menemanimu membangun relasi baru.",
+      "Program ini bukan sekadar mencari teman, tetapi menjadi ruang yang hangat agar setiap orang dapat merasa diterima, memiliki tempat untuk bertumbuh, dan memulai perjalanan perkuliahan bersama."
+    ]
+  },
   buttonText: "Join First Friends",
   buttonLink: "https://forms.gle/pmkagape-first-friends",
   icon: <Smile className="w-10 h-10 text-[#4A1F1F]" />
 };
 
 function FeaturedCampaign() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
+  // Close modal on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false);
+      }
+    };
+    if (isModalOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen]);
+
   if (!featuredCampaignConfig.enabled) {
     return null;
   }
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 md:pt-10 md:pb-4 relative z-10 scroll-mt-20"
-    >
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
-        {/* Ambient Glows */}
-        <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
-        <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
+    <>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 md:pt-10 md:pb-4 relative z-10 scroll-mt-20"
+      >
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
+          {/* Ambient Glows */}
+          <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
+          <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-          {/* Main Copy */}
-          <div className="max-w-2xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4A1F1F] text-white text-xs font-black uppercase tracking-[0.18em] shadow-sm mb-4 sm:mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse" />
-              {featuredCampaignConfig.badge}
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            {/* Main Copy */}
+            <div className="max-w-2xl">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4A1F1F] text-white text-xs font-black uppercase tracking-[0.18em] shadow-sm mb-4 sm:mb-5">
+                <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse" />
+                {featuredCampaignConfig.badge}
+              </div>
+
+              {/* Title */}
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
+                {featuredCampaignConfig.title}
+              </h2>
+
+              {/* Description */}
+              <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-8">
+                {featuredCampaignConfig.description}
+              </p>
+
+              {/* CTA Buttons Row */}
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href={featuredCampaignConfig.buttonLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base sm:text-lg shadow-md hover:bg-[#381717] hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group cursor-pointer"
+                >
+                  <span>{featuredCampaignConfig.buttonText}</span>
+                  <ArrowRight className="w-5 h-5 text-brand-pink group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+
+                {/* Mobile & Tablet Learn More button */}
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
+                >
+                  <Sparkles className="w-4 h-4 text-[#D88A9A]" />
+                  <span>Learn More</span>
+                </button>
+              </div>
             </div>
 
-            {/* Title */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
-              {featuredCampaignConfig.title}
-            </h2>
+            {/* Interactive Card Accent (Desktop) */}
+            <div className="hidden lg:flex items-center justify-center shrink-0">
+              <motion.div
+                onClick={() => setIsModalOpen(true)}
+                whileHover={{ scale: 1.03, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="relative w-64 h-64 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
+              >
+                {/* Top indicator badge */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-[10px] font-bold tracking-wider uppercase border border-[#FADADD]/60 group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors duration-300">
+                  <span>Tap to Explore</span>
+                  <Sparkles className="w-3 h-3 text-[#D88A9A] group-hover:text-brand-pink" />
+                </div>
 
-            {/* Description */}
-            <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-8">
-              {featuredCampaignConfig.description}
-            </p>
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-2xl bg-[#FFF0F2] flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300 my-auto shadow-inner">
+                  {featuredCampaignConfig.icon || <Sparkles className="w-8 h-8 text-[#4A1F1F]" />}
+                </div>
 
-            {/* CTA Button */}
-            <a
-              href={featuredCampaignConfig.buttonLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base sm:text-lg shadow-md hover:bg-[#381717] hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group cursor-pointer"
-            >
-              <span>{featuredCampaignConfig.buttonText}</span>
-              <ArrowRight className="w-5 h-5 text-brand-pink group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
-          </div>
-
-          {/* Decorative Visual Element / Card Accent */}
-          <div className="hidden lg:flex items-center justify-center shrink-0">
-            <div className="relative w-64 h-64 rounded-3xl bg-white/80 backdrop-blur-md border border-[#FADADD] shadow-lg flex flex-col items-center justify-center p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="w-20 h-20 rounded-2xl bg-[#FFF0F2] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                {featuredCampaignConfig.icon || <Sparkles className="w-10 h-10 text-[#4A1F1F]" />}
-              </div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-1">
-                FEATURED PROGRAM
-              </span>
-              <span className="text-lg font-bold text-brand-black">
-                {featuredCampaignConfig.title}
-              </span>
+                {/* Title & Bottom Indicator */}
+                <div className="w-full">
+                  <span className="text-base font-bold text-brand-black block mb-0.5">
+                    {featuredCampaignConfig.title}
+                  </span>
+                  <span className="text-xs font-bold text-[#D88A9A] group-hover:text-[#4A1F1F] flex items-center justify-center gap-1 transition-colors duration-300">
+                    Learn More <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </div>
-    </motion.section>
+      </motion.section>
+
+      {/* Interactive Program Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            onClick={() => setIsModalOpen(false)}
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-8 md:p-10 max-w-xl w-full shadow-2xl border border-gray-100 relative flex flex-col gap-5 max-h-[90vh] overflow-y-auto"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-5 right-5 p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors cursor-pointer"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Modal Header */}
+              <div className="flex items-center gap-3.5 pr-8">
+                <div className="w-12 h-12 rounded-2xl bg-[#FFF0F2] flex items-center justify-center shrink-0">
+                  {featuredCampaignConfig.icon || <Smile className="w-6 h-6 text-[#4A1F1F]" />}
+                </div>
+                <div>
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#4A1F1F] text-white text-[10px] font-black tracking-widest uppercase mb-1">
+                    {featuredCampaignConfig.badge}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-brand-black tracking-tight leading-tight">
+                    {featuredCampaignConfig.title}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Subtitle */}
+              {featuredCampaignConfig.modalDetails?.subtitle && (
+                <p className="text-base sm:text-lg font-semibold text-[#D88A9A] italic -mt-1">
+                  "{featuredCampaignConfig.modalDetails.subtitle}"
+                </p>
+              )}
+
+              {/* Divider */}
+              <div className="h-px bg-gray-100 w-full" />
+
+              {/* Explanation Text */}
+              <div className="space-y-4 text-gray-700 text-sm sm:text-base font-medium leading-relaxed">
+                {featuredCampaignConfig.modalDetails?.paragraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-3 items-center justify-end mt-2">
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-full sm:w-auto px-6 py-3 rounded-full border border-gray-200 text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors order-2 sm:order-1 cursor-pointer"
+                >
+                  Maybe Later
+                </button>
+                <a
+                  href={featuredCampaignConfig.buttonLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#4A1F1F] text-white font-bold text-sm hover:bg-[#381717] shadow-md hover:shadow-lg transition-all text-center order-1 sm:order-2 cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <span>{featuredCampaignConfig.buttonText}</span>
+                  <ArrowRight className="w-4 h-4 text-brand-pink" />
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -719,7 +874,7 @@ function Testimonials() {
                     "{story.text}"
                   </p>
                   {isLong && (
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedStory(story);
