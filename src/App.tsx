@@ -569,31 +569,28 @@ function Leadership() {
 }
 
 function Testimonials() {
+  const [selectedStory, setSelectedStory] = useState<{ text: string; author: string } | null>(null);
+
   const stories = [
     {
       text: `banyak rumah sudah disinggahi, beribu jumpa sudah dialami, banyak yang datang, pergi, dan melampaui, ada juga yang tidak kunjung sama sekali. tapi yang satu ini beda sekali, ini lebih dari sekedar singgah, ini rumah yang berbeda`,
-      author: "Matthew FISIP 21",
-      widthClass: "w-[84vw] sm:w-[380px] md:w-[420px]"
+      author: "Matthew FISIP 21"
     },
     {
       text: `PMK Agape adalah tempat Tuhan membentukku. Rumah untuk pulang… di mana aku diingatkan bahwa perjalanan iman tidak dijalani seorang diri. Bersama orang-orang yang Tuhan hadirkan, aku belajar mengasihi Tuhan, mengasihi sesama, dan mengasihi diri sendiri 🩷`,
-      author: "Reynaya FEB 22",
-      widthClass: "w-[90vw] sm:w-[400px] md:w-[450px]"
+      author: "Reynaya FEB 22"
     },
     {
       text: `Kabanyakan orang bilang "aku takut ditolak" \ntapi PMK Agape? dengan kasih yang Tuhan berikan menjadi tempat setiap pribadi di terima dengan baik apapun kekurangan nya. Tempat bertumbuh mengenal diri lebih baik dalam kasih Tuhan agar dapat menyebarkan kasih lebih luas`,
-      author: "Davina FEB 22",
-      widthClass: "w-[96vw] sm:w-[440px] md:w-[500px]"
+      author: "Davina FEB 22"
     },
     {
       text: `Terkadang Tuhan tidak mengubah jalan yang sedang kita lewati, tetapi menghadirkan tempat untuk beristirahat, bertumbuh, dan dikuatkan. Kebersamaan yang Tuhan berikan di tempat itu begitu hangat, hingga aku belajar bahwa iman bukan hanya tentang berjalan menuju Tuhan, tetapi juga tentang saling menggenggam tangan agar tidak ada yang tertinggal dalam perjalanan.`,
-      author: "Dinda FEB 25",
-      widthClass: "w-[118vw] sm:w-[520px] md:w-[640px]"
+      author: "Dinda FEB 25"
     },
     {
       text: `super happy karena bisa kenal orang baru di PMK Agape yang very welcome and warm. hopefully after this, more and more "reasons" will appear to make me be here and grow in God together w them`,
-      author: "Natta FH 25",
-      widthClass: "w-[76vw] sm:w-[380px] md:w-[400px]"
+      author: "Natta FH 25"
     },
   ];
 
@@ -603,38 +600,104 @@ function Testimonials() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="pt-8 pb-10 md:pt-12 md:pb-14 px-6 bg-[#FAFAFA] rounded-[3rem] mx-2 md:mx-6 my-6 overflow-hidden"
+      className="pt-8 pb-10 md:pt-12 md:pb-14 px-4 md:px-6 bg-[#FAFAFA] rounded-[3rem] mx-2 md:mx-6 my-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">What They Say?</h2>
         <div className="flex overflow-x-auto items-stretch gap-4 md:gap-6 pb-6 -mx-4 px-4 md:-mx-6 md:px-6 snap-x snap-mandatory scroll-smooth no-scrollbar">
-          {stories.map((story, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{
-                delay: i * 0.2,
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}
-              className={`bg-white p-5 md:p-6 rounded-3xl shadow-sm flex flex-col justify-between border border-gray-100 shrink-0 snap-start cursor-pointer h-[260px] sm:h-[280px] md:h-[270px] ${story.widthClass}`}
-            >
-              <div>
-                <div className="flex gap-1 mb-3">
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-brand-pink text-brand-pink" />)}
+          {stories.map((story, i) => {
+            const isLong = story.text.length > 170;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{
+                  delay: i * 0.15,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20
+                }}
+                onClick={() => setSelectedStory(story)}
+                className="bg-white p-5 md:p-6 rounded-3xl shadow-sm flex flex-col justify-between border border-gray-100 shrink-0 snap-start cursor-pointer w-[88vw] sm:w-[350px] md:w-[360px] lg:w-[380px] h-[270px] sm:h-[280px] overflow-hidden"
+              >
+                <div>
+                  <div className="flex gap-1 mb-3">
+                    {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-brand-pink text-brand-pink" />)}
+                  </div>
+                  <p className="text-sm sm:text-base font-medium text-brand-black italic relative z-10 leading-relaxed line-clamp-4">
+                    "{story.text}"
+                  </p>
+                  {isLong && (
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedStory(story);
+                      }}
+                      className="text-xs font-bold text-[#D88A9A] hover:underline mt-1 block"
+                    >
+                      Read more...
+                    </button>
+                  )}
                 </div>
-                <p className="text-sm sm:text-base md:text-lg font-medium text-brand-black italic relative z-10 leading-relaxed">"{story.text}"</p>
-              </div>
-              <p className="font-bold text-brand-black text-sm sm:text-base pt-2 shrink-0">— {story.author}</p>
-            </motion.div>
-          ))}
+                <p className="font-bold text-brand-black text-sm sm:text-base pt-2 shrink-0 border-t border-gray-50 mt-auto">
+                  — {story.author}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
+
+      {/* Modal for full story */}
+      <AnimatePresence>
+        {selectedStory && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedStory(null)}
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-gray-100 relative flex flex-col gap-4 max-h-[85vh] overflow-y-auto"
+            >
+              <button
+                onClick={() => setSelectedStory(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-5 h-5 fill-brand-pink text-brand-pink" />)}
+              </div>
+
+              <p className="text-base sm:text-lg font-medium text-brand-black italic leading-relaxed">
+                "{selectedStory.text}"
+              </p>
+
+              <div className="pt-3 border-t border-gray-100 flex justify-between items-center">
+                <p className="font-bold text-brand-black text-base">— {selectedStory.author}</p>
+                <button
+                  onClick={() => setSelectedStory(null)}
+                  className="px-4 py-2 bg-[#4A1F1F] text-white text-xs font-bold rounded-full hover:bg-[#381717] transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.section>
   );
 }
