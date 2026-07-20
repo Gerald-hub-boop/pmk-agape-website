@@ -435,116 +435,242 @@ function FeaturedCampaign() {
 
 function About() {
   const missions = [
-    { title: "Penginjilan", icon: <Megaphone className="w-6 h-6" />, desc: "Memberitakan Injil melalui pendekatan pribadi, kelompok kecil, dan kegiatan agar mahasiswa mengenal Kristus." },
-    { title: "Pemuridan", icon: <BookOpen className="w-6 h-6" />, desc: "Membina iman dan karakter melalui kelompok kecil, persekutuan, dan pembelajaran firman." },
-    { title: "Pelipatgandaan", icon: <Users className="w-6 h-6" />, desc: "Mempercayakan mahasiswa untuk membina orang lain dan menjadi murid yang melipatgandakan." },
-    { title: "Pengutusan", icon: <Send className="w-6 h-6" />, desc: "Mengutus mahasiswa untuk hidup sebagai terang di tengah keluarga, gereja, dan masyarakat." },
+    {
+      number: "01",
+      title: "Penginjilan",
+      icon: <Megaphone className="w-5 h-5" />,
+      desc: "Mengenalkan Kristus melalui relasi pribadi, kelompok kecil, dan persekutuan agar mahasiswa dapat mengenal Injil secara nyata.",
+    },
+    {
+      number: "02",
+      title: "Pemuridan",
+      icon: <BookOpen className="w-5 h-5" />,
+      desc: "Bertumbuh bersama melalui firman, komunitas, dan kehidupan sehari-hari dalam iman yang semakin dalam.",
+    },
+    {
+      number: "03",
+      title: "Pelipatgandaan",
+      icon: <Users className="w-5 h-5" />,
+      desc: "Belajar membimbing orang lain agar bertumbuh bersama dan menjadi murid yang melipatgandakan dampak.",
+    },
+    {
+      number: "04",
+      title: "Pengutusan",
+      icon: <Send className="w-5 h-5" />,
+      desc: "Menjadi terang dan membawa dampak nyata bagi keluarga, gereja, kampus, dan masyarakat luas.",
+    },
   ];
 
   return (
-    <motion.section
+    <section
       id="vision"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="py-10 md:py-14 px-6 bg-white relative scroll-mt-20"
+      className="py-16 md:py-24 px-6 bg-white relative scroll-mt-20 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto">
+      {/* Very subtle background texture */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="w-[600px] h-[600px] bg-[#FADADD]/10 rounded-full blur-[120px] absolute -top-32 -right-32" />
+        <div className="w-[400px] h-[400px] bg-[#FFF0F2]/20 rounded-full blur-[100px] absolute bottom-0 -left-20" />
+      </div>
+
+      <div className="max-w-5xl mx-auto relative z-10">
+
+        {/* ── Section Label ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-2xl mx-auto mb-4 md:mb-6"
+          transition={{ duration: 0.5 }}
+          className="flex items-center justify-center gap-3 mb-10 md:mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Vision & Mission</h2>
-          <p className="text-lg text-gray-500 font-medium">
-            The Foundation of Direction and Calling for PMK Agape
-          </p>
+          <div className="h-px w-8 bg-[#D88A9A]/50" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D88A9A]">Vision & Mission</span>
+          <div className="h-px w-8 bg-[#D88A9A]/50" />
         </motion.div>
 
-        {/* Visi Highlight Block */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative overflow-hidden bg-gradient-to-b from-[#FFF0F2] to-white border border-[#D88A9A]/20 rounded-3xl p-5 md:p-6 text-center max-w-3xl mx-auto mb-8 shadow-[0_10px_30px_-10px_rgba(90,30,30,0.1)]"
-        >
-          {/* Faint Background Quote Icon */}
-          <Quote className="absolute top-6 left-6 md:top-8 md:left-8 w-16 h-16 md:w-20 md:h-20 text-[#FADADD] opacity-40 rotate-180 -z-10" />
-
-          {/* High Contrast Pill Label */}
-          <div className="mb-6">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#f8dce1] text-[#5A1E1E] text-[10px] font-black tracking-[0.2em] uppercase shadow-sm">
-              Vision
-            </span>
-          </div>
+        {/* ── VISION ── Manifesto style */}
+        <div className="mb-20 md:mb-28 text-center max-w-4xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400 mb-5"
+          >
+            Vision
+          </motion.p>
 
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-80px" }}
             variants={{
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: {
-                  staggerChildren: 0.05,
-                }
+                transition: { staggerChildren: 0.04 }
               }
             }}
-            className="text-lg md:text-xl lg:text-2xl font-semibold text-brand-black/90 leading-snug md:leading-relaxed max-w-2xl mx-auto italic relative z-10"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-brand-black leading-snug md:leading-[1.25] tracking-tight"
           >
-            {"\"Memperlengkapi mahasiswa menjadi garam dan terang, yang dewasa dalam Kristus serta menjadi berkat bagi keluarga, gereja, bangsa, bahkan dunia.\"".split(" ").map((word, index) => (
+            {`"Memperlengkapi mahasiswa menjadi garam dan terang, yang dewasa dalam Kristus serta menjadi berkat bagi keluarga, gereja, bangsa, bahkan dunia."`.split(" ").map((word, i) => (
               <motion.span
-                key={index}
+                key={i}
                 variants={{
-                  hidden: { opacity: 0, y: 5, filter: "blur(2px)" },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                    transition: { ease: "easeOut", duration: 0.6 }
-                  }
+                  hidden: { opacity: 0, y: 8, filter: "blur(3px)" },
+                  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { ease: "easeOut", duration: 0.55 } }
                 }}
-                className="inline-block mr-[0.2em]"
+                className="inline-block mr-[0.25em]"
               >
                 {word}
               </motion.span>
             ))}
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Misi Grid */}
-        <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-4 md:pt-0 md:pb-0 -mt-3 md:mt-0 md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory scroll-smooth no-scrollbar md:overflow-visible">
-          {missions.map((misi, idx) => (
+        {/* ── MISSION ── Narrative intro */}
+        <div className="mb-12 md:mb-16 max-w-2xl">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400 mb-4"
+          >
+            Our Mission
+          </motion.p>
+          <motion.h3
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="text-2xl md:text-3xl font-bold text-brand-black mb-4 leading-snug"
+          >
+            Satu perjalanan,<br />empat langkah bersama.
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.14 }}
+            className="text-gray-500 text-base md:text-lg font-medium leading-relaxed"
+          >
+            Kami percaya bahwa pertumbuhan setiap mahasiswa bukan terjadi dalam satu langkah, tetapi melalui sebuah perjalanan. Perjalanan itulah yang kami hidupi bersama di PMK Agape.
+          </motion.p>
+        </div>
+
+        {/* ── TIMELINE ── Desktop horizontal, Mobile vertical */}
+        {/* Desktop */}
+        <div className="hidden md:block">
+          <div className="relative">
+            {/* Connector line */}
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+              className="absolute top-[2.4rem] left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-gradient-to-r from-[#D88A9A]/20 via-[#D88A9A] to-[#D88A9A]/20 origin-left"
+            />
+
+            <div className="grid grid-cols-4 gap-0">
+              {missions.map((m, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.15, ease: "easeOut" }}
+                  className="flex flex-col items-center text-center px-4 group"
+                >
+                  {/* Step node */}
+                  <div className="relative mb-6">
+                    <div className="w-[4.8rem] h-[4.8rem] rounded-2xl bg-white border border-gray-100 shadow-sm group-hover:shadow-md group-hover:border-[#D88A9A]/40 flex items-center justify-center transition-all duration-300 relative z-10">
+                      <div className="text-[#4A1F1F]/70 group-hover:text-[#4A1F1F] transition-colors duration-300">
+                        {m.icon}
+                      </div>
+                    </div>
+                    {/* Number badge */}
+                    <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#4A1F1F] text-white text-[9px] font-black flex items-center justify-center z-20 shadow-sm">
+                      {i + 1}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <h4 className="text-base font-bold text-brand-black mb-2 group-hover:text-[#7A2E2E] transition-colors duration-300">
+                    {m.title}
+                  </h4>
+                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
+                    {m.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile vertical timeline */}
+        <div className="md:hidden space-y-0">
+          {missions.map((m, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{
-                delay: idx * 0.1,
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}
-              className="bg-[#FFF0F2] rounded-[2rem] p-5 md:p-6 text-center hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300 md:hover:-translate-y-1 group shrink-0 w-[80vw] md:w-auto snap-start cursor-pointer"
+              transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
+              className="flex gap-5 pb-0"
             >
-              <div className="w-14 h-14 bg-white text-brand-black rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm [&>svg]:transition-transform [&>svg]:duration-300 group-hover:[&>svg]:scale-[1.15] group-hover:[&>svg]:rotate-[8deg]">
-                {misi.icon}
+              {/* Left: number + vertical line */}
+              <div className="flex flex-col items-center shrink-0 w-10">
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-center relative z-10 shrink-0">
+                  <span className="text-[11px] font-black text-[#4A1F1F]">{m.number}</span>
+                </div>
+                {i < missions.length - 1 && (
+                  <motion.div
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 + i * 0.12, ease: "easeOut" }}
+                    className="w-px flex-1 bg-gradient-to-b from-[#D88A9A]/60 to-[#D88A9A]/10 origin-top mt-2 min-h-[3rem]"
+                  />
+                )}
               </div>
-              <h3 className="text-xl font-bold mb-3">{misi.title}</h3>
-              <p className="text-gray-600 font-medium leading-relaxed">{misi.desc}</p>
+
+              {/* Right: content */}
+              <div className="pt-1 pb-8">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[#4A1F1F]/60">{m.icon}</span>
+                  <h4 className="text-base font-bold text-brand-black">{m.title}</h4>
+                </div>
+                <p className="text-sm text-gray-500 font-medium leading-relaxed">{m.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        {/* ── Bottom CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-14 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4 text-center"
+        >
+          <p className="text-gray-400 text-sm font-medium italic">
+            Perjalanan ini dimulai dari satu langkah kecil.
+          </p>
+          <a
+            href="#connect"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4A1F1F] text-white text-sm font-bold hover:bg-[#381717] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] group"
+          >
+            <span>Join PMK Agape</span>
+            <ArrowRight className="w-4 h-4 text-brand-pink group-hover:translate-x-0.5 transition-transform duration-300" />
+          </a>
+        </motion.div>
+
       </div>
-    </motion.section>
+    </section>
   );
 }
+
 
 function Activities() {
   const activities = [
