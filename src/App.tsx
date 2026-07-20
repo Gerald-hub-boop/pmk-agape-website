@@ -189,7 +189,94 @@ function Header() {
   );
 }
 
+export interface FeaturedCampaignConfig {
+  enabled: boolean;
+  badge: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  icon?: React.ReactNode;
+}
 
+export const featuredCampaignConfig: FeaturedCampaignConfig = {
+  enabled: true,
+  badge: "NOW OPEN",
+  title: "First Friends",
+  description: "Meet new friends, build genuine connections, and feel right at home. Join a welcoming community where you can get to know fellow students before and during your university journey.",
+  buttonText: "Join First Friends",
+  buttonLink: "https://forms.gle/pmkagape-first-friends",
+  icon: <Smile className="w-10 h-10 text-[#4A1F1F]" />
+};
+
+function FeaturedCampaign() {
+  if (!featuredCampaignConfig.enabled) {
+    return null;
+  }
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 md:pt-10 md:pb-4 relative z-10 scroll-mt-20"
+    >
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
+        {/* Ambient Glows */}
+        <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
+        <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+          {/* Main Copy */}
+          <div className="max-w-2xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4A1F1F] text-white text-xs font-black uppercase tracking-[0.18em] shadow-sm mb-4 sm:mb-5">
+              <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse" />
+              {featuredCampaignConfig.badge}
+            </div>
+
+            {/* Title */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
+              {featuredCampaignConfig.title}
+            </h2>
+
+            {/* Description */}
+            <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-8">
+              {featuredCampaignConfig.description}
+            </p>
+
+            {/* CTA Button */}
+            <a
+              href={featuredCampaignConfig.buttonLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base sm:text-lg shadow-md hover:bg-[#381717] hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group cursor-pointer"
+            >
+              <span>{featuredCampaignConfig.buttonText}</span>
+              <ArrowRight className="w-5 h-5 text-brand-pink group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
+          </div>
+
+          {/* Decorative Visual Element / Card Accent */}
+          <div className="hidden lg:flex items-center justify-center shrink-0">
+            <div className="relative w-64 h-64 rounded-3xl bg-white/80 backdrop-blur-md border border-[#FADADD] shadow-lg flex flex-col items-center justify-center p-6 text-center group hover:scale-105 transition-transform duration-300">
+              <div className="w-20 h-20 rounded-2xl bg-[#FFF0F2] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                {featuredCampaignConfig.icon || <Sparkles className="w-10 h-10 text-[#4A1F1F]" />}
+              </div>
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-1">
+                FEATURED PROGRAM
+              </span>
+              <span className="text-lg font-bold text-brand-black">
+                {featuredCampaignConfig.title}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  );
+}
 
 function About() {
   const missions = [
@@ -1015,6 +1102,8 @@ export default function App() {
     <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
       <Header />
       <CinematicHero />
+
+      <FeaturedCampaign />
 
       <About />
       <Activities />
