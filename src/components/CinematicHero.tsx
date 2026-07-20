@@ -65,7 +65,7 @@ export const CinematicHero: React.FC = () => {
           ref={imgRef}
           src={imgLanding}
           alt=""
-          className="w-full h-full object-cover object-[70%_center] md:object-center"
+          className="w-full h-full object-cover object-[80%_center] md:object-center"
           style={{
             // Slightly warmer and dimmed on mobile for slogan legibility
             filter: 'brightness(0.93) saturate(0.94)',
@@ -82,16 +82,16 @@ export const CinematicHero: React.FC = () => {
               'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
           }}
         />
-        {/* Mobile horizontal gradient overlay — left to right as requested */}
+        {/* Mobile horizontal gradient overlay — 95-98% opacity white covering 75-80% of screen left to right */}
         <div
           className="absolute inset-0 pointer-events-none md:hidden"
           style={{
             background:
-              'linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.85) 45%, rgba(255,255,255,0.4) 75%, rgba(255,255,255,0.1) 100%)',
+              'linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.96) 55%, rgba(255,255,255,0.92) 75%, rgba(255,255,255,0.3) 92%, rgba(255,255,255,0) 100%)',
           }}
         />
 
-        {/* Gradient fade at bottom — desktop 40%, mobile 18% */}
+        {/* Gradient fade at bottom — desktop 40%, mobile 15% */}
         <div
           className="absolute inset-0 pointer-events-none hidden md:block"
           style={{
@@ -103,7 +103,7 @@ export const CinematicHero: React.FC = () => {
           className="absolute inset-0 pointer-events-none md:hidden"
           style={{
             background:
-              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 10%, transparent 22%)',
+              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 8%, transparent 15%)',
           }}
         />
       </motion.div>
