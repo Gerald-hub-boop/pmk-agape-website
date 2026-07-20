@@ -59,9 +59,9 @@ import { CinematicHero } from './components/CinematicHero';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Heart, Users, BookOpen, MessageCircle, MapPin,
-  Calendar, ChevronRight, Star, Mail, ArrowRight,
-  HandHeart, Send, Quote, Music, Sparkles, UserPlus, Mountain, Megaphone,
-  Flame, Menu, X, Instagram, Activity, Smile, Handshake
+  CalendarDays, Mail, ArrowRight,
+  HandHeart, Send, Music, UserPlus, Mountain, Megaphone,
+  Menu, X, Instagram, Activity, Handshake
 } from 'lucide-react';
 
 export const triggerScrollToConnectCard = (index: number) => {
@@ -221,7 +221,7 @@ export const featuredCampaignConfig: FeaturedCampaignConfig = {
   },
   buttonText: "Join First Friends",
   buttonLink: "https://forms.gle/pmkagape-first-friends",
-  icon: <Smile className="w-10 h-10 text-[#4A1F1F]" />
+  icon: <UserPlus className="w-10 h-10 text-[#4A1F1F]" />
 };
 
 function FeaturedCampaign() {
@@ -308,8 +308,8 @@ function FeaturedCampaign() {
                   onClick={() => setIsModalOpen(true)}
                   className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
                 >
-                  <Sparkles className="w-4 h-4 text-[#D88A9A]" />
                   <span>Learn More</span>
+                  <ArrowRight className="w-4 h-4 text-[#D88A9A]" />
                 </button>
               </div>
             </div>
@@ -326,12 +326,11 @@ function FeaturedCampaign() {
                 {/* Top indicator badge */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-[10px] font-bold tracking-wider uppercase border border-[#FADADD]/60 group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors duration-300">
                   <span>Tap to Explore</span>
-                  <Sparkles className="w-3 h-3 text-[#D88A9A] group-hover:text-brand-pink" />
                 </div>
 
                 {/* Icon */}
                 <div className="w-16 h-16 rounded-2xl bg-[#FFF0F2] flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300 my-auto shadow-inner">
-                  {featuredCampaignConfig.icon || <Sparkles className="w-8 h-8 text-[#4A1F1F]" />}
+                  {featuredCampaignConfig.icon || <UserPlus className="w-8 h-8 text-[#4A1F1F]" />}
                 </div>
 
                 {/* Title & Bottom Indicator */}
@@ -380,7 +379,7 @@ function FeaturedCampaign() {
               {/* Modal Header */}
               <div className="flex items-center gap-3.5 pr-8">
                 <div className="w-12 h-12 rounded-2xl bg-[#FFF0F2] flex items-center justify-center shrink-0">
-                  {featuredCampaignConfig.icon || <Smile className="w-6 h-6 text-[#4A1F1F]" />}
+                  {featuredCampaignConfig.icon || <UserPlus className="w-6 h-6 text-[#4A1F1F]" />}
                 </div>
                 <div>
                   <span className="inline-block px-3 py-1 rounded-full bg-[#4A1F1F] text-white text-[10px] font-black tracking-widest uppercase mb-1">
@@ -686,7 +685,7 @@ function Activities() {
     },
     {
       title: "Persekutuan Doa Jemaat",
-      icon: <Heart className="w-6 h-6" />,
+      icon: <HandHeart className="w-6 h-6" />,
       desc: "Ruang untuk saling mendoakan, membawa setiap pergumulan kepada Tuhan bersama-sama.",
       image: imgPersekutuanDoaJemaat
     },
@@ -698,7 +697,7 @@ function Activities() {
     },
     {
       title: "Ibadah Perayaan Natal & Paskah",
-      icon: <Sparkles className="w-6 h-6" />,
+      icon: <CalendarDays className="w-6 h-6" />,
       desc: "Momen spesial untuk merayakan kasih Tuhan bersama seluruh komunitas.",
       image: imgNatalPaskah
     },
@@ -858,8 +857,8 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mt-2">{m.role}</p>
 
             {/* Mobile Hint */}
-            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5 text-[9px] font-bold text-brand-pink/60 uppercase tracking-tighter md:hidden">
-              <Sparkles className="w-2.5 h-2.5" /> Tap to see story
+            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5 text-[9px] font-bold text-[#D88A9A] uppercase tracking-tighter md:hidden">
+              Tap to see story →
             </div>
           </div>
         </div>
@@ -1140,7 +1139,7 @@ function Interaction() {
     {
       title: "First Friends",
       desc: "Meet new friends, connect with others, and start your journey together.",
-      icon: <Smile className="w-8 h-8 md:w-10 md:h-10" />,
+      icon: <UserPlus className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Get Connected",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
@@ -1160,7 +1159,7 @@ function Interaction() {
     {
       title: "Request Prayer",
       desc: "You don’t have to carry everything alone. We are here to pray with you and stand with you.",
-      icon: <Heart className="w-8 h-8 md:w-10 md:h-10 fill-[#4A1F1F]" />,
+      icon: <HandHeart className="w-8 h-8 md:w-10 md:h-10 text-[#4A1F1F]" />,
       btn: "Send Prayer Request",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
