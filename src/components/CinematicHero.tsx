@@ -134,6 +134,10 @@ export const CinematicHero: React.FC = () => {
             <Rise delay={0.58} className="mt-10 flex flex-wrap items-center gap-4">
               <a
                 href="#connect"
+                onClick={() => {
+                  const event = new CustomEvent('scroll-to-connect-card', { detail: 0 });
+                  window.dispatchEvent(event);
+                }}
                 className="
                   px-7 py-3.5 rounded-full
                   bg-[#D88A9A] text-white text-sm font-bold

@@ -64,6 +64,11 @@ import {
   Flame, Menu, X, Instagram, Activity, Smile, Handshake
 } from 'lucide-react';
 
+export const triggerScrollToConnectCard = (index: number) => {
+  const event = new CustomEvent('scroll-to-connect-card', { detail: index });
+  window.dispatchEvent(event);
+};
+
 function Header() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
@@ -90,7 +95,6 @@ function Header() {
           isAnyIntersecting = true;
         }
       });
-      // If we scroll to the very top and miss the threshold slightly, default to home
       if (!isAnyIntersecting && window.scrollY < 100) {
         setActiveSection('home');
       }
@@ -111,26 +115,16 @@ function Header() {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b-transparent' : 'bg-white/80 backdrop-blur-md border-b border-[#FFF0F2]'}`}>
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 cursor-pointer group">
-
-
-
-          {/* Logo Box */}
-
-          <div className="w-10 h-10 rounded-xl bg-[#FFF0F2] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105">
-
-            <img
-              src={logo}
-              alt="PMK Agape Logo"
-              className="w-full h-full object-contain"
-            />
-
-          </div>
-
-          <span className="font-bold text-xl tracking-tight text-brand-black">
+    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        {/* Brand */}
+        <a href="#home" className="flex items-center gap-3 group">
+          <img
+            src={logo}
+            alt="PMK Agape Logo"
+            className="w-10 h-10 object-contain rounded-xl transition-transform duration-300 group-hover:scale-105"
+          />
+          <span className="text-xl md:text-2xl font-bold tracking-tight text-brand-black">
             PMK Agape
           </span>
         </a>
@@ -145,7 +139,11 @@ function Header() {
               )}
             </a>
           ))}
-          <a href="#connect" className="px-6 py-2.5 bg-[#FFF0F2] text-brand-black hover:bg-brand-pink hover:text-white rounded-full text-sm font-bold transition-colors">
+          <a
+            href="#connect"
+            onClick={() => triggerScrollToConnectCard(0)}
+            className="px-6 py-2.5 bg-[#FFF0F2] text-brand-black hover:bg-brand-pink hover:text-white rounded-full text-sm font-bold transition-colors"
+          >
             Join Us
           </a>
         </nav>
@@ -177,7 +175,10 @@ function Header() {
             ))}
             <a
               href="#connect"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                triggerScrollToConnectCard(0);
+              }}
               className="w-full py-4 text-center bg-brand-black text-white rounded-full font-bold mt-2"
             >
               Join Us
@@ -659,6 +660,7 @@ function About() {
           </p>
           <a
             href="#connect"
+            onClick={() => triggerScrollToConnectCard(0)}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4A1F1F] text-white text-sm font-bold hover:bg-[#381717] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] group"
           >
             <span>Join PMK Agape</span>
@@ -1291,10 +1293,7 @@ function Interaction() {
   );
 }
 
-const triggerScrollToConnectCard = (index: number) => {
-  const event = new CustomEvent('scroll-to-connect-card', { detail: index });
-  window.dispatchEvent(event);
-};
+
 
 function Footer() {
   return (
@@ -1319,10 +1318,10 @@ function Footer() {
           <ul className="space-y-2 text-sm text-white/60">
             <li>
               <button
-                onClick={() => triggerScrollToConnectCard(2)}
+                onClick={() => triggerScrollToConnectCard(0)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
-                Join First Friends
+                Contact Our Team
               </button>
             </li>
             <li>
@@ -1330,7 +1329,15 @@ function Footer() {
                 onClick={() => triggerScrollToConnectCard(1)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
-                Request Prayer
+                First Friends
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => triggerScrollToConnectCard(2)}
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              >
+                Serve With Us
               </button>
             </li>
             <li>
@@ -1338,15 +1345,7 @@ function Footer() {
                 onClick={() => triggerScrollToConnectCard(3)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
-                Start a Conversation
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => triggerScrollToConnectCard(0)}
-                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
-              >
-                Start Serving
+                Request Prayer
               </button>
             </li>
             <li>
@@ -1354,7 +1353,7 @@ function Footer() {
                 onClick={() => triggerScrollToConnectCard(4)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
-                Media Partner
+                Let’s Talk
               </button>
             </li>
           </ul>
