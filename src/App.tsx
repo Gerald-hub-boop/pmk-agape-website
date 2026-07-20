@@ -1193,11 +1193,11 @@ function Interaction() {
         <div className="w-[900px] h-[900px] bg-gradient-to-r from-[#FFF0F2] to-transparent rounded-full opacity-50 blur-[100px]" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-8 px-6 lg:px-12">
+      <div className="max-w-[1450px] mx-auto relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-8 px-6 lg:px-12">
 
         {/* LEFT */}
-        <div className="w-full lg:w-5/12 text-center lg:text-left">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight text-[#4A1F1F]">
+        <div className="w-full lg:w-4/12 text-center lg:text-left lg:pt-8 shrink-0">
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4 leading-tight text-[#4A1F1F]">
             We’re ready to walk this journey with you.
           </h2>
 
@@ -1207,17 +1207,17 @@ function Interaction() {
         </div>
 
         {/* RIGHT */}
-        <div className="w-full lg:w-7/12 relative">
-          {/* Fade Indicator (Mobile Only) */}
-          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/20 to-transparent z-20 pointer-events-none md:hidden" />
+        <div className="w-full lg:w-8/12 relative min-w-0">
+          {/* Fade Indicator (Mobile & Tablet) */}
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/40 to-transparent z-20 pointer-events-none xl:hidden" />
 
           <div
             ref={containerRef}
             onScroll={handleScroll}
             className="
-            flex gap-4 md:gap-8 overflow-x-auto pb-10 px-4 pl-4
-            snap-x snap-mandatory no-scrollbar
-          "
+              flex gap-4 md:gap-6 lg:gap-6 overflow-x-auto pb-12 pt-4 px-2
+              snap-x snap-mandatory no-scrollbar w-full
+            "
           >
             {cards.map((c, i) => {
               const isActive = activeIdx === i;
@@ -1229,57 +1229,54 @@ function Interaction() {
                     e.preventDefault();
                     e.stopPropagation();
                     const items = containerRef.current?.querySelectorAll('.cta-card');
-                    items?.[i]?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                    items?.[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    setActiveIdx(i);
                   }}
                   className={`
-                  cta-card shrink-0
-                  w-[78%] sm:w-[80%] md:w-[380px] lg:w-[400px]
-                  snap-start rounded-[2rem]
-                  p-6 md:p-8
-                  flex flex-col items-center justify-center
-                  min-h-[280px] md:min-h-[320px]
-                  cursor-pointer border-2
-                  transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    cta-card shrink-0
+                    w-[84vw] sm:w-[70vw] md:w-[340px] lg:w-[350px] xl:w-[370px]
+                    snap-center rounded-[2rem]
+                    p-6 md:p-8
+                    flex flex-col items-center justify-between
+                    min-h-[320px] md:min-h-[340px]
+                    cursor-pointer border-2 group
+                    transition-all duration-500 ease-out
 
-                  ${isActive
-                      ? c.activeStyle + ' scale-100 shadow-xl z-10 opacity-100'
-                      : c.inactiveStyle + ' scale-95 opacity-70 z-0'}
-                `}
+                    ${isActive
+                        ? 'bg-white border-[#4A1F1F]/30 shadow-xl z-10 opacity-100 scale-100'
+                        : 'bg-white/90 border-gray-100 shadow-sm hover:shadow-md opacity-85 hover:opacity-100 scale-[0.98]'}
+                  `}
                 >
-
                   {/* ICON */}
                   <div className={`
-                  w-14 h-14 md:w-16 md:h-16 rounded-full
-                  flex items-center justify-center
-                  mb-4 md:mb-6
-                  transition-transform duration-500 shadow-sm
-                  ${isActive ? 'scale-110' : ''}
-                  ${c.iconBg}
-                `}>
+                    w-14 h-14 md:w-16 md:h-16 rounded-full
+                    flex items-center justify-center
+                    mb-4 md:mb-5
+                    transition-transform duration-300 shadow-sm
+                    ${isActive ? 'scale-110' : 'group-hover:scale-105'}
+                    ${c.iconBg}
+                  `}>
                     {c.icon}
                   </div>
 
                   {/* TITLE */}
-                  <h3 className="font-bold text-2xl md:text-3xl mb-3 text-center text-[#4A1F1F]">
+                  <h3 className="font-bold text-2xl md:text-3xl mb-2 text-center text-[#4A1F1F]">
                     {c.title}
                   </h3>
 
                   {/* DESC */}
-                  <p className="text-center mb-5 font-medium text-gray-500 leading-relaxed">
+                  <p className="text-center mb-6 font-medium text-gray-500 text-sm md:text-base leading-relaxed">
                     {c.desc}
                   </p>
 
-                  {/* BUTTON */}
+                  {/* BUTTON — ALWAYS VISIBLE & ACCESSIBLE */}
                   <button
                     type="button"
                     className={`
-                    w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
-                    transition-all duration-300
-                    ${isActive
-                        ? 'translate-y-0 opacity-100'
-                        : 'translate-y-4 opacity-0 pointer-events-none'}
-                    ${c.btnStyle}
-                  `}
+                      w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
+                      transition-all duration-300 mt-auto
+                      ${c.btnStyle}
+                    `}
                   >
                     {c.btn}
                   </button>
@@ -1287,6 +1284,9 @@ function Interaction() {
                 </div>
               );
             })}
+
+            {/* Spacer to allow the 5th card (Let's Talk) to scroll cleanly to center */}
+            <div className="shrink-0 w-12 md:w-32 lg:w-48" />
           </div>
         </div>
 

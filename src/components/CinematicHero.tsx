@@ -52,7 +52,7 @@ export const CinematicHero: React.FC = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative w-full h-[100svh] min-h-[520px] max-h-[740px] md:h-screen md:min-h-[640px] md:max-h-[960px] overflow-hidden bg-[#FFF0F2]"
+      className="relative w-full h-[100svh] min-h-[540px] max-h-[780px] md:h-screen md:min-h-[640px] md:max-h-[960px] overflow-hidden bg-[#FFF0F2]"
     >
       {/* ─── BACKGROUND IMAGE (right half, parallax) ──────────── */}
       {/* Positioned absolutely so the white text panel floats over it */}
@@ -65,17 +65,14 @@ export const CinematicHero: React.FC = () => {
           ref={imgRef}
           src={imgLanding}
           alt=""
-          className="w-full h-full object-cover object-[72%_center] md:object-center"
+          className="w-full h-full object-cover object-[70%_center] md:object-center"
           style={{
-            // Very slight warm tint to bridge into the pink palette
-            filter: 'brightness(0.97) saturate(0.94)',
+            // Slightly warmer and dimmed on mobile for slogan legibility
+            filter: 'brightness(0.93) saturate(0.94)',
             scale: 1.04,
           }}
           onLoad={onImageLoad}
         />
-
-        {/* Mobile subtle top wash for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-transparent md:bg-transparent pointer-events-none" />
 
         {/* Desktop horizontal gradient overlay */}
         <div
@@ -85,12 +82,12 @@ export const CinematicHero: React.FC = () => {
               'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
           }}
         />
-        {/* Mobile vertical gradient overlay */}
+        {/* Mobile horizontal gradient overlay — left to right as requested */}
         <div
           className="absolute inset-0 pointer-events-none md:hidden"
           style={{
             background:
-              'linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 70%)',
+              'linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.85) 45%, rgba(255,255,255,0.4) 75%, rgba(255,255,255,0.1) 100%)',
           }}
         />
 
@@ -106,7 +103,7 @@ export const CinematicHero: React.FC = () => {
           className="absolute inset-0 pointer-events-none md:hidden"
           style={{
             background:
-              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 8%, transparent 18%)',
+              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 10%, transparent 22%)',
           }}
         />
       </motion.div>
