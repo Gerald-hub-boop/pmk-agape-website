@@ -52,7 +52,7 @@ export const CinematicHero: React.FC = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative w-full h-screen min-h-[640px] max-h-[960px] overflow-hidden bg-[#FFF0F2]"
+      className="relative w-full h-[100svh] min-h-[520px] max-h-[740px] md:h-screen md:min-h-[640px] md:max-h-[960px] overflow-hidden bg-[#FFF0F2]"
     >
       {/* ─── BACKGROUND IMAGE (right half, parallax) ──────────── */}
       {/* Positioned absolutely so the white text panel floats over it */}
@@ -65,7 +65,7 @@ export const CinematicHero: React.FC = () => {
           ref={imgRef}
           src={imgLanding}
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[72%_center] md:object-center"
           style={{
             // Very slight warm tint to bridge into the pink palette
             filter: 'brightness(0.97) saturate(0.94)',
@@ -74,28 +74,45 @@ export const CinematicHero: React.FC = () => {
           onLoad={onImageLoad}
         />
 
-        {/* Mobile-only solid white wash for text contrast */}
-        <div className="absolute inset-0 bg-white/85 md:bg-transparent pointer-events-none" />
+        {/* Mobile subtle top wash for text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-transparent md:bg-transparent pointer-events-none" />
 
+        {/* Desktop horizontal gradient overlay */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none hidden md:block"
           style={{
             background:
               'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
           }}
         />
-        {/* Gradient fade — white at the BOTTOM for seamless → Vision section */}
+        {/* Mobile vertical gradient overlay */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none md:hidden"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 70%)',
+          }}
+        />
+
+        {/* Gradient fade at bottom — desktop 40%, mobile 18% */}
+        <div
+          className="absolute inset-0 pointer-events-none hidden md:block"
           style={{
             background:
               'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 18%, transparent 40%)',
           }}
         />
+        <div
+          className="absolute inset-0 pointer-events-none md:hidden"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 8%, transparent 18%)',
+          }}
+        />
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
-      <div className="relative z-10 h-full flex items-start" style={{ paddingTop: 'clamp(2.5rem, 8vh, 5.5rem)' }}>
+      <div className="relative z-10 h-full flex items-center md:items-start pt-6 sm:pt-10 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
           {/*
            * Max-width constraint keeps the text panel tight on the left
