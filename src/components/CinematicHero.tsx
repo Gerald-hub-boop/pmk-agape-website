@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import imgLanding from '../images/Landing.png';
+import imgLanding from '../images-optimized/Landing.webp';
 
 // ─────────────────────────────────────────────
 // Staggered fade-up — matches the animation

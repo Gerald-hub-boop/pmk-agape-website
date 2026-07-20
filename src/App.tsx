@@ -1,59 +1,59 @@
 import React, { useState, useEffect, useRef } from 'react';
-// Team Images 1-45
-import img1 from './images/1.png';
-import img2 from './images/2.png';
-import img3 from './images/3.png';
-import img4 from './images/4.png';
-import img5 from './images/5.png';
-import img6 from './images/6.png';
-import img7 from './images/7.png';
-import img8 from './images/8.png';
-import img9 from './images/9.png';
-import img10 from './images/10.png';
-import img11 from './images/11.png';
-import img12 from './images/12.png';
-import img13 from './images/13.png';
-import img14 from './images/14.png';
-import img15 from './images/15.png';
-import img16 from './images/16.png';
-import img17 from './images/17.png';
-import img18 from './images/18.png';
-import img19 from './images/19.png';
-import img20 from './images/20.png';
-import img21 from './images/21.png';
-import img22 from './images/22.png';
-import img23 from './images/23.png';
-import img24 from './images/24.png';
-import img25 from './images/25.png';
-import img26 from './images/26.png';
-import img27 from './images/27.png';
-import img28 from './images/28.png';
-import img29 from './images/29.png';
-import img30 from './images/30.png';
-import img31 from './images/31.png';
-import img32 from './images/32.png';
-import img33 from './images/33.png';
-import img34 from './images/34.png';
-import img35 from './images/35.png';
-import img36 from './images/36.png';
-import img37 from './images/37.png';
-import img38 from './images/38.png';
-import img39 from './images/39.png';
-import img40 from './images/40.png';
-import img41 from './images/41.png';
-import img42 from './images/42.png';
-import img43 from './images/43.png';
-import img44 from './images/44.png';
-import img45 from './images/45.png';
-import logo from './logo.png';
-import imgPersekutuanDoaJemaat from './images/WhatWeDo/Persekutuan Doa Jemaat.png';
-import imgPersekutuanJumat from './images/WhatWeDo/Persekutuan Jumat.png';
-import imgNatalPaskah from './images/WhatWeDo/NATAL & PASKAH.png';
-import imgPenyambutanMaba from './images/WhatWeDo/Penyambutan Mahasiswa Baru.png';
-import imgRetreat from './images/WhatWeDo/Retreat.png';
-import imgKelompokKecil from './images/WhatWeDo/Kelompok Kecil.png';
-import imgPelayananPribadi from './images/WhatWeDo/Pelayanan Pribadi.png';
-import imgPMKS33hat from './images/WhatWeDo/PMK S33hat.png';
+// Team Images 1-45 (optimized WebP)
+import img1 from './images-optimized/1.webp';
+import img2 from './images-optimized/2.webp';
+import img3 from './images-optimized/3.webp';
+import img4 from './images-optimized/4.webp';
+import img5 from './images-optimized/5.webp';
+import img6 from './images-optimized/6.webp';
+import img7 from './images-optimized/7.webp';
+import img8 from './images-optimized/8.webp';
+import img9 from './images-optimized/9.webp';
+import img10 from './images-optimized/10.webp';
+import img11 from './images-optimized/11.webp';
+import img12 from './images-optimized/12.webp';
+import img13 from './images-optimized/13.webp';
+import img14 from './images-optimized/14.webp';
+import img15 from './images-optimized/15.webp';
+import img16 from './images-optimized/16.webp';
+import img17 from './images-optimized/17.webp';
+import img18 from './images-optimized/18.webp';
+import img19 from './images-optimized/19.webp';
+import img20 from './images-optimized/20.webp';
+import img21 from './images-optimized/21.webp';
+import img22 from './images-optimized/22.webp';
+import img23 from './images-optimized/23.webp';
+import img24 from './images-optimized/24.webp';
+import img25 from './images-optimized/25.webp';
+import img26 from './images-optimized/26.webp';
+import img27 from './images-optimized/27.webp';
+import img28 from './images-optimized/28.webp';
+import img29 from './images-optimized/29.webp';
+import img30 from './images-optimized/30.webp';
+import img31 from './images-optimized/31.webp';
+import img32 from './images-optimized/32.webp';
+import img33 from './images-optimized/33.webp';
+import img34 from './images-optimized/34.webp';
+import img35 from './images-optimized/35.webp';
+import img36 from './images-optimized/36.webp';
+import img37 from './images-optimized/37.webp';
+import img38 from './images-optimized/38.webp';
+import img39 from './images-optimized/39.webp';
+import img40 from './images-optimized/40.webp';
+import img41 from './images-optimized/41.webp';
+import img42 from './images-optimized/42.webp';
+import img43 from './images-optimized/43.webp';
+import img44 from './images-optimized/44.webp';
+import img45 from './images-optimized/45.webp';
+import logo from './images-optimized/logo.webp';
+import imgPersekutuanDoaJemaat from './images-optimized/WhatWeDo/Persekutuan Doa Jemaat.webp';
+import imgPersekutuanJumat from './images-optimized/WhatWeDo/Persekutuan Jumat.webp';
+import imgNatalPaskah from './images-optimized/WhatWeDo/NATAL & PASKAH.webp';
+import imgPenyambutanMaba from './images-optimized/WhatWeDo/Penyambutan Mahasiswa Baru.webp';
+import imgRetreat from './images-optimized/WhatWeDo/Retreat.webp';
+import imgKelompokKecil from './images-optimized/WhatWeDo/Kelompok Kecil.webp';
+import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.webp';
+import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
 
 import { motion, AnimatePresence } from 'motion/react';
@@ -758,6 +758,7 @@ function Activities() {
                   <img
                     src={act.image}
                     alt={act.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                   />
                   {/* Cinematic Overlay */}
@@ -846,7 +847,7 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
         {/* Front Side */}
         <div className="absolute inset-0 [backface-visibility:hidden] flex flex-col bg-white rounded-3xl overflow-hidden border border-gray-100">
           <div className="h-[150px] w-full bg-[#FFF0F2] relative overflow-hidden flex-shrink-0">
-            <img src={avatarUrl} alt={m.name} className="w-full h-full object-cover object-[center_20%]" />
+            <img src={avatarUrl} alt={m.name} loading="lazy" className="w-full h-full object-cover object-[center_20%]" />
           </div>
           <div className="p-4 flex-1 flex flex-col items-center justify-center text-center bg-gray-50 relative">
             <h4 className="font-bold text-xl text-brand-black">{m.name}</h4>
