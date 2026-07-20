@@ -439,7 +439,7 @@ function About() {
       number: "01",
       title: "Penginjilan",
       icon: <Megaphone className="w-5 h-5" />,
-      desc: "Mengenalkan Kristus melalui relasi pribadi, kelompok kecil, dan persekutuan agar mahasiswa dapat mengenal Injil secara nyata.",
+      desc: "Mengenalkan Kristus melalui pelayanan pribadi, kelompok kecil, dan persekutuan agar mahasiswa dapat mengenal Injil secara nyata.",
     },
     {
       number: "02",
@@ -451,7 +451,7 @@ function About() {
       number: "03",
       title: "Pelipatgandaan",
       icon: <Users className="w-5 h-5" />,
-      desc: "Belajar membimbing orang lain agar bertumbuh bersama dan menjadi murid yang melipatgandakan dampak.",
+      desc: "Belajar membimbing orang lain agar bertumbuh bersama dan menjadi murid yang melipatgandakan murid.",
     },
     {
       number: "04",
@@ -1124,20 +1124,10 @@ function Interaction() {
 
   const cards = [
     {
-      title: "Serve With Us",
-      desc: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
-      icon: <Users className="w-8 h-8 md:w-10 md:h-10" />,
-      btn: "Start Serving",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
-      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
-      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
-      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
-    },
-    {
-      title: "Request Prayer",
-      desc: "You don’t have to carry everything alone. We are here to pray with you and stand with you.",
-      icon: <Heart className="w-8 h-8 md:w-10 md:h-10 fill-[#4A1F1F]" />,
-      btn: "Send Prayer Request",
+      title: "Contact Our Team",
+      desc: "For collaborations, registrations, data collection, media partnerships, official requests, or other administrative matters, feel free to contact our team.",
+      icon: <Handshake className="w-8 h-8 md:w-10 md:h-10" />,
+      btn: "Contact Our Team",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
@@ -1164,10 +1154,20 @@ function Interaction() {
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
     },
     {
-      title: "Media Partner",
-      desc: "We're always open to collaborating on events, promotions, media partnerships, and other initiatives that create a positive impact.",
-      icon: <Handshake className="w-8 h-8 md:w-10 md:h-10" />,
-      btn: "Collaborate With Us",
+      title: "Serve With Us",
+      desc: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
+      icon: <Users className="w-8 h-8 md:w-10 md:h-10" />,
+      btn: "Start Serving",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
+      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
+      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
+    },
+    {
+      title: "Request Prayer",
+      desc: "You don’t have to carry everything alone. We are here to pray with you and stand with you.",
+      icon: <Heart className="w-8 h-8 md:w-10 md:h-10 fill-[#4A1F1F]" />,
+      btn: "Send Prayer Request",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
