@@ -117,13 +117,6 @@ export const CinematicHero: React.FC = () => {
            */}
           <div className="max-w-[480px]">
 
-            {/* Pill label — same style as the section pills below */}
-            <Rise delay={0.1}>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#FFF0F2] border border-[#FADADD] text-[#5A1E1E] text-[10px] font-black tracking-[0.2em] uppercase shadow-sm">
-                PMK Agape · UPNVJ
-              </span>
-            </Rise>
-
             {/* Headline — Quicksand bold, same scale as H2 sections */}
             <Rise delay={0.25} className="mt-7">
               <h1
