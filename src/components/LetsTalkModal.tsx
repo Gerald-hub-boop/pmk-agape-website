@@ -193,7 +193,7 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
               ) : tawkStatus === 'online' ? (
                 <span className="text-emerald-600 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Pembina Sedang Online
+                  Online
                 </span>
               ) : (
                 <span className="text-amber-600 flex items-center gap-1.5">
