@@ -104,8 +104,17 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
 
   const handleStartChat = () => {
     if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-      window.Tawk_API.showWidget();
-      window.Tawk_API.maximize();
+      try {
+        if (typeof window.Tawk_API.showWidget === 'function') {
+          window.Tawk_API.showWidget();
+        }
+        window.Tawk_API.maximize();
+      } catch (err) {
+        window.open(`https://tawk.to/chat/${TAWK_PROPERTY_ID}`, '_blank');
+      }
+    } else {
+      // Fallback: Direct link to Tawk.to chat page if widget API is not ready or blocked
+      window.open(`https://tawk.to/chat/${TAWK_PROPERTY_ID}`, '_blank');
     }
     onClose();
   };
