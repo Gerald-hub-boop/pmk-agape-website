@@ -15,9 +15,8 @@ declare global {
   }
 }
 
-// Placeholder for Tawk.to property ID.
-// The user should replace this with their actual Property ID.
-const TAWK_PROPERTY_ID = 'YOUR_TAWK_PROPERTY_ID'; // Replace with actual Property ID
+// Tawk.to property ID and Widget ID provided by user
+const TAWK_PROPERTY_ID = '6a5ee5df1a1df41d5c17898d/1ju1b3t2t';
 
 export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
   const [tawkStatus, setTawkStatus] = useState<'online' | 'away' | 'offline' | 'loading'>('loading');
@@ -69,7 +68,7 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
       const s1 = document.createElement('script');
       const s0 = document.getElementsByTagName('script')[0];
       s1.async = true;
-      s1.src = `https://embed.tawk.to/${TAWK_PROPERTY_ID}/default`;
+      s1.src = `https://embed.tawk.to/${TAWK_PROPERTY_ID}`;
       s1.charset = 'UTF-8';
       s1.setAttribute('crossorigin', '*');
       s1.id = 'tawk-script';
