@@ -832,18 +832,16 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
 
   return (
     <motion.div
-      className={`group snap-start shrink-0 w-[240px] md:w-full h-[300px] [perspective:1200px] ${m.message ? 'cursor-pointer' : 'cursor-default'}`}
+      className="group snap-start shrink-0 w-[240px] md:w-full h-[300px] [perspective:1200px] cursor-pointer"
       onMouseEnter={() => {
-        if (!isTouch && m.message) setIsFlipped(true);
+        if (!isTouch) setIsFlipped(true);
       }}
       onMouseLeave={() => {
-        if (!isTouch && m.message) setIsFlipped(false);
+        if (!isTouch) setIsFlipped(false);
       }}
-      onClick={() => {
-        if (m.message) setIsFlipped(!isFlipped);
-      }}
-      whileHover={m.message ? { scale: 1.04 } : {}}
-      whileTap={m.message ? { scale: 0.96 } : {}}
+      onClick={() => setIsFlipped(!isFlipped)}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <motion.div
@@ -861,42 +859,43 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mt-2">{m.role}</p>
 
             {/* Mobile Hint */}
-            {m.message && (
-              <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5 text-[9px] font-bold text-brand-pink/60 uppercase tracking-tighter md:hidden">
-                <ArrowRight className="w-2.5 h-2.5" /> Tap to see story
-              </div>
-            )}
+            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5 text-[9px] font-bold text-brand-pink/60 uppercase tracking-tighter md:hidden">
+              <ArrowRight className="w-2.5 h-2.5" /> Tap to see story
+            </div>
           </div>
         </div>
 
         {/* Back Side */}
-        {m.message && (
-          <div
-            className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl overflow-hidden bg-white border border-[#FADADD]/40 shadow-inner"
-          >
-            {/* Layer 1: Image Loop */}
-            <div className="absolute inset-0 z-0">
-              {backImages.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt=""
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === imgIndex ? 'opacity-100' : 'opacity-0'}`}
-                />
-              ))}
-            </div>
-
-            {/* Layer 2: Overlay */}
-            <div className="absolute inset-0 z-10 bg-white/85 backdrop-blur-[3px]" />
-
-            {/* Layer 3: Content */}
-            <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
-              <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
-              <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
-              <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.author || m.name}</p>
-            </div>
+        <div
+          className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl overflow-hidden bg-white border border-[#FADADD]/40 shadow-inner"
+        >
+          {/* Layer 1: Image Loop */}
+          <div className="absolute inset-0 z-0 bg-[#FFF0F2]">
+            {backImages.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt=""
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === imgIndex ? 'opacity-100' : 'opacity-0'}`}
+              />
+            ))}
           </div>
-        )}
+
+          {/* Render Text and Overlay only if there's a message */}
+          {m.message && (
+            <>
+              {/* Layer 2: Overlay */}
+              <div className="absolute inset-0 z-10 bg-white/85 backdrop-blur-[3px]" />
+
+              {/* Layer 3: Content */}
+              <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
+                <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
+                <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
+                <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.author || m.name}</p>
+              </div>
+            </>
+          )}
+        </div>
       </motion.div>
     </motion.div>
   );
