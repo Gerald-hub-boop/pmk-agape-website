@@ -16,7 +16,7 @@ declare global {
 }
 
 // Tawk.to property ID and Widget ID
-const TAWK_PROPERTY_ID = '6a5ef11c4693711d483c319b/default';
+const TAWK_PROPERTY_ID = '6a5ef11c4693711d483c319b/1ju1drme4';
 
 export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
   const [tawkStatus, setTawkStatus] = useState<'online' | 'away' | 'offline' | 'loading'>('loading');
