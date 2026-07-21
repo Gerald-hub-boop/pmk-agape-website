@@ -15,8 +15,8 @@ declare global {
   }
 }
 
-// Tawk.to property ID and Widget ID provided by user
-const TAWK_PROPERTY_ID = '6a5ee5df1a1df41d5c17898d/1ju1b3t2t';
+// Tawk.to property ID and Widget ID
+const TAWK_PROPERTY_ID = '6a5ef11c4693711d483c319b/default';
 
 export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
   const [tawkStatus, setTawkStatus] = useState<'online' | 'away' | 'offline' | 'loading'>('loading');
@@ -44,27 +44,37 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
 
   // Inject and initialize Tawk.to
   useEffect(() => {
-    // Only inject if not already injected
-    if (!document.getElementById('tawk-script')) {
-      window.Tawk_API = window.Tawk_API || {};
-      window.Tawk_LoadStart = new Date();
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = window.Tawk_LoadStart || new Date();
 
-      // Configure Tawk to start hidden
-      window.Tawk_API.onLoad = function () {
-        window.Tawk_API.hideWidget();
-        setTawkStatus(window.Tawk_API.getStatus());
-      };
-
-      // Hide again when user minimizes chat
-      window.Tawk_API.onChatMinimized = function () {
-        window.Tawk_API.hideWidget();
-      };
-
-      // Listen to status changes
-      window.Tawk_API.onStatusChange = function (status: string) {
+    // If Tawk_API is already loaded, get status immediately
+    if (typeof window.Tawk_API.getStatus === 'function') {
+      const status = window.Tawk_API.getStatus();
+      if (status) {
         setTawkStatus(status as any);
-      };
+      }
+    }
 
+    // Attach callbacks
+    const originalOnLoad = window.Tawk_API.onLoad;
+    window.Tawk_API.onLoad = function () {
+      if (typeof originalOnLoad === 'function') originalOnLoad();
+      if (window.Tawk_API.hideWidget) window.Tawk_API.hideWidget();
+      if (window.Tawk_API.getStatus) {
+        setTawkStatus(window.Tawk_API.getStatus() || 'offline');
+      }
+    };
+
+    window.Tawk_API.onChatMinimized = function () {
+      if (window.Tawk_API.hideWidget) window.Tawk_API.hideWidget();
+    };
+
+    window.Tawk_API.onStatusChange = function (status: string) {
+      setTawkStatus(status as any);
+    };
+
+    // Inject script if not already present
+    if (!document.getElementById('tawk-script')) {
       const s1 = document.createElement('script');
       const s0 = document.getElementsByTagName('script')[0];
       s1.async = true;
@@ -72,12 +82,24 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
       s1.charset = 'UTF-8';
       s1.setAttribute('crossorigin', '*');
       s1.id = 'tawk-script';
+
+      s1.onerror = () => {
+        setTawkStatus('offline');
+      };
+
       if (s0 && s0.parentNode) {
         s0.parentNode.insertBefore(s1, s0);
       } else {
         document.head.appendChild(s1);
       }
     }
+
+    // Fallback timer: if status is still loading after 4s, fallback to offline
+    const timer = setTimeout(() => {
+      setTawkStatus((prev) => (prev === 'loading' ? 'offline' : prev));
+    }, 4000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleStartChat = () => {
