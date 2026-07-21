@@ -832,16 +832,18 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
 
   return (
     <motion.div
-      className="group snap-start shrink-0 w-[240px] md:w-full h-[300px] [perspective:1200px] cursor-pointer"
+      className={`group snap-start shrink-0 w-[240px] md:w-full h-[300px] [perspective:1200px] ${m.message ? 'cursor-pointer' : 'cursor-default'}`}
       onMouseEnter={() => {
-        if (!isTouch) setIsFlipped(true);
+        if (!isTouch && m.message) setIsFlipped(true);
       }}
       onMouseLeave={() => {
-        if (!isTouch) setIsFlipped(false);
+        if (!isTouch && m.message) setIsFlipped(false);
       }}
-      onClick={() => setIsFlipped(!isFlipped)}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.96 }}
+      onClick={() => {
+        if (m.message) setIsFlipped(!isFlipped);
+      }}
+      whileHover={m.message ? { scale: 1.04 } : {}}
+      whileTap={m.message ? { scale: 0.96 } : {}}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <motion.div
@@ -859,9 +861,11 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mt-2">{m.role}</p>
 
             {/* Mobile Hint */}
-            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5 text-[9px] font-bold text-brand-pink/60 uppercase tracking-tighter md:hidden">
-              <ArrowRight className="w-2.5 h-2.5" /> Tap to see story
-            </div>
+            {m.message && (
+              <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5 text-[9px] font-bold text-brand-pink/60 uppercase tracking-tighter md:hidden">
+                <ArrowRight className="w-2.5 h-2.5" /> Tap to see story
+              </div>
+            )}
           </div>
         </div>
 
