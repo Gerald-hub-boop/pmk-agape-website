@@ -909,7 +909,7 @@ function Leadership() {
     { name: "Erta Kiristina", role: "Discipleship Staff", message: "janganlah takut, sebab Aku menyertai engkau, janganlah bimbang, sebab Aku ini Allahmu; Aku akan meneguhkan, bahkan akan menolong engkau; Aku akan memegang engkau dengan tangan kanan-Ku yang membawa kemenangan.", avatar: img16, backImages: [img16, img17, img18], author: "Yesaya 41:10" },
     { name: "Tikauli Cristina", role: "Discipleship Staff", message: "Diberkatilah orang yang mengandalkan TUHAN, yang menaruh harapannya pada TUHAN!", avatar: img19, backImages: [img19, img20, img21], author: "Yeremia 17:7" },
     { name: "Ferlian Luri Sasta", role: "Discipleship Staff", message: "Apa yang Kuperbuat, engkau tidak tahu sekarang, tetapi engkau akan mengertinya kelak.", avatar: img22, backImages: [img22, img23, img24], author: "Yohanes 13:7" },
-    { name: "Chris Matthew", role: "Communications & Media Coordinator", message: "Menceritakan kasih Tuhan yang luar biasa melalui kreativitas dan media digital.", avatar: img7, backImages: [img7, img8, img9] },
+    { name: "Chris Matthew", role: "Communications & Media Coordinator", message: "", avatar: img7, backImages: [img7, img8, img9] },
     { name: "Zipora Andiena", role: "Communications & Media Staff", message: "Matahari tidak menyakiti engkau pada waktu siang, atau bulan pada waktu malam.", avatar: img10, backImages: [img10, img11, img12], author: "Mazmur 121:6" },
     { name: "Nova Kristin", role: "Communications & Media Staff", message: "Tetaplah berdoa. Mengucap syukurlah dalam segala hal, sebab itulah yang dikehendaki Allah di dalam Kristus Yesus bagi kamu.", avatar: img1, backImages: [img1, img2, img3], author: "1 Tesalonika 5:17–18" },
     { name: "Johan Binsar", role: "Communications & Media Staff", message: "Sebab bagi Allah tidak ada yang mustahil.", avatar: img4, backImages: [img4, img5, img6], author: "Lukas 1:37" }
@@ -1241,8 +1241,8 @@ function Interaction() {
                     transition-all duration-500 ease-out
 
                     ${isActive
-                        ? 'bg-white border-[#4A1F1F]/30 shadow-xl z-10 opacity-100 scale-100'
-                        : 'bg-white/90 border-gray-100 shadow-sm hover:shadow-md opacity-85 hover:opacity-100 scale-[0.98]'}
+                      ? 'bg-white border-[#4A1F1F]/30 shadow-xl z-10 opacity-100 scale-100'
+                      : 'bg-white/90 border-gray-100 shadow-sm hover:shadow-md opacity-85 hover:opacity-100 scale-[0.98]'}
                   `}
                 >
                   {/* ICON */}
@@ -1295,10 +1295,10 @@ function Interaction() {
         </div>
 
       </div>
-      
-      <LetsTalkModal 
-        isOpen={isLetsTalkModalOpen} 
-        onClose={() => setIsLetsTalkModalOpen(false)} 
+
+      <LetsTalkModal
+        isOpen={isLetsTalkModalOpen}
+        onClose={() => setIsLetsTalkModalOpen(false)}
       />
     </motion.section>
   );
