@@ -870,31 +870,33 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
         </div>
 
         {/* Back Side */}
-        <div
-          className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl overflow-hidden bg-white border border-[#FADADD]/40 shadow-inner"
-        >
-          {/* Layer 1: Image Loop */}
-          <div className="absolute inset-0 z-0">
-            {backImages.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt=""
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === imgIndex ? 'opacity-100' : 'opacity-0'}`}
-              />
-            ))}
-          </div>
+        {m.message && (
+          <div
+            className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl overflow-hidden bg-white border border-[#FADADD]/40 shadow-inner"
+          >
+            {/* Layer 1: Image Loop */}
+            <div className="absolute inset-0 z-0">
+              {backImages.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt=""
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === imgIndex ? 'opacity-100' : 'opacity-0'}`}
+                />
+              ))}
+            </div>
 
-          {/* Layer 2: Overlay */}
-          <div className="absolute inset-0 z-10 bg-white/85 backdrop-blur-[3px]" />
+            {/* Layer 2: Overlay */}
+            <div className="absolute inset-0 z-10 bg-white/85 backdrop-blur-[3px]" />
 
-          {/* Layer 3: Content */}
-          <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
-            <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
-            <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
-            <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.author || m.name}</p>
+            {/* Layer 3: Content */}
+            <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
+              <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
+              <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
+              <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.author || m.name}</p>
+            </div>
           </div>
-        </div>
+        )}
       </motion.div>
     </motion.div>
   );
