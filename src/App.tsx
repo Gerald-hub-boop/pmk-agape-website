@@ -1378,10 +1378,26 @@ function Footer() {
         <div>
           <h3 className="font-semibold text-lg mb-4">Find Us</h3>
           <ul className="space-y-4 text-sm text-white/60">
-            <li className="flex items-center gap-3"><MapPin className="w-4 h-4" /> UPN "Veteran" Jakarta Campus</li>
-            <li className="flex items-center gap-3"><Mail className="w-4 h-4" /> pmkagape@upnvj.ac.id</li>
-            <li className="flex items-center gap-3"><Instagram className="w-4 h-4" /> Instagram</li>
-            <li className="flex items-center gap-3"><Music className="w-4 h-4" /> TikTok</li>
+            <li>
+              <a href="https://maps.app.goo.gl/PWX8cAmrsb8TFv157" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
+                <MapPin className="w-4 h-4 shrink-0" /> UPN "Veteran" Jakarta Campus
+              </a>
+            </li>
+            <li>
+              <a href="mailto:pmkagape@upnvj.ac.id" className="flex items-center gap-3 hover:text-white transition-colors">
+                <Mail className="w-4 h-4 shrink-0" /> pmkagape@upnvj.ac.id
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/pmk_agape?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
+                <Instagram className="w-4 h-4 shrink-0" /> Instagram
+              </a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@pmk_agape?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
+                <Music className="w-4 h-4 shrink-0" /> TikTok
+              </a>
+            </li>
           </ul>
         </div>
       </div>
