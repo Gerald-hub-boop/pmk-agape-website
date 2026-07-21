@@ -55,6 +55,7 @@ import imgKelompokKecil from './images-optimized/WhatWeDo/Kelompok Kecil.webp';
 import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.webp';
 import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
+import { LetsTalkModal } from './components/LetsTalkModal';
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -1073,6 +1074,7 @@ function Testimonials() {
 
 function Interaction() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isLetsTalkModalOpen, setIsLetsTalkModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -1268,6 +1270,12 @@ function Interaction() {
                   {/* BUTTON — ALWAYS VISIBLE & ACCESSIBLE */}
                   <button
                     type="button"
+                    onClick={(e) => {
+                      if (c.title === "Let’s Talk") {
+                        e.stopPropagation();
+                        setIsLetsTalkModalOpen(true);
+                      }
+                    }}
                     className={`
                       w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
                       transition-all duration-300 mt-auto
@@ -1287,6 +1295,11 @@ function Interaction() {
         </div>
 
       </div>
+      
+      <LetsTalkModal 
+        isOpen={isLetsTalkModalOpen} 
+        onClose={() => setIsLetsTalkModalOpen(false)} 
+      />
     </motion.section>
   );
 }
