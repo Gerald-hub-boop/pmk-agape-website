@@ -194,6 +194,7 @@ function Header() {
 }
 
 export interface FeaturedCampaignConfig {
+  id: string;
   enabled: boolean;
   badge: string;
   title: string;
@@ -207,30 +208,53 @@ export interface FeaturedCampaignConfig {
   icon?: React.ReactNode;
 }
 
-export const featuredCampaignConfig: FeaturedCampaignConfig = {
-  enabled: true,
-  badge: "NOW OPEN",
-  title: "First Friends",
-  description: "Meet new friends, connect with others, and start your journey together.",
-  modalDetails: {
-    subtitle: "Teman pertama untuk memulai perjalananmu di PMK Agape.",
-    paragraphs: [
-      "First Friends adalah program penyambutan bagi mahasiswa baru agar tidak menjalani awal perkuliahan sendirian.",
-      "Melalui program ini, kamu akan dipertemukan dengan teman-teman PMK Agape yang siap menyambutmu, mengenalkan lingkungan kampus, menjawab hal-hal sederhana yang mungkin masih membingungkan, serta menemanimu membangun relasi baru.",
-      "Program ini bukan sekadar mencari teman, tetapi menjadi ruang yang hangat agar setiap orang dapat merasa diterima, memiliki tempat untuk bertumbuh, dan memulai perjalanan perkuliahan bersama."
-    ]
+export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
+  {
+    id: "pelayan",
+    enabled: true,
+    badge: "OPEN RECRUITMENT",
+    title: "Open Recruitment Pelayan",
+    description: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
+    modalDetails: {
+      subtitle: "Ruang untuk bertumbuh dan melayani di PMK Agape UPNVJ.",
+      paragraphs: [
+        "Setiap kita diberi karunia dan kesempatan untuk berdampak bagi sesama.",
+        "Bergabunglah bersama pelayanan PMK Agape untuk melayani dalam berbagai divisi dan kegiatan persekutuan.",
+        "Mari bergerak dan melayani bersama di dalam Kristus. Klik tombol di bawah untuk mengisi formulir pendaftaran pelayan."
+      ]
+    },
+    buttonText: "Daftar Pelayan",
+    buttonLink: "https://bit.ly/PELAYANPMK2026",
+    icon: <Users className="w-10 h-10 text-[#4A1F1F]" />
   },
-  buttonText: "Join First Friends",
-  buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
-  icon: <UserPlus className="w-10 h-10 text-[#4A1F1F]" />
-};
+  {
+    id: "first-friends",
+    enabled: true,
+    badge: "NOW OPEN",
+    title: "First Friends",
+    description: "Meet new friends, connect with others, and start your journey together.",
+    modalDetails: {
+      subtitle: "Teman pertama untuk memulai perjalananmu di PMK Agape.",
+      paragraphs: [
+        "First Friends adalah program penyambutan bagi mahasiswa baru agar tidak menjalani awal perkuliahan sendirian.",
+        "Melalui program ini, kamu akan dipertemukan dengan teman-teman PMK Agape yang siap menyambutmu, mengenalkan lingkungan kampus, menjawab hal-hal sederhana yang mungkin masih membingungkan, serta menemanimu membangun relasi baru.",
+        "Program ini bukan sekadar mencari teman, tetapi menjadi ruang yang hangat agar setiap orang dapat merasa diterima, memiliki tempat untuk bertumbuh, dan memulai perjalanan perkuliahan bersama."
+      ]
+    },
+    buttonText: "Join First Friends",
+    buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
+    icon: <UserPlus className="w-10 h-10 text-[#4A1F1F]" />
+  }
+];
 
 function FeaturedCampaign() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModalConfig, setActiveModalConfig] = useState<FeaturedCampaignConfig | null>(null);
+
+  const activeCampaigns = featuredCampaignConfigs.filter((c) => c.enabled);
 
   // Disable body scroll when modal is open
   useEffect(() => {
-    if (isModalOpen) {
+    if (activeModalConfig) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -238,127 +262,131 @@ function FeaturedCampaign() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isModalOpen]);
+  }, [activeModalConfig]);
 
   // Close modal on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setIsModalOpen(false);
+        setActiveModalConfig(null);
       }
     };
-    if (isModalOpen) {
+    if (activeModalConfig) {
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isModalOpen]);
+  }, [activeModalConfig]);
 
-  if (!featuredCampaignConfig.enabled) {
+  if (activeCampaigns.length === 0) {
     return null;
   }
 
   return (
     <>
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 md:pt-10 md:pb-4 relative z-10 scroll-mt-20"
-      >
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
-          {/* Ambient Glows */}
-          <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
-          <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 md:pt-10 md:pb-4 relative z-10 scroll-mt-20 flex flex-col gap-6 sm:gap-8">
+        {activeCampaigns.map((campaign) => (
+          <motion.section
+            key={campaign.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
+              {/* Ambient Glows */}
+              <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
+              <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            {/* Main Copy */}
-            <div className="max-w-2xl">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4A1F1F] text-white text-xs font-black uppercase tracking-[0.18em] shadow-sm mb-4 sm:mb-5">
-                <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse" />
-                {featuredCampaignConfig.badge}
-              </div>
+              <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                {/* Main Copy */}
+                <div className="max-w-2xl">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4A1F1F] text-white text-xs font-black uppercase tracking-[0.18em] shadow-sm mb-4 sm:mb-5">
+                    <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse" />
+                    {campaign.badge}
+                  </div>
 
-              {/* Title */}
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
-                {featuredCampaignConfig.title}
-              </h2>
+                  {/* Title */}
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
+                    {campaign.title}
+                  </h2>
 
-              {/* Description */}
-              <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-8">
-                {featuredCampaignConfig.description}
-              </p>
+                  {/* Description */}
+                  <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-8">
+                    {campaign.description}
+                  </p>
 
-              {/* CTA Buttons Row */}
-              <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href={featuredCampaignConfig.buttonLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base sm:text-lg shadow-md hover:bg-[#381717] hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group cursor-pointer"
-                >
-                  <span>{featuredCampaignConfig.buttonText}</span>
-                  <ArrowRight className="w-5 h-5 text-brand-pink group-hover:translate-x-1 transition-transform duration-300" />
-                </a>
+                  {/* CTA Buttons Row */}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a
+                      href={campaign.buttonLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base sm:text-lg shadow-md hover:bg-[#381717] hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group cursor-pointer"
+                    >
+                      <span>{campaign.buttonText}</span>
+                      <ArrowRight className="w-5 h-5 text-brand-pink group-hover:translate-x-1 transition-transform duration-300" />
+                    </a>
 
-                {/* Mobile & Tablet Learn More button */}
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
-                >
-                  <span>Learn More</span>
-                  <ChevronRight className="w-4 h-4 text-[#D88A9A]" />
-                </button>
+                    {/* Mobile & Tablet Learn More button */}
+                    <button
+                      onClick={() => setActiveModalConfig(campaign)}
+                      className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
+                    >
+                      <span>Learn More</span>
+                      <ChevronRight className="w-4 h-4 text-[#D88A9A]" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Interactive Card Accent (Desktop) */}
+                <div className="hidden lg:flex items-center justify-center shrink-0">
+                  <motion.div
+                    onClick={() => setActiveModalConfig(campaign)}
+                    whileHover={{ scale: 1.03, y: -4 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="relative w-64 h-64 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
+                  >
+                    {/* Top indicator badge */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-[10px] font-bold tracking-wider uppercase border border-[#FADADD]/60 group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors duration-300">
+                      <span>Tap to Explore</span>
+                      <ArrowRight className="w-3 h-3 text-[#D88A9A] group-hover:text-brand-pink" />
+                    </div>
+
+                    {/* Icon */}
+                    <div className="w-16 h-16 rounded-2xl bg-[#FFF0F2] flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300 my-auto shadow-inner">
+                      {campaign.icon || <UserPlus className="w-8 h-8 text-[#4A1F1F]" />}
+                    </div>
+
+                    {/* Title & Bottom Indicator */}
+                    <div className="w-full">
+                      <span className="text-base font-bold text-brand-black block mb-0.5 line-clamp-1">
+                        {campaign.title}
+                      </span>
+                      <span className="text-xs font-bold text-[#D88A9A] group-hover:text-[#4A1F1F] flex items-center justify-center gap-1 transition-colors duration-300">
+                        Learn More <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                      </span>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </div>
-
-            {/* Interactive Card Accent (Desktop) */}
-            <div className="hidden lg:flex items-center justify-center shrink-0">
-              <motion.div
-                onClick={() => setIsModalOpen(true)}
-                whileHover={{ scale: 1.03, y: -4 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative w-64 h-64 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
-              >
-                {/* Top indicator badge */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-[10px] font-bold tracking-wider uppercase border border-[#FADADD]/60 group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors duration-300">
-                  <span>Tap to Explore</span>
-                  <ArrowRight className="w-3 h-3 text-[#D88A9A] group-hover:text-brand-pink" />
-                </div>
-
-                {/* Icon */}
-                <div className="w-16 h-16 rounded-2xl bg-[#FFF0F2] flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300 my-auto shadow-inner">
-                  {featuredCampaignConfig.icon || <UserPlus className="w-8 h-8 text-[#4A1F1F]" />}
-                </div>
-
-                {/* Title & Bottom Indicator */}
-                <div className="w-full">
-                  <span className="text-base font-bold text-brand-black block mb-0.5">
-                    {featuredCampaignConfig.title}
-                  </span>
-                  <span className="text-xs font-bold text-[#D88A9A] group-hover:text-[#4A1F1F] flex items-center justify-center gap-1 transition-colors duration-300">
-                    Learn More <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </motion.section>
+          </motion.section>
+        ))}
+      </div>
 
       {/* Interactive Program Modal */}
       <AnimatePresence>
-        {isModalOpen && (
+        {activeModalConfig && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => setActiveModalConfig(null)}
             className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
           >
             <motion.div
@@ -371,7 +399,7 @@ function FeaturedCampaign() {
             >
               {/* Close Button */}
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => setActiveModalConfig(null)}
                 className="absolute top-5 right-5 p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
@@ -381,22 +409,22 @@ function FeaturedCampaign() {
               {/* Modal Header */}
               <div className="flex items-center gap-3.5 pr-8">
                 <div className="w-12 h-12 rounded-2xl bg-[#FFF0F2] flex items-center justify-center shrink-0">
-                  {featuredCampaignConfig.icon || <Smile className="w-6 h-6 text-[#4A1F1F]" />}
+                  {activeModalConfig.icon || <Smile className="w-6 h-6 text-[#4A1F1F]" />}
                 </div>
                 <div>
                   <span className="inline-block px-3 py-1 rounded-full bg-[#4A1F1F] text-white text-[10px] font-black tracking-widest uppercase mb-1">
-                    {featuredCampaignConfig.badge}
+                    {activeModalConfig.badge}
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-bold text-brand-black tracking-tight leading-tight">
-                    {featuredCampaignConfig.title}
+                    {activeModalConfig.title}
                   </h3>
                 </div>
               </div>
 
               {/* Subtitle */}
-              {featuredCampaignConfig.modalDetails?.subtitle && (
+              {activeModalConfig.modalDetails?.subtitle && (
                 <p className="text-base sm:text-lg font-semibold text-[#D88A9A] italic -mt-1">
-                  "{featuredCampaignConfig.modalDetails.subtitle}"
+                  "{activeModalConfig.modalDetails.subtitle}"
                 </p>
               )}
 
@@ -405,7 +433,7 @@ function FeaturedCampaign() {
 
               {/* Explanation Text */}
               <div className="space-y-4 text-gray-700 text-sm sm:text-base font-medium leading-relaxed">
-                {featuredCampaignConfig.modalDetails?.paragraphs.map((p, idx) => (
+                {activeModalConfig.modalDetails?.paragraphs.map((p, idx) => (
                   <p key={idx}>{p}</p>
                 ))}
               </div>
@@ -413,19 +441,19 @@ function FeaturedCampaign() {
               {/* CTA Buttons */}
               <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-3 items-center justify-end mt-2">
                 <button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setActiveModalConfig(null)}
                   className="w-full sm:w-auto px-6 py-3 rounded-full border border-gray-200 text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors order-2 sm:order-1 cursor-pointer"
                 >
                   Maybe Later
                 </button>
                 <a
-                  href={featuredCampaignConfig.buttonLink}
+                  href={activeModalConfig.buttonLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setActiveModalConfig(null)}
                   className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#4A1F1F] text-white font-bold text-sm hover:bg-[#381717] shadow-md hover:shadow-lg transition-all text-center order-1 sm:order-2 cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <span>{featuredCampaignConfig.buttonText}</span>
+                  <span>{activeModalConfig.buttonText}</span>
                   <ArrowRight className="w-4 h-4 text-brand-pink" />
                 </a>
               </div>
