@@ -221,7 +221,7 @@ export const featuredCampaignConfig: FeaturedCampaignConfig = {
     ]
   },
   buttonText: "Join First Friends",
-  buttonLink: "https://forms.gle/pmkagape-first-friends",
+  buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
   icon: <UserPlus className="w-10 h-10 text-[#4A1F1F]" />
 };
 
@@ -1135,6 +1135,7 @@ function Interaction() {
       desc: "For collaborations, registrations, data collection, media partnerships, official requests, or other administrative matters, feel free to contact our team.",
       icon: <Handshake className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Contact Our Team",
+      link: "https://wa.me/6285175203004",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
@@ -1145,6 +1146,7 @@ function Interaction() {
       desc: "Meet new friends, connect with others, and start your journey together.",
       icon: <UserPlus className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Get Connected",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
@@ -1155,6 +1157,7 @@ function Interaction() {
       desc: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
       icon: <Users className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Start Serving",
+      link: "https://bit.ly/PELAYANPMK2026",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
@@ -1165,6 +1168,7 @@ function Interaction() {
       desc: "You don’t have to carry everything alone. We are here to pray with you and stand with you.",
       icon: <Heart className="w-8 h-8 md:w-10 md:h-10 fill-[#4A1F1F]" />,
       btn: "Send Prayer Request",
+      link: "https://forms.gle/ocmnPSBCvBacje98A",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
@@ -1273,22 +1277,38 @@ function Interaction() {
                   </p>
 
                   {/* BUTTON — ALWAYS VISIBLE & ACCESSIBLE */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      if (c.title === "Let’s Talk") {
-                        e.stopPropagation();
-                        setIsLetsTalkModalOpen(true);
-                      }
-                    }}
-                    className={`
-                      w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
-                      transition-all duration-300 mt-auto
-                      ${c.btnStyle}
-                    `}
-                  >
-                    {c.btn}
-                  </button>
+                  {c.link ? (
+                    <a
+                      href={c.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className={`
+                        w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
+                        transition-all duration-300 mt-auto text-center flex items-center justify-center
+                        ${c.btnStyle}
+                      `}
+                    >
+                      {c.btn}
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        if (c.title === "Let’s Talk") {
+                          e.stopPropagation();
+                          setIsLetsTalkModalOpen(true);
+                        }
+                      }}
+                      className={`
+                        w-full py-3 md:py-3.5 rounded-full font-bold text-sm tracking-wide
+                        transition-all duration-300 mt-auto
+                        ${c.btnStyle}
+                      `}
+                    >
+                      {c.btn}
+                    </button>
+                  )}
 
                 </div>
               );
@@ -1333,36 +1353,44 @@ function Footer() {
           <h3 className="font-semibold text-lg mb-4">Get Involved</h3>
           <ul className="space-y-2 text-sm text-white/60">
             <li>
-              <button
-                onClick={() => triggerScrollToConnectCard(0)}
-                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              <a
+                href="https://wa.me/6285175203004"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors block cursor-pointer"
               >
                 Contact Our Team
-              </button>
+              </a>
             </li>
             <li>
-              <button
-                onClick={() => triggerScrollToConnectCard(1)}
-                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors block cursor-pointer"
               >
                 First Friends
-              </button>
+              </a>
             </li>
             <li>
-              <button
-                onClick={() => triggerScrollToConnectCard(2)}
-                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              <a
+                href="https://bit.ly/PELAYANPMK2026"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors block cursor-pointer"
               >
                 Serve With Us
-              </button>
+              </a>
             </li>
             <li>
-              <button
-                onClick={() => triggerScrollToConnectCard(3)}
-                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
+              <a
+                href="https://forms.gle/ocmnPSBCvBacje98A"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors block cursor-pointer"
               >
                 Request Prayer
-              </button>
+              </a>
             </li>
             <li>
               <button
