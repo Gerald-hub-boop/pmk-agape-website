@@ -109,7 +109,7 @@ export const CinematicHero: React.FC = () => {
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
-      <div className="relative z-10 h-full flex items-center md:items-start pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
+      <div className="relative z-10 h-full flex items-center md:items-start pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)] pb-12 md:pb-0">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
           {/*
            * Max-width constraint keeps the text panel tight on the left
