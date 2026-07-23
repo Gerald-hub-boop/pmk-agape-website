@@ -109,36 +109,36 @@ export const CinematicHero: React.FC = () => {
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
-      <div className="relative z-10 h-full flex items-center md:items-start pt-6 sm:pt-10 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
+      <div className="relative z-10 h-full flex items-start pt-8 sm:pt-14 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
           {/*
            * Max-width constraint keeps the text panel tight on the left
            * while the image breathes on the right — intentional asymmetry.
            */}
-          <div className="max-w-[480px] mx-auto md:mx-0 text-center md:text-left flex flex-col items-center md:items-start">
+          <div className="max-w-[480px]">
 
             {/* Headline — Quicksand bold, same scale as H2 sections */}
-            <Rise delay={0.25} className="mt-7 w-full">
+            <Rise delay={0.25} className="mt-4 md:mt-7">
               <h1
-                className="font-bold text-brand-black leading-[1.1] tracking-tight text-center md:text-left"
-                style={{ fontSize: 'clamp(3rem, 6.5vw, 4.6rem)' }}
+                className="font-bold text-brand-black leading-[1.1] tracking-tight"
+                style={{ fontSize: 'clamp(2.75rem, 6.5vw, 4.6rem)' }}
               >
                 You Belong Here.
               </h1>
             </Rise>
 
             {/* Supporting text — one or two sentences, matches p style below */}
-            <Rise delay={0.42} className="mt-6 w-full flex justify-center md:justify-start">
+            <Rise delay={0.42} className="mt-4 md:mt-6">
               <p
-                className="font-semibold leading-relaxed text-brand-black text-center md:text-left mx-auto md:mx-0"
-                style={{ fontSize: 'clamp(1.125rem, 2vw, 1.35rem)', maxWidth: '455px' }}
+                className="font-semibold leading-relaxed text-brand-black"
+                style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', maxWidth: '455px' }}
               >
                 Here, you can grow in faith, make new friends, and walk through university with people who truly care.
               </p>
             </Rise>
 
             {/* CTA buttons — exact same classes as the site's existing CTAs */}
-            <Rise delay={0.58} className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3.5 sm:gap-4 w-full sm:w-auto">
+            <Rise delay={0.58} className="mt-6 md:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4">
               <a
                 href="#connect"
                 onClick={() => {
@@ -146,7 +146,6 @@ export const CinematicHero: React.FC = () => {
                   window.dispatchEvent(event);
                 }}
                 className="
-                  w-full sm:w-auto text-center justify-center
                   px-7 py-3.5 rounded-full
                   bg-[#D88A9A] text-white text-sm font-bold
                   shadow-[0_4px_20px_rgba(216,138,154,0.4)]
@@ -161,7 +160,6 @@ export const CinematicHero: React.FC = () => {
               <a
                 href="#vision"
                 className="
-                  w-full sm:w-auto text-center justify-center
                   px-7 py-3.5 rounded-full
                   bg-white text-[#4A1F1F] text-sm font-bold
                   border border-[#FADADD]
