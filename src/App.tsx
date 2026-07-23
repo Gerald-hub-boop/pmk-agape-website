@@ -1353,7 +1353,30 @@ function Interaction() {
         isOpen={isLetsTalkModalOpen}
         onClose={() => setIsLetsTalkModalOpen(false)}
       />
+      <FloatingLetsTalkWidget onClick={() => setIsLetsTalkModalOpen(true)} />
     </motion.section>
+  );
+}
+
+function FloatingLetsTalkWidget({ onClick }: { onClick: () => void }) {
+  return (
+    <motion.button
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      whileHover={{ scale: 1.06, y: -2 }}
+      whileTap={{ scale: 0.94 }}
+      transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+      onClick={onClick}
+      className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-[#4A1F1F] text-white shadow-[0_8px_30px_rgba(74,31,31,0.35)] border border-[#FADADD]/30 backdrop-blur-md cursor-pointer group"
+      aria-label="Let's Talk"
+    >
+      <span className="relative flex h-2.5 w-2.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+      </span>
+      <MessageCircle className="w-5 h-5 text-[#D88A9A] transition-transform group-hover:rotate-12" />
+      <span className="font-bold text-sm tracking-tight text-white">Let's Talk</span>
+    </motion.button>
   );
 }
 

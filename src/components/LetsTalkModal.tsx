@@ -59,11 +59,17 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
     const originalOnLoad = window.Tawk_API.onLoad;
     window.Tawk_API.onLoad = function () {
       if (typeof originalOnLoad === 'function') originalOnLoad();
-      if (typeof window.Tawk_API.showWidget === 'function') {
-        window.Tawk_API.showWidget();
+      if (typeof window.Tawk_API.hideWidget === 'function') {
+        window.Tawk_API.hideWidget();
       }
       if (window.Tawk_API.getStatus) {
         setTawkStatus(window.Tawk_API.getStatus() || 'offline');
+      }
+    };
+
+    window.Tawk_API.onChatMinimized = function () {
+      if (typeof window.Tawk_API.hideWidget === 'function') {
+        window.Tawk_API.hideWidget();
       }
     };
 
