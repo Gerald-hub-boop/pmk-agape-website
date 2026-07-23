@@ -115,12 +115,12 @@ export const CinematicHero: React.FC = () => {
            * Max-width constraint keeps the text panel tight on the left
            * while the image breathes on the right — intentional asymmetry.
            */}
-          <div className="max-w-[480px]">
+          <div className="max-w-[480px] mx-auto md:mx-0 text-center md:text-left flex flex-col items-center md:items-start">
 
             {/* Headline — Quicksand bold, same scale as H2 sections */}
-            <Rise delay={0.25} className="mt-7">
+            <Rise delay={0.25} className="mt-7 w-full">
               <h1
-                className="font-bold text-brand-black leading-[1.1] tracking-tight"
+                className="font-bold text-brand-black leading-[1.1] tracking-tight text-center md:text-left"
                 style={{ fontSize: 'clamp(3rem, 6.5vw, 4.6rem)' }}
               >
                 You Belong Here.
@@ -128,9 +128,9 @@ export const CinematicHero: React.FC = () => {
             </Rise>
 
             {/* Supporting text — one or two sentences, matches p style below */}
-            <Rise delay={0.42} className="mt-6">
+            <Rise delay={0.42} className="mt-6 w-full flex justify-center md:justify-start">
               <p
-                className="font-semibold leading-relaxed text-brand-black"
+                className="font-semibold leading-relaxed text-brand-black text-center md:text-left mx-auto md:mx-0"
                 style={{ fontSize: 'clamp(1.125rem, 2vw, 1.35rem)', maxWidth: '455px' }}
               >
                 Here, you can grow in faith, make new friends, and walk through university with people who truly care.
@@ -138,7 +138,7 @@ export const CinematicHero: React.FC = () => {
             </Rise>
 
             {/* CTA buttons — exact same classes as the site's existing CTAs */}
-            <Rise delay={0.58} className="mt-10 flex flex-wrap items-center gap-4">
+            <Rise delay={0.58} className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3.5 sm:gap-4 w-full sm:w-auto">
               <a
                 href="#connect"
                 onClick={() => {
@@ -146,6 +146,7 @@ export const CinematicHero: React.FC = () => {
                   window.dispatchEvent(event);
                 }}
                 className="
+                  w-full sm:w-auto text-center justify-center
                   px-7 py-3.5 rounded-full
                   bg-[#D88A9A] text-white text-sm font-bold
                   shadow-[0_4px_20px_rgba(216,138,154,0.4)]
@@ -160,6 +161,7 @@ export const CinematicHero: React.FC = () => {
               <a
                 href="#vision"
                 className="
+                  w-full sm:w-auto text-center justify-center
                   px-7 py-3.5 rounded-full
                   bg-white text-[#4A1F1F] text-sm font-bold
                   border border-[#FADADD]
@@ -172,8 +174,6 @@ export const CinematicHero: React.FC = () => {
                 Discover Our Story →
               </a>
             </Rise>
-
-
 
           </div>
         </div>

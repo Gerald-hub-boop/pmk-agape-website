@@ -560,7 +560,7 @@ function About() {
         </div>
 
         {/* ── MISSION ── Narrative intro */}
-        <div className="mb-12 md:mb-16 max-w-2xl">
+        <div className="mb-12 md:mb-16 max-w-2xl text-center md:text-left mx-auto md:mx-0">
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -577,7 +577,7 @@ function About() {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="text-2xl md:text-3xl font-bold text-brand-black mb-4 leading-snug"
           >
-            Satu perjalanan,<br />empat langkah bersama.
+            Satu perjalanan,<br className="hidden md:inline" /> empat langkah bersama.
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -768,8 +768,8 @@ function Activities() {
     >
       <div className="max-w-[1500px] mx-auto">
 
-        <div className="flex flex-col md:flex-row justify-between items-end mb-6 px-6 lg:px-16">
-          <div className="max-w-2xl">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-6 px-6 lg:px-16 text-center md:text-left">
+          <div className="max-w-2xl mx-auto md:mx-0">
             <h2 className="text-2xl md:text-4xl font-bold mb-3 tracking-tight text-brand-black">What We Do?</h2>
             <p className="text-gray-500 font-medium text-base md:text-lg leading-relaxed opacity-90">Growing together in every gathering and every shared journey.</p>
           </div>
