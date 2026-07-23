@@ -109,7 +109,7 @@ export const CinematicHero: React.FC = () => {
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
-      <div className="relative z-10 h-full flex items-start pt-8 sm:pt-14 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
+      <div className="relative z-10 h-full flex items-center md:items-start pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
           {/*
            * Max-width constraint keeps the text panel tight on the left
@@ -118,17 +118,17 @@ export const CinematicHero: React.FC = () => {
           <div className="max-w-[480px]">
 
             {/* Headline — Quicksand bold, same scale as H2 sections */}
-            <Rise delay={0.25} className="mt-4 md:mt-7">
+            <Rise delay={0.25} className="mt-0 md:mt-7">
               <h1
                 className="font-bold text-brand-black leading-[1.1] tracking-tight"
-                style={{ fontSize: 'clamp(2.75rem, 6.5vw, 4.6rem)' }}
+                style={{ fontSize: 'clamp(2.8rem, 6.5vw, 4.6rem)' }}
               >
                 You Belong Here.
               </h1>
             </Rise>
 
             {/* Supporting text — one or two sentences, matches p style below */}
-            <Rise delay={0.42} className="mt-4 md:mt-6">
+            <Rise delay={0.42} className="mt-5 md:mt-6">
               <p
                 className="font-semibold leading-relaxed text-brand-black"
                 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', maxWidth: '455px' }}
@@ -138,7 +138,7 @@ export const CinematicHero: React.FC = () => {
             </Rise>
 
             {/* CTA buttons — exact same classes as the site's existing CTAs */}
-            <Rise delay={0.58} className="mt-6 md:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4">
+            <Rise delay={0.58} className="mt-8 md:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4">
               <a
                 href="#connect"
                 onClick={() => {
