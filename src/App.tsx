@@ -210,24 +210,6 @@ export interface FeaturedCampaignConfig {
 
 export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
   {
-    id: "pelayan",
-    enabled: true,
-    badge: "OPEN RECRUITMENT",
-    title: "Open Recruitment Pelayan",
-    description: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
-    modalDetails: {
-      subtitle: "Ruang untuk bertumbuh dan melayani di PMK Agape UPNVJ.",
-      paragraphs: [
-        "Setiap kita diberi karunia dan kesempatan untuk berdampak bagi sesama.",
-        "Bergabunglah bersama pelayanan PMK Agape untuk melayani dalam berbagai divisi dan kegiatan persekutuan.",
-        "Mari bergerak dan melayani bersama di dalam Kristus. Klik tombol di bawah untuk mengisi formulir pendaftaran pelayan."
-      ]
-    },
-    buttonText: "Daftar Pelayan",
-    buttonLink: "https://bit.ly/PELAYANPMK2026",
-    icon: <Users className="w-10 h-10 text-[#4A1F1F]" />
-  },
-  {
     id: "first-friends",
     enabled: true,
     badge: "NOW OPEN",
@@ -244,6 +226,24 @@ export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
     buttonText: "Join First Friends",
     buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
     icon: <UserPlus className="w-10 h-10 text-[#4A1F1F]" />
+  },
+  {
+    id: "pelayan",
+    enabled: true,
+    badge: "OPEN RECRUITMENT",
+    title: "Open Recruitment Pelayan",
+    description: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
+    modalDetails: {
+      subtitle: "Ruang untuk bertumbuh dan melayani di PMK Agape UPNVJ.",
+      paragraphs: [
+        "Setiap kita diberi karunia dan kesempatan untuk berdampak bagi sesama.",
+        "Bergabunglah bersama pelayanan PMK Agape untuk melayani dalam berbagai divisi dan kegiatan persekutuan.",
+        "Mari bergerak dan melayani bersama di dalam Kristus. Klik tombol di bawah untuk mengisi formulir pendaftaran pelayan."
+      ]
+    },
+    buttonText: "Daftar Pelayan",
+    buttonLink: "https://bit.ly/PELAYANPMK2026",
+    icon: <Users className="w-10 h-10 text-[#4A1F1F]" />
   }
 ];
 
