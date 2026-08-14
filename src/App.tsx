@@ -110,6 +110,7 @@ function Header() {
   }, []);
 
   const navLinks = [
+    { name: "First Friends", href: "#first-friends" },
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
     { name: "Meet The Team", href: "#family" }
@@ -117,6 +118,21 @@ function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b-transparent' : 'bg-white/80 backdrop-blur-md border-b border-[#FFF0F2]'}`}>
+      {/* Announcement Bar */}
+      <div className="bg-[#4A1F1F] text-white py-2 px-4 text-xs sm:text-sm font-medium text-center flex items-center justify-center gap-2 relative z-50">
+        <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse shrink-0" />
+        <span className="truncate">
+          <strong className="font-bold text-white">First Friends 2026</strong> is now open for new students!
+        </span>
+        <a
+          href="#first-friends"
+          className="inline-flex items-center gap-1 font-bold text-[#FADADD] hover:text-white underline transition-colors shrink-0 ml-1"
+        >
+          <span>Join Now</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3 cursor-pointer group">
@@ -288,11 +304,13 @@ function FeaturedCampaign() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 md:pt-10 md:pb-4 relative z-10 scroll-mt-20 flex flex-col gap-6 sm:gap-8">
         {activeCampaigns.map((campaign) => (
           <motion.section
+            id={campaign.id}
             key={campaign.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut" }}
+            className="scroll-mt-28"
           >
             <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
               {/* Ambient Glows */}
