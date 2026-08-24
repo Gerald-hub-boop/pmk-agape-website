@@ -110,7 +110,6 @@ function Header() {
   }, []);
 
   const navLinks = [
-    { name: "First Friends", href: "#first-friends" },
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
     { name: "Meet The Team", href: "#family" }
@@ -118,20 +117,6 @@ function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b-transparent' : 'bg-white/80 backdrop-blur-md border-b border-[#FFF0F2]'}`}>
-      {/* Announcement Bar */}
-      <div className="bg-[#4A1F1F] text-white py-2 px-4 text-xs sm:text-sm font-medium text-center flex items-center justify-center gap-2 relative z-50">
-        <span className="w-2 h-2 rounded-full bg-[#D88A9A] animate-pulse shrink-0" />
-        <span className="truncate">
-          <strong className="font-bold text-white">First Friends 2026</strong> is now open for new students!
-        </span>
-        <a
-          href="#first-friends"
-          className="inline-flex items-center gap-1 font-bold text-[#FADADD] hover:text-white underline transition-colors shrink-0 ml-1"
-        >
-          <span>Join Now</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-      </div>
 
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
@@ -225,24 +210,6 @@ export interface FeaturedCampaignConfig {
 }
 
 export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
-  {
-    id: "first-friends",
-    enabled: true,
-    badge: "NOW OPEN",
-    title: "First Friends",
-    description: "Meet new friends, connect with others, and start your journey together.",
-    modalDetails: {
-      subtitle: "Teman pertama untuk memulai perjalananmu di PMK Agape.",
-      paragraphs: [
-        "First Friends adalah program penyambutan bagi mahasiswa baru agar tidak menjalani awal perkuliahan sendirian.",
-        "Melalui program ini, kamu akan dipertemukan dengan teman-teman PMK Agape yang siap menyambutmu, mengenalkan lingkungan kampus, menjawab hal-hal sederhana yang mungkin masih membingungkan, serta menemanimu membangun relasi baru.",
-        "Program ini bukan sekadar mencari teman, tetapi menjadi ruang yang hangat agar setiap orang dapat merasa diterima, memiliki tempat untuk bertumbuh, dan memulai perjalanan perkuliahan bersama."
-      ]
-    },
-    buttonText: "Join First Friends",
-    buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
-    icon: <UserPlus className="w-10 h-10 text-[#4A1F1F]" />
-  },
   {
     id: "pelayan",
     enabled: true,
@@ -1188,17 +1155,6 @@ function Interaction() {
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
     },
     {
-      title: "First Friends",
-      desc: "Meet new friends, connect with others, and start your journey together.",
-      icon: <UserPlus className="w-8 h-8 md:w-10 md:h-10" />,
-      btn: "Get Connected",
-      link: "https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
-      inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
-      iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
-      btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
-    },
-    {
       title: "Serve With Us",
       desc: "You don’t have to be anyone special to start. There is always a place for you to serve and grow together with us.",
       icon: <Users className="w-8 h-8 md:w-10 md:h-10" />,
@@ -1410,16 +1366,6 @@ function Footer() {
             </li>
             <li>
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfwJd_Hf3Dj7Bl078aIhzFG_bee4PpDUTVFD4DHqBDMaBrUaA/viewform?usp=header"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors block cursor-pointer"
-              >
-                First Friends
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://bit.ly/PELAYANPMK2026"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1440,7 +1386,7 @@ function Footer() {
             </li>
             <li>
               <button
-                onClick={() => triggerScrollToConnectCard(4)}
+                onClick={() => triggerScrollToConnectCard(3)}
                 className="hover:text-white transition-colors text-left bg-transparent border-none p-0 focus:outline-none block w-full cursor-pointer"
               >
                 Let’s Talk

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { UserPlus, ArrowRight } from 'lucide-react';
 import imgLanding from '../images-optimized/Landing.webp';
 
 // ─────────────────────────────────────────────
@@ -118,23 +117,6 @@ export const CinematicHero: React.FC = () => {
            */}
           <div className="max-w-[480px]">
 
-            {/* First Friends Hero Badge */}
-            <Rise delay={0.15} className="mt-0 md:mt-2 mb-2 md:mb-3">
-              <a
-                href="#first-friends"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/95 border border-[#D88A9A]/50 shadow-sm hover:shadow-md hover:border-[#D88A9A] hover:bg-[#FFF0F2] transition-all duration-300 group cursor-pointer"
-              >
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D88A9A] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4A1F1F]"></span>
-                </span>
-                <span className="text-xs sm:text-sm font-bold text-[#4A1F1F] tracking-wide flex items-center gap-1.5">
-                  <UserPlus className="w-3.5 h-3.5 text-[#D88A9A]" />
-                  <span>First Friends 2026 is Now Open</span>
-                </span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#D88A9A] group-hover:translate-x-1 transition-transform duration-300" />
-              </a>
-            </Rise>
 
             {/* Headline — Quicksand bold, same scale as H2 sections */}
             <Rise delay={0.25} className="mt-0 md:mt-4">
