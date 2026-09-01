@@ -115,7 +115,7 @@ function Header() {
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
     { name: "Meet The Team", href: "#family" },
-    { name: "Brand New Day", href: "#brand-new-day" }
+    { name: "Special Event: Brand New Day", href: "#brand-new-day" }
   ];
 
   return (
