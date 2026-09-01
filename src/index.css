@@ -41,7 +41,7 @@ body {
   line-height: 0.9;
   letter-spacing: 0.08em;
 
-  /* 🔥 GRADIENT TEXT */
+  /* Gradient Text */
   background: linear-gradient(180deg, #7A2E2E 0%, #4A1414 100%);
   -webkit-background-clip: text;
   background-clip: text;

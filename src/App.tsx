@@ -56,6 +56,8 @@ import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.w
 import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
 import { LetsTalkModal } from './components/LetsTalkModal';
+import { BrandNewDayApp } from './brand-new-day/BrandNewDayApp';
+import { ErrorBoundary } from './brand-new-day/components/ErrorBoundary';
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -112,7 +114,8 @@ function Header() {
   const navLinks = [
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
-    { name: "Meet The Team", href: "#family" }
+    { name: "Meet The Team", href: "#family" },
+    { name: "Brand New Day", href: "#brand-new-day" }
   ];
 
   return (
@@ -788,7 +791,7 @@ function Activities() {
                 <div className="p-4 md:p-6 flex flex-col relative bg-white">
                   <div className="flex gap-4 md:gap-6 items-start">
                     <div className="w-10 h-10 md:w-14 md:h-14 bg-[#FFF0F2] text-[#5A1E1E] rounded-xl flex items-center justify-center shrink-0 border border-[#FADADD]/20 shadow-sm">
-                      {React.cloneElement(act.icon as React.ReactElement, { className: 'w-5 h-5 md:w-7 md:h-7' })}
+                      {React.cloneElement(act.icon as React.ReactElement<{ className?: string }>, { className: 'w-5 h-5 md:w-7 md:h-7' })}
                     </div>
                     <div>
                       <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
@@ -1356,6 +1359,14 @@ function Footer() {
           <ul className="space-y-2 text-sm text-white/60">
             <li>
               <a
+                href="#brand-new-day"
+                className="text-[#FADADD] hover:text-white transition-colors block cursor-pointer font-bold"
+              >
+                Brand New Day (Fellowship)
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://wa.me/6285175203004"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1430,7 +1441,61 @@ function Footer() {
   );
 }
 
+function isBrandNewDayRoute(): boolean {
+  if (typeof window === 'undefined') return false;
+  return (
+    window.location.hash === '#brand-new-day' ||
+    window.location.pathname === '/brand-new-day' ||
+    window.location.pathname.startsWith('/brand-new-day')
+  );
+}
+
 export default function App() {
+  const [currentView, setCurrentView] = useState<'home' | 'brand-new-day'>(() => {
+    return isBrandNewDayRoute() ? 'brand-new-day' : 'home';
+  });
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isBrandNewDayRoute()) {
+        setCurrentView('brand-new-day');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleRouteChange);
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange);
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
+
+  if (currentView === 'brand-new-day') {
+    return (
+      <ErrorBoundary
+        onHome={() => {
+          if (window.location.pathname.startsWith('/brand-new-day')) {
+            window.history.pushState(null, '', '/');
+          }
+          window.location.hash = '';
+          setCurrentView('home');
+        }}
+      >
+        <BrandNewDayApp
+          onBackToHome={() => {
+            if (window.location.pathname.startsWith('/brand-new-day')) {
+              window.history.pushState(null, '', '/');
+            }
+            window.location.hash = '';
+            setCurrentView('home');
+          }}
+        />
+      </ErrorBoundary>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
       <Header />
@@ -1447,3 +1512,4 @@ export default function App() {
     </div>
   );
 }
+
