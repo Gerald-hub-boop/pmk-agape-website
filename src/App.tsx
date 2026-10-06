@@ -56,16 +56,14 @@ import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.w
 import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
 import { LetsTalkModal } from './components/LetsTalkModal';
-import { BrandNewDayApp } from './brand-new-day/BrandNewDayApp';
-import { ErrorBoundary } from './brand-new-day/components/ErrorBoundary';
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Heart, Users, BookOpen, MessageCircle, MapPin,
-  Calendar, ChevronRight, Star, Mail, ArrowRight,
-  HandHeart, Send, Quote, Music, Sparkles, UserPlus, Mountain, Megaphone,
-  Flame, Menu, X, Instagram, Activity, Smile, Handshake
-} from 'lucide-react';
+  Heart, Users, BookOpen, ChatCircle, MapPin,
+  Calendar, CaretRight, Star, Envelope, ArrowRight,
+  HandHeart, PaperPlaneRight, Quotes, MusicNotes, Sparkle, UserPlus, Mountains, Megaphone,
+  Fire, List, X, InstagramLogo, ChartLineUp as Activity, Smiley, Handshake
+} from '@phosphor-icons/react';
 
 export const triggerScrollToConnectCard = (index: number) => {
   const event = new CustomEvent('scroll-to-connect-card', { detail: index });
@@ -113,13 +111,12 @@ function Header() {
 
   const navLinks = [
     { name: "Vision & Mission", href: "#vision" },
-    { name: "What We Do?", href: "#events" },
-    { name: "Meet The Team", href: "#family" },
-    { name: "Special Event: Brand New Day", href: "#brand-new-day" }
+    { name: "What We Do", href: "#events" },
+    { name: "Meet The Team", href: "#family" }
   ];
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b-transparent' : 'bg-white/80 backdrop-blur-md border-b border-[#FFF0F2]'}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90  shadow-sm border-b-transparent' : 'bg-white/80  border-b border-[#FFF0F2]'}`}>
 
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
@@ -157,7 +154,7 @@ function Header() {
 
         {/* Mobile Menu Toggle */}
         <button className="md:hidden p-2 text-brand-black" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <List className="w-6 h-6" />}
         </button>
       </div>
 
@@ -282,7 +279,7 @@ function FeaturedCampaign() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="scroll-mt-28"
           >
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
+            <div className="relative overflow-hidden bg-zinc-50 border border-zinc-200 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-sm">
               {/* Ambient Glows */}
               <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
               <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
@@ -324,7 +321,7 @@ function FeaturedCampaign() {
                       className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
                     >
                       <span>Learn More</span>
-                      <ChevronRight className="w-4 h-4 text-[#D88A9A]" />
+                      <CaretRight className="w-4 h-4 text-[#D88A9A]" />
                     </button>
                   </div>
                 </div>
@@ -336,7 +333,7 @@ function FeaturedCampaign() {
                     whileHover={{ scale: 1.03, y: -4 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="relative w-64 h-64 rounded-3xl bg-white/90 backdrop-blur-md border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
+                    className="relative w-64 h-64 rounded-3xl bg-white/90  border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
                   >
                     {/* Top indicator badge */}
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-[10px] font-bold tracking-wider uppercase border border-[#FADADD]/60 group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors duration-300">
@@ -375,7 +372,7 @@ function FeaturedCampaign() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={() => setActiveModalConfig(null)}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-black/60  flex items-center justify-center p-4 sm:p-6"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -397,7 +394,7 @@ function FeaturedCampaign() {
               {/* Modal Header */}
               <div className="flex items-center gap-3.5 pr-8">
                 <div className="w-12 h-12 rounded-2xl bg-[#FFF0F2] flex items-center justify-center shrink-0">
-                  {activeModalConfig.icon || <Smile className="w-6 h-6 text-[#4A1F1F]" />}
+                  {activeModalConfig.icon || <Smiley className="w-6 h-6 text-[#4A1F1F]" />}
                 </div>
                 <div>
                   <span className="inline-block px-3 py-1 rounded-full bg-[#4A1F1F] text-white text-[10px] font-black tracking-widest uppercase mb-1">
@@ -476,7 +473,7 @@ function About() {
     {
       number: "04",
       title: "Pengutusan",
-      icon: <Send className="w-5 h-5" />,
+      icon: <PaperPlaneRight className="w-5 h-5" />,
       desc: "Menjadi terang dan membawa dampak nyata bagi keluarga, gereja, kampus, dan masyarakat luas.",
     },
   ];
@@ -588,7 +585,7 @@ function About() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-              className="absolute top-[2.4rem] left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-gradient-to-r from-[#D88A9A]/20 via-[#D88A9A] to-[#D88A9A]/20 origin-left"
+              className="absolute top-[2.4rem] left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-zinc-50 border border-zinc-200 origin-left"
             />
 
             <div className="grid grid-cols-4 gap-0">
@@ -649,7 +646,7 @@ function About() {
                     whileInView={{ scaleY: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.12, ease: "easeOut" }}
-                    className="w-px flex-1 bg-gradient-to-b from-[#D88A9A]/60 to-[#D88A9A]/10 origin-top mt-2 min-h-[3rem]"
+                    className="w-px flex-1 bg-zinc-50 border border-zinc-200 origin-top mt-2 min-h-[3rem]"
                   />
                 )}
               </div>
@@ -709,7 +706,7 @@ function Activities() {
     },
     {
       title: "Persekutuan Jumat",
-      icon: <Music className="w-6 h-6" />,
+      icon: <MusicNotes className="w-6 h-6" />,
       desc: "Ibadah rutin untuk memuji Tuhan, mendengar firman, dan dikuatkan bersama.",
       image: imgPersekutuanJumat
     },
@@ -727,13 +724,13 @@ function Activities() {
     },
     {
       title: "Retreat",
-      icon: <Mountain className="w-6 h-6" />,
+      icon: <Mountains className="w-6 h-6" />,
       desc: "Waktu khusus untuk berhenti sejenak, dipulihkan, dan kembali dekat dengan Tuhan.",
       image: imgRetreat
     },
     {
       title: "Pelayanan Pribadi",
-      icon: <MessageCircle className="w-6 h-6" />,
+      icon: <ChatCircle className="w-6 h-6" />,
       desc: "Ruang aman untuk berbagi cerita, didengarkan, dan didoakan secara pribadi.",
       image: imgPelayananPribadi
     },
@@ -755,57 +752,52 @@ function Activities() {
       className="pt-8 pb-4 md:pt-12 md:pb-6 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 mt-6 mb-2 overflow-hidden scroll-mt-20"
     >
       <div className="max-w-[1500px] mx-auto">
-
-        <div className="flex flex-col md:flex-row justify-between items-end mb-6 px-6 lg:px-16">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 px-6 lg:px-16">
           <div className="max-w-2xl">
-            <h2 className="text-2xl md:text-4xl font-bold mb-3 tracking-tight text-brand-black">What We Do?</h2>
-            <p className="text-gray-500 font-medium text-base md:text-lg leading-relaxed opacity-90">Growing together in every gathering and every shared journey.</p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-brand-black">What We Do</h2>
+            <p className="text-gray-500 font-medium text-lg leading-relaxed">Growing together in every gathering and every shared journey.</p>
           </div>
         </div>
 
-        {/* Horizontal Scroll Layout */}
+        {/* Horizontal Gallery (Bento Style) */}
         <div className="relative w-full">
-          <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-6 md:pt-0 md:pb-10 -mt-3 md:mt-0 gap-4 md:gap-6 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
+          <div className="flex overflow-x-auto pt-4 pb-12 gap-8 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
             {activities.map((act, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white rounded-2xl md:rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 ease-in-out cursor-pointer group flex flex-col border border-gray-100/50 shrink-0 w-[80vw] md:w-[48vw] lg:w-[42vw] max-w-[650px] snap-start overflow-hidden h-fit"
+                className="shrink-0 w-[85vw] md:w-[45vw] lg:w-[38vw] max-w-[600px] snap-start flex flex-col gap-6 cursor-pointer group"
               >
-                {/* Immersive Image Header */}
-                <div className="relative w-full h-[200px] md:h-[340px] overflow-hidden">
-                  <img
-                    src={act.image}
-                    alt={act.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
-                  />
-                  {/* Cinematic Overlay */}
-                  <div className="absolute inset-0 bg-[#5A1E1E]/5 transition-opacity duration-500 group-hover:opacity-10" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/40 via-transparent to-transparent opacity-60" />
+                {/* Clean Image Card */}
+                <div className="relative w-full h-[240px] md:h-[400px] rounded-[2.5rem] bg-white border border-slate-200/50 overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-2">
+                  <div className="relative w-full h-full rounded-[2rem] overflow-hidden">
+                    <img
+                      src={act.image}
+                      alt={act.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-[#09090b]/5 transition-opacity duration-500 group-hover:opacity-0" />
+                  </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="p-4 md:p-6 flex flex-col relative bg-white">
-                  <div className="flex gap-4 md:gap-6 items-start">
-                    <div className="w-10 h-10 md:w-14 md:h-14 bg-[#FFF0F2] text-[#5A1E1E] rounded-xl flex items-center justify-center shrink-0 border border-[#FADADD]/20 shadow-sm">
-                      {React.cloneElement(act.icon as React.ReactElement<{ className?: string }>, { className: 'w-5 h-5 md:w-7 md:h-7' })}
-                    </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
-                      <p className="text-gray-500 font-medium text-sm md:text-base leading-relaxed opacity-80">{act.desc}</p>
-                    </div>
+                {/* Content Outside/Below Card */}
+                <div className="flex gap-5 px-2">
+                  <div className="w-12 h-12 bg-zinc-100 text-[#09090b] rounded-2xl flex items-center justify-center shrink-0 border border-slate-200/50 shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                    {React.cloneElement(act.icon as React.ReactElement<{ className?: string }>, { className: 'w-6 h-6' })}
+                  </div>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 tracking-tight text-brand-black">{act.title}</h3>
+                    <p className="text-gray-500 font-medium text-base leading-relaxed">{act.desc}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
-            {/* Spacer to allow the last card to scroll fully to the left */}
             <div className="shrink-0 w-8 md:w-20"></div>
           </div>
         </div>
-
       </div>
     </motion.section>
   );
@@ -861,7 +853,7 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <motion.div
-        className="relative w-full h-full [transform-style:preserve-3d] rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
+        className="relative w-full h-full [transform-style:preserve-3d] rounded-3xl shadow-sm"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
@@ -901,13 +893,13 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
           {m.message && (
             <>
               {/* Layer 2: Overlay */}
-              <div className="absolute inset-0 z-10 bg-white/85 backdrop-blur-[3px]" />
+              <div className="absolute inset-0 z-10 bg-white/85 " />
 
               {/* Layer 3: Content */}
               <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
-                <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
+                <Quotes className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
                 <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
-                <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">— {m.author || m.name}</p>
+                <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">- {m.author || m.name}</p>
               </div>
             </>
           )}
@@ -1020,7 +1012,7 @@ function Testimonials() {
                 className="bg-white p-5 md:p-6 rounded-3xl shadow-sm flex flex-col justify-between border border-gray-100 shrink-0 snap-start cursor-pointer w-[88vw] sm:w-[350px] md:w-[360px] lg:w-[380px] h-[270px] sm:h-[280px] overflow-hidden"
               >
                 <div>
-                  <Quote className="w-5 h-5 text-[#D88A9A]/60 mb-2 rotate-180" />
+                  <Quotes className="w-5 h-5 text-[#D88A9A]/60 mb-2 rotate-180" />
                   <p className="text-sm sm:text-base font-medium text-brand-black italic relative z-10 leading-relaxed line-clamp-4">
                     "{story.text}"
                   </p>
@@ -1037,7 +1029,7 @@ function Testimonials() {
                   )}
                 </div>
                 <p className="font-bold text-brand-black text-sm sm:text-base pt-2 shrink-0 border-t border-gray-50 mt-auto">
-                  — {story.author}
+                  - {story.author}
                 </p>
               </motion.div>
             );
@@ -1053,7 +1045,7 @@ function Testimonials() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedStory(null)}
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black/50  flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -1070,14 +1062,14 @@ function Testimonials() {
                 <X className="w-5 h-5" />
               </button>
 
-              <Quote className="w-8 h-8 text-[#D88A9A]/60 rotate-180" />
+              <Quotes className="w-8 h-8 text-[#D88A9A]/60 rotate-180" />
 
               <p className="text-base sm:text-lg font-medium text-brand-black italic leading-relaxed">
                 "{selectedStory.text}"
               </p>
 
               <div className="pt-3 border-t border-gray-100 flex justify-between items-center">
-                <p className="font-bold text-brand-black text-base">— {selectedStory.author}</p>
+                <p className="font-bold text-brand-black text-base">- {selectedStory.author}</p>
                 <button
                   onClick={() => setSelectedStory(null)}
                   className="px-4 py-2 bg-[#4A1F1F] text-white text-xs font-bold rounded-full hover:bg-[#381717] transition-colors"
@@ -1152,7 +1144,7 @@ function Interaction() {
       icon: <Handshake className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Contact Our Team",
       link: "https://wa.me/6285175203004",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-sm",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
@@ -1163,7 +1155,7 @@ function Interaction() {
       icon: <Users className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Start Serving",
       link: "https://bit.ly/PELAYANPMK2026",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-sm",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
@@ -1174,7 +1166,7 @@ function Interaction() {
       icon: <Heart className="w-8 h-8 md:w-10 md:h-10 fill-[#4A1F1F]" />,
       btn: "Send Prayer Request",
       link: "https://forms.gle/ocmnPSBCvBacje98A",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-sm",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
@@ -1182,9 +1174,9 @@ function Interaction() {
     {
       title: "Let’s Talk",
       desc: "If you need someone to listen, we are here for you. Feel free to reach out anytime.",
-      icon: <MessageCircle className="w-8 h-8 md:w-10 md:h-10" />,
+      icon: <ChatCircle className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Start a Conversation",
-      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]",
+      activeStyle: "bg-white border-[#4A1F1F]/20 shadow-sm",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
       iconBg: "bg-[#4A1F1F]/5 text-[#4A1F1F]",
       btnStyle: "border-[1.5px] border-[#4A1F1F] text-[#4A1F1F] bg-transparent hover:bg-[#4A1F1F] hover:text-white hover:shadow-md hover:scale-[1.02] transition-all duration-300"
@@ -1202,7 +1194,7 @@ function Interaction() {
     >
       {/* Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[900px] h-[900px] bg-gradient-to-r from-[#FFF0F2] to-transparent rounded-full opacity-50 blur-[100px]" />
+        <div className="w-[900px] h-[900px] bg-zinc-50 border border-zinc-200 rounded-full opacity-50 blur-[100px]" />
       </div>
 
       <div className="max-w-[1450px] mx-auto relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-8 px-6 lg:px-12">
@@ -1221,7 +1213,7 @@ function Interaction() {
         {/* RIGHT */}
         <div className="w-full lg:w-8/12 relative min-w-0">
           {/* Fade Indicator (Mobile & Tablet) */}
-          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/40 to-transparent z-20 pointer-events-none xl:hidden" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-zinc-50 border border-zinc-200 z-20 pointer-events-none xl:hidden" />
 
           <div
             ref={containerRef}
@@ -1281,7 +1273,7 @@ function Interaction() {
                     {c.desc}
                   </p>
 
-                  {/* BUTTON — ALWAYS VISIBLE & ACCESSIBLE */}
+                  {/* BUTTON - ALWAYS VISIBLE & ACCESSIBLE */}
                   {c.link ? (
                     <a
                       href={c.link}
@@ -1359,14 +1351,6 @@ function Footer() {
           <ul className="space-y-2 text-sm text-white/60">
             <li>
               <a
-                href="#brand-new-day"
-                className="text-[#FADADD] hover:text-white transition-colors block cursor-pointer font-bold"
-              >
-                Brand New Day (Fellowship)
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://wa.me/6285175203004"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1416,17 +1400,17 @@ function Footer() {
             </li>
             <li>
               <a href="mailto:pmkagape@upnvj.ac.id" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Mail className="w-4 h-4 shrink-0" /> pmkagape@upnvj.ac.id
+                <Envelope className="w-4 h-4 shrink-0" /> pmkagape@upnvj.ac.id
               </a>
             </li>
             <li>
               <a href="https://www.instagram.com/pmk_agape?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Instagram className="w-4 h-4 shrink-0" /> Instagram
+                <InstagramLogo className="w-4 h-4 shrink-0" /> Instagram
               </a>
             </li>
             <li>
               <a href="https://www.tiktok.com/@pmk_agape?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Music className="w-4 h-4 shrink-0" /> TikTok
+                <MusicNotes className="w-4 h-4 shrink-0" /> TikTok
               </a>
             </li>
           </ul>
@@ -1441,61 +1425,7 @@ function Footer() {
   );
 }
 
-function isBrandNewDayRoute(): boolean {
-  if (typeof window === 'undefined') return false;
-  return (
-    window.location.hash === '#brand-new-day' ||
-    window.location.pathname === '/brand-new-day' ||
-    window.location.pathname.startsWith('/brand-new-day')
-  );
-}
-
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'brand-new-day'>(() => {
-    return isBrandNewDayRoute() ? 'brand-new-day' : 'home';
-  });
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      if (isBrandNewDayRoute()) {
-        setCurrentView('brand-new-day');
-      } else {
-        setCurrentView('home');
-      }
-    };
-
-    window.addEventListener('hashchange', handleRouteChange);
-    window.addEventListener('popstate', handleRouteChange);
-    return () => {
-      window.removeEventListener('hashchange', handleRouteChange);
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, []);
-
-  if (currentView === 'brand-new-day') {
-    return (
-      <ErrorBoundary
-        onHome={() => {
-          if (window.location.pathname.startsWith('/brand-new-day')) {
-            window.history.pushState(null, '', '/');
-          }
-          window.location.hash = '';
-          setCurrentView('home');
-        }}
-      >
-        <BrandNewDayApp
-          onBackToHome={() => {
-            if (window.location.pathname.startsWith('/brand-new-day')) {
-              window.history.pushState(null, '', '/');
-            }
-            window.location.hash = '';
-            setCurrentView('home');
-          }}
-        />
-      </ErrorBoundary>
-    );
-  }
-
   return (
     <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
       <Header />

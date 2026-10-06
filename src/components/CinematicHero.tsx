@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import imgLanding from '../images-optimized/Landing.webp';
 
 // ─────────────────────────────────────────────
-// Staggered fade-up — matches the animation
+// Staggered fade-up - matches the animation
 // style used in every whileInView section below.
 // ─────────────────────────────────────────────
 function Rise({
@@ -55,9 +55,9 @@ export const CinematicHero: React.FC = () => {
       className="relative w-full h-[100svh] min-h-[540px] max-h-[780px] md:h-screen md:min-h-[640px] md:max-h-[960px] overflow-hidden bg-[#FFF0F2]"
     >
       {/* ─── BACKGROUND IMAGE (right half, parallax) ──────────── */}
-      {/* Positioned absolutely so the white text panel floats over it */}
+      {/* Positioned absolutely on the right for split-screen asymmetry */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute top-0 right-0 bottom-0 w-full md:w-3/5 z-0"
         style={{ y: imgY }}
         aria-hidden
       >
@@ -67,58 +67,23 @@ export const CinematicHero: React.FC = () => {
           alt=""
           className="w-full h-full object-cover object-[80%_center] md:object-center"
           style={{
-            // Slightly warmer and dimmed on mobile for slogan legibility
-            filter: 'brightness(0.93) saturate(0.94)',
             scale: 1.04,
           }}
           onLoad={onImageLoad}
         />
-
-        {/* Desktop horizontal gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none hidden md:block"
-          style={{
-            background:
-              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
-          }}
-        />
-        {/* Mobile horizontal gradient overlay — white translucent overlay (98% left -> 40% right minimum opacity) */}
-        <div
-          className="absolute inset-0 pointer-events-none md:hidden"
-          style={{
-            background:
-              'linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.94) 25%, rgba(255,255,255,0.88) 45%, rgba(255,255,255,0.78) 60%, rgba(255,255,255,0.65) 75%, rgba(255,255,255,0.52) 88%, rgba(255,255,255,0.40) 100%)',
-          }}
-        />
-
-        {/* Gradient fade at bottom — desktop 40%, mobile 15% */}
-        <div
-          className="absolute inset-0 pointer-events-none hidden md:block"
-          style={{
-            background:
-              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 18%, transparent 40%)',
-          }}
-        />
-        <div
-          className="absolute inset-0 pointer-events-none md:hidden"
-          style={{
-            background:
-              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 8%, transparent 15%)',
-          }}
-        />
+        {/* Sleek edge fade instead of heavy gradient overlay */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#fafafa] via-[#fafafa]/80 to-transparent w-full md:w-1/3" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#fafafa] to-transparent h-1/4 mt-auto md:hidden" />
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
-      <div className="relative z-10 h-full flex items-center md:items-start pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)] pb-36 md:pb-0">
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
-          {/*
-           * Max-width constraint keeps the text panel tight on the left
-           * while the image breathes on the right — intentional asymmetry.
-           */}
-          <div className="max-w-[480px]">
+      <div className="relative z-10 h-full flex items-end pb-24 md:items-center md:pb-0 pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex">
+          {/* Asymmetric left-aligned content */}
+          <div className="max-w-[480px] bg-[#fafafa]/90 md:bg-transparent p-6 md:p-0 rounded-3xl backdrop-blur-xl md:backdrop-blur-none border border-slate-200/50 md:border-none shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] md:shadow-none">
 
 
-            {/* Headline — Quicksand bold, same scale as H2 sections */}
+            {/* Headline - Quicksand bold, same scale as H2 sections */}
             <Rise delay={0.25} className="mt-0 md:mt-4">
               <h1
                 className="font-bold text-brand-black leading-[1.1] tracking-tight"
@@ -128,7 +93,7 @@ export const CinematicHero: React.FC = () => {
               </h1>
             </Rise>
 
-            {/* Supporting text — one or two sentences, matches p style below */}
+            {/* Supporting text - one or two sentences, matches p style below */}
             <Rise delay={0.42} className="mt-5 md:mt-6">
               <p
                 className="font-semibold leading-relaxed text-brand-black"
@@ -138,7 +103,7 @@ export const CinematicHero: React.FC = () => {
               </p>
             </Rise>
 
-            {/* CTA buttons — exact same classes as the site's existing CTAs */}
+            {/* CTA buttons - exact same classes as the site's existing CTAs */}
             <Rise delay={0.58} className="mt-8 md:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4">
               <a
                 href="#connect"
@@ -149,9 +114,9 @@ export const CinematicHero: React.FC = () => {
                 className="
                   px-7 py-3.5 rounded-full
                   bg-[#D88A9A] text-white text-sm font-bold
-                  shadow-[0_4px_20px_rgba(216,138,154,0.4)]
+                  shadow-sm
                   hover:bg-[#C9778A]
-                  hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(216,138,154,0.45)]
+                  hover:-translate-y-0.5 hover:shadow-sm
                   transition-all duration-300
                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D88A9A]
                 "
@@ -205,7 +170,7 @@ export const CinematicHero: React.FC = () => {
       </motion.div>
 
       {/*
-       * Invisible preload state — we let the browser paint first
+       * Invisible preload state - we let the browser paint first
        * before fading in, preventing a white flash on slow connections.
        */}
       {!ready && (

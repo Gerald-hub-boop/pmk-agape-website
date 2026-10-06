@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, MessageCircle, Heart, Shield, User, Clock } from 'lucide-react';
+import { X, ChatCircle as MessageCircle, Heart, ShieldCheck as Shield, User, Clock } from '@phosphor-icons/react';
 
 interface LetsTalkModalProps {
   isOpen: boolean;
@@ -125,7 +125,7 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/60  flex items-center justify-center p-4"
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -133,12 +133,12 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-[2rem] p-6 sm:p-8 max-w-[420px] w-full shadow-2xl border border-gray-100 relative flex flex-col gap-6"
+            className="bg-white/90 backdrop-blur-2xl rounded-[2.5rem] p-6 sm:p-8 max-w-[420px] w-full shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border-[0.5px] border-white/60 relative flex flex-col gap-6"
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 p-2 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute top-5 right-5 p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-400 hover:text-zinc-600 transition-colors"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -204,7 +204,7 @@ export function LetsTalkModal({ isOpen, onClose }: LetsTalkModalProps) {
             {/* Action Button */}
             <button
               onClick={handleStartChat}
-              className="w-full py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base shadow-lg shadow-[#4A1F1F]/20 hover:bg-[#381717] hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+              className="w-full py-4 rounded-full bg-[#4A1F1F] text-white font-bold text-base shadow-lg shadow-sm/20 hover:bg-[#381717] hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
             >
               Mulai Percakapan
             </button>
