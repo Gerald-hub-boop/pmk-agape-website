@@ -52,7 +52,7 @@ export const CinematicHero: React.FC = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative w-full h-[100svh] min-h-[540px] max-h-[780px] md:h-screen md:min-h-[640px] md:max-h-[960px] overflow-hidden bg-[#FFF0F2]"
+      className="relative w-full min-h-[100dvh] md:min-h-[100dvh] overflow-hidden bg-[#FFF0F2]"
     >
       {/* ─── BACKGROUND IMAGE (right half, parallax) ──────────── */}
       {/* Positioned absolutely on the right for split-screen asymmetry */}
@@ -72,15 +72,15 @@ export const CinematicHero: React.FC = () => {
           onLoad={onImageLoad}
         />
         {/* Sleek edge fade instead of heavy gradient overlay */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#fafafa] via-[#fafafa]/80 to-transparent w-full md:w-1/3" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#fafafa] to-transparent h-1/4 mt-auto md:hidden" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#FFF0F2] via-[#FFF0F2]/80 to-transparent w-full md:w-1/3" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#FFF0F2] to-transparent h-1/4 mt-auto md:hidden" />
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
       <div className="relative z-10 h-full flex items-end pb-24 md:items-center md:pb-0 pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex">
           {/* Asymmetric left-aligned content */}
-          <div className="max-w-[480px] bg-[#fafafa]/90 md:bg-transparent p-6 md:p-0 rounded-3xl backdrop-blur-xl md:backdrop-blur-none border border-slate-200/50 md:border-none shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] md:shadow-none">
+          <div className="max-w-[480px] bg-white/70 md:bg-transparent p-6 md:p-0 rounded-3xl backdrop-blur-xl md:backdrop-blur-none border border-[#FADADD]/60 md:border-none shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] md:shadow-none">
 
 
             {/* Headline - Quicksand bold, same scale as H2 sections */}
