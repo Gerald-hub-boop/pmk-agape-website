@@ -36,10 +36,13 @@ Unless the user explicitly specifies a different stack, adhere to these structur
 LLMs have statistical biases toward specific UI cliché patterns. Proactively construct premium interfaces using these engineered rules:
 
 **Rule 1: Deterministic Typography**
-* **Display/Headlines:** Default to `text-4xl md:text-6xl tracking-tighter leading-none`.
-    * **ANTI-SLOP:** Discourage `Inter` for "Premium" or "Creative" vibes. Force unique character using `Geist`, `Outfit`, `Cabinet Grotesk`, or `Satoshi`.
-    * **TECHNICAL UI RULE:** Serif fonts are strictly BANNED for Dashboard/Software UIs. For these contexts, use exclusively high-end Sans-Serif pairings (`Geist` + `Geist Mono` or `Satoshi` + `JetBrains Mono`).
-* **Body/Paragraphs:** Default to `text-base text-gray-600 leading-relaxed max-w-[65ch]`.
+* **Display/Headlines & Body:** Default to `Lora` (`font-lora` / serif) for organic warmth, soft calligraphic curves, and gentle elegance matching the soft pink aesthetic.
+    * **ANTI-SLOP & ANTI-RIGID:** 
+      - Bubbly rounded fonts (`Quicksand`) and generic AI fonts (`Outfit`, `Inter`) are strictly BANNED.
+      - Overly sharp/rigid high-contrast fonts (`Playfair Display`) are BANNED because they are too severe/formal ("terlalu tegas") for the soft pink palette.
+      - Italics are strictly avoided unless explicitly requested.
+      - Uniform Brand Font: `Lora` (warm humanist serif with gentle curves across the entire website).
+* **Body/Paragraphs:** `Lora` with balanced leading and warm readable weight.
 
 **Rule 2: Color Calibration**
 * **Constraint:** Max 1 Accent Color. Saturation < 80%.
@@ -105,7 +108,7 @@ To guarantee a premium, non-generic output, you MUST strictly avoid these common
 * **NO Custom Mouse Cursors:** They are outdated and ruin performance/accessibility.
 
 ### Typography
-* **NO Inter Font:** Banned. Use `Geist`, `Outfit`, `Cabinet Grotesk`, or `Satoshi`.
+* **NO Inter / Outfit / Quicksand Font:** Banned. They give an artificial/AI-slop or overly bubbly appearance. Use authentic uniform brand font: `Playfair Display` across the entire website.
 * **NO Oversized H1s:** The first heading should not scream. Control hierarchy with weight and color, not just massive scale.
 * **Serif Constraints:** Use Serif fonts ONLY for creative/editorial designs. **NEVER** use Serif on clean Dashboards.
 

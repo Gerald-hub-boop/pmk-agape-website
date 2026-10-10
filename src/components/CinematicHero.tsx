@@ -52,12 +52,12 @@ export const CinematicHero: React.FC = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative w-full min-h-[100dvh] md:min-h-[100dvh] overflow-hidden bg-[#FFF0F2]"
+      className="relative w-full h-[100svh] min-h-[540px] max-h-[780px] md:h-screen md:min-h-[640px] md:max-h-[960px] overflow-hidden bg-[#FFF0F2]"
     >
       {/* ─── BACKGROUND IMAGE (right half, parallax) ──────────── */}
-      {/* Positioned absolutely on the right for split-screen asymmetry */}
+      {/* Positioned absolutely so the white text panel floats over it */}
       <motion.div
-        className="absolute top-0 right-0 bottom-0 w-full md:w-3/5 z-0"
+        className="absolute inset-0 z-0"
         style={{ y: imgY }}
         aria-hidden
       >
@@ -67,37 +67,72 @@ export const CinematicHero: React.FC = () => {
           alt=""
           className="w-full h-full object-cover object-[80%_center] md:object-center"
           style={{
+            // Slightly warmer and dimmed on mobile for slogan legibility
+            filter: 'brightness(0.93) saturate(0.94)',
             scale: 1.04,
           }}
           onLoad={onImageLoad}
         />
-        {/* Sleek edge fade instead of heavy gradient overlay */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#FFF0F2] via-[#FFF0F2]/80 to-transparent w-full md:w-1/3" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#FFF0F2] to-transparent h-1/4 mt-auto md:hidden" />
+
+        {/* Desktop horizontal gradient overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none hidden md:block"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 60%)',
+          }}
+        />
+        {/* Mobile horizontal gradient overlay - white translucent overlay (98% left -> 40% right minimum opacity) */}
+        <div
+          className="absolute inset-0 pointer-events-none md:hidden"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.94) 25%, rgba(255,255,255,0.88) 45%, rgba(255,255,255,0.78) 60%, rgba(255,255,255,0.65) 75%, rgba(255,255,255,0.52) 88%, rgba(255,255,255,0.40) 100%)',
+          }}
+        />
+
+        {/* Gradient fade at bottom - desktop 40%, mobile 15% */}
+        <div
+          className="absolute inset-0 pointer-events-none hidden md:block"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 18%, transparent 40%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 pointer-events-none md:hidden"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 8%, transparent 15%)',
+          }}
+        />
       </motion.div>
 
       {/* ─── CONTENT LAYER ────────────────────────────────────── */}
-      <div className="relative z-10 h-full flex items-end pb-24 md:items-center md:pb-0 pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)]">
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex">
-          {/* Asymmetric left-aligned content */}
-          <div className="max-w-[480px] bg-white/70 md:bg-transparent p-6 md:p-0 rounded-3xl backdrop-blur-xl md:backdrop-blur-none border border-[#FADADD]/60 md:border-none shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] md:shadow-none">
+      <div className="relative z-10 h-full flex items-center md:items-start pt-0 md:pt-[clamp(2.5rem,8vh,5.5rem)] pb-36 md:pb-0">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
+          {/*
+           * Max-width constraint keeps the text panel tight on the left
+           * while the image breathes on the right - intentional asymmetry.
+           */}
+          <div className="max-w-[480px]">
 
 
-            {/* Headline - Quicksand bold, same scale as H2 sections */}
+            {/* Headline - Lora bold */}
             <Rise delay={0.25} className="mt-0 md:mt-4">
               <h1
-                className="font-bold text-brand-black leading-[1.1] tracking-tight"
+                className="font-lora font-bold text-brand-black leading-[1.1] tracking-tight"
                 style={{ fontSize: 'clamp(2.8rem, 6.5vw, 4.6rem)' }}
               >
                 You Belong Here.
               </h1>
             </Rise>
 
-            {/* Supporting text - one or two sentences, matches p style below */}
+            {/* Supporting text - Lora regular/upright */}
             <Rise delay={0.42} className="mt-5 md:mt-6">
               <p
-                className="font-semibold leading-relaxed text-brand-black"
-                style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', maxWidth: '455px' }}
+                className="font-lora text-[#4A1F1F] leading-relaxed font-medium"
+                style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)', maxWidth: '470px' }}
               >
                 Here, you can grow in faith, make new friends, and walk through university with people who truly care.
               </p>

@@ -56,14 +56,17 @@ import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.w
 import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
 import { LetsTalkModal } from './components/LetsTalkModal';
+import { BrandNewDayApp } from './brand-new-day/BrandNewDayApp';
+import { ErrorBoundary } from './brand-new-day/components/ErrorBoundary';
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Heart, Users, BookOpen, ChatCircle, MapPin,
-  Calendar, CaretRight, Star, Envelope, ArrowRight,
-  HandHeart, PaperPlaneRight, Quotes, MusicNotes, Sparkle, UserPlus, Mountains, Megaphone,
-  Fire, List, X, InstagramLogo, ChartLineUp as Activity, Smiley, Handshake
-} from '@phosphor-icons/react';
+  Heart, Users, BookOpen, MessageCircle, MapPin,
+  Calendar, ChevronRight, Star, Mail, ArrowRight,
+  HandHeart, Send, Quote, Music, Sparkles, UserPlus, Mountain, Megaphone,
+  Flame, Menu, X, Activity, Smile, Handshake
+} from 'lucide-react';
+import { InstagramLogo as Instagram } from '@phosphor-icons/react';
 
 export const triggerScrollToConnectCard = (index: number) => {
   const event = new CustomEvent('scroll-to-connect-card', { detail: index });
@@ -111,8 +114,9 @@ function Header() {
 
   const navLinks = [
     { name: "Vision & Mission", href: "#vision" },
-    { name: "What We Do", href: "#events" },
-    { name: "Meet The Team", href: "#family" }
+    { name: "What We Do?", href: "#events" },
+    { name: "Meet The Team", href: "#family" },
+    { name: "Special Event: Brand New Day", href: "#brand-new-day" }
   ];
 
   return (
@@ -154,7 +158,7 @@ function Header() {
 
         {/* Mobile Menu Toggle */}
         <button className="md:hidden p-2 text-brand-black" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <List className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
@@ -279,7 +283,7 @@ function FeaturedCampaign() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="scroll-mt-28"
           >
-            <div className="relative overflow-hidden bg-zinc-50 border border-zinc-200 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-sm">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
               {/* Ambient Glows */}
               <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
               <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
@@ -294,7 +298,7 @@ function FeaturedCampaign() {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
+                  <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
                     {campaign.title}
                   </h2>
 
@@ -321,7 +325,7 @@ function FeaturedCampaign() {
                       className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
                     >
                       <span>Learn More</span>
-                      <CaretRight className="w-4 h-4 text-[#D88A9A]" />
+                      <ChevronRight className="w-4 h-4 text-[#D88A9A]" />
                     </button>
                   </div>
                 </div>
@@ -394,7 +398,7 @@ function FeaturedCampaign() {
               {/* Modal Header */}
               <div className="flex items-center gap-3.5 pr-8">
                 <div className="w-12 h-12 rounded-2xl bg-[#FFF0F2] flex items-center justify-center shrink-0">
-                  {activeModalConfig.icon || <Smiley className="w-6 h-6 text-[#4A1F1F]" />}
+                  {activeModalConfig.icon || <Smile className="w-6 h-6 text-[#4A1F1F]" />}
                 </div>
                 <div>
                   <span className="inline-block px-3 py-1 rounded-full bg-[#4A1F1F] text-white text-[10px] font-black tracking-widest uppercase mb-1">
@@ -408,7 +412,7 @@ function FeaturedCampaign() {
 
               {/* Subtitle */}
               {activeModalConfig.modalDetails?.subtitle && (
-                <p className="text-base sm:text-lg font-semibold text-[#D88A9A] italic -mt-1">
+                <p className="text-base sm:text-lg font-semibold text-[#D88A9A] -mt-1">
                   "{activeModalConfig.modalDetails.subtitle}"
                 </p>
               )}
@@ -473,7 +477,7 @@ function About() {
     {
       number: "04",
       title: "Pengutusan",
-      icon: <PaperPlaneRight className="w-5 h-5" />,
+      icon: <Send className="w-5 h-5" />,
       desc: "Menjadi terang dan membawa dampak nyata bagi keluarga, gereja, kampus, dan masyarakat luas.",
     },
   ];
@@ -527,7 +531,7 @@ function About() {
                 transition: { staggerChildren: 0.04 }
               }
             }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-brand-black leading-snug md:leading-[1.25] tracking-tight"
+            className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-medium text-brand-black leading-snug md:leading-[1.3] tracking-normal"
           >
             {`"Memperlengkapi mahasiswa menjadi garam dan terang, yang dewasa dalam Kristus serta menjadi berkat bagi keluarga, gereja, bangsa, bahkan dunia."`.split(" ").map((word, i) => (
               <motion.span
@@ -560,7 +564,7 @@ function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.08 }}
-            className="text-2xl md:text-3xl font-bold text-brand-black mb-4 leading-snug"
+            className="font-playfair text-2xl md:text-3xl font-bold text-brand-black mb-4 leading-snug"
           >
             Satu perjalanan,<br />empat langkah bersama.
           </motion.h3>
@@ -585,7 +589,7 @@ function About() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-              className="absolute top-[2.4rem] left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-zinc-50 border border-zinc-200 origin-left"
+              className="absolute top-[2.4rem] left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-[#FADADD]/70 origin-left"
             />
 
             <div className="grid grid-cols-4 gap-0">
@@ -646,7 +650,7 @@ function About() {
                     whileInView={{ scaleY: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.12, ease: "easeOut" }}
-                    className="w-px flex-1 bg-zinc-50 border border-zinc-200 origin-top mt-2 min-h-[3rem]"
+                    className="w-px flex-1 bg-[#FADADD]/70 origin-top mt-2 min-h-[3rem]"
                   />
                 )}
               </div>
@@ -671,7 +675,7 @@ function About() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-14 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4 text-center"
         >
-          <p className="text-gray-400 text-sm font-medium italic">
+          <p className="text-gray-400 text-sm font-medium">
             Perjalanan ini dimulai dari satu langkah kecil.
           </p>
           <a
@@ -706,7 +710,7 @@ function Activities() {
     },
     {
       title: "Persekutuan Jumat",
-      icon: <MusicNotes className="w-6 h-6" />,
+      icon: <Music className="w-6 h-6" />,
       desc: "Ibadah rutin untuk memuji Tuhan, mendengar firman, dan dikuatkan bersama.",
       image: imgPersekutuanJumat
     },
@@ -724,13 +728,13 @@ function Activities() {
     },
     {
       title: "Retreat",
-      icon: <Mountains className="w-6 h-6" />,
+      icon: <Mountain className="w-6 h-6" />,
       desc: "Waktu khusus untuk berhenti sejenak, dipulihkan, dan kembali dekat dengan Tuhan.",
       image: imgRetreat
     },
     {
       title: "Pelayanan Pribadi",
-      icon: <ChatCircle className="w-6 h-6" />,
+      icon: <MessageCircle className="w-6 h-6" />,
       desc: "Ruang aman untuk berbagi cerita, didengarkan, dan didoakan secara pribadi.",
       image: imgPelayananPribadi
     },
@@ -752,52 +756,56 @@ function Activities() {
       className="pt-8 pb-4 md:pt-12 md:pb-6 px-0 bg-[#FAFAFA] rounded-[3rem] mx-1 md:mx-4 mt-6 mb-2 overflow-hidden scroll-mt-20"
     >
       <div className="max-w-[1500px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 px-6 lg:px-16">
+
+        <div className="flex flex-col md:flex-row justify-between items-end mb-6 px-6 lg:px-16">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-brand-black">What We Do</h2>
-            <p className="text-gray-500 font-medium text-lg leading-relaxed">Growing together in every gathering and every shared journey.</p>
+            <h2 className="font-playfair text-2xl md:text-4xl font-bold mb-3 tracking-tight text-brand-black">What We Do?</h2>
+            <p className="font-playfair text-gray-700 font-medium text-lg md:text-xl leading-relaxed">Growing together in every gathering and every shared journey.</p>
           </div>
         </div>
 
-        {/* Horizontal Gallery (Bento Style) */}
+        {/* Horizontal Scroll Layout */}
         <div className="relative w-full">
-          <div className="flex overflow-x-auto pt-4 pb-12 gap-8 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
+          <div className="flex overflow-x-auto overflow-y-hidden pt-3 pb-6 md:pt-0 md:pb-10 -mt-3 md:mt-0 gap-4 md:gap-6 px-6 lg:px-16 snap-x snap-mandatory no-scrollbar w-full relative scroll-smooth">
             {activities.map((act, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="shrink-0 w-[85vw] md:w-[45vw] lg:w-[38vw] max-w-[600px] snap-start flex flex-col gap-6 cursor-pointer group"
+                className="bg-white rounded-2xl md:rounded-3xl shadow-sm hover:shadow-sm transition-all duration-500 ease-in-out cursor-pointer group flex flex-col border border-gray-100/50 shrink-0 w-[80vw] md:w-[48vw] lg:w-[42vw] max-w-[650px] snap-start overflow-hidden h-fit"
               >
-                {/* Clean Image Card */}
-                <div className="relative w-full h-[240px] md:h-[400px] rounded-[2.5rem] bg-white border border-slate-200/50 overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-2">
-                  <div className="relative w-full h-full rounded-[2rem] overflow-hidden">
-                    <img
-                      src={act.image}
-                      alt={act.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-[#09090b]/5 transition-opacity duration-500 group-hover:opacity-0" />
-                  </div>
+                {/* Immersive Image Header - Crisp & Full Color */}
+                <div className="relative w-full h-[200px] md:h-[340px] overflow-hidden">
+                  <img
+                    src={act.image}
+                    alt={act.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                  />
+                  {/* Subtle hover gradient for polish, no washed-out white overlays */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
                 </div>
 
-                {/* Content Outside/Below Card */}
-                <div className="flex gap-5 px-2">
-                  <div className="w-12 h-12 bg-zinc-100 text-[#09090b] rounded-2xl flex items-center justify-center shrink-0 border border-slate-200/50 shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
-                    {React.cloneElement(act.icon as React.ReactElement<{ className?: string }>, { className: 'w-6 h-6' })}
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 tracking-tight text-brand-black">{act.title}</h3>
-                    <p className="text-gray-500 font-medium text-base leading-relaxed">{act.desc}</p>
+                {/* Content Section */}
+                <div className="p-4 md:p-6 flex flex-col relative bg-white">
+                  <div className="flex gap-4 md:gap-6 items-start">
+                    <div className="w-10 h-10 md:w-14 md:h-14 bg-[#FFF0F2] text-[#5A1E1E] rounded-xl flex items-center justify-center shrink-0 border border-[#FADADD]/20 shadow-sm">
+                      {React.cloneElement(act.icon as React.ReactElement<{ className?: string }>, { className: 'w-5 h-5 md:w-7 md:h-7' })}
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
+                      <p className="text-gray-500 font-medium text-sm md:text-base leading-relaxed opacity-80">{act.desc}</p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ))}
+            {/* Spacer to allow the last card to scroll fully to the left */}
             <div className="shrink-0 w-8 md:w-20"></div>
           </div>
         </div>
+
       </div>
     </motion.section>
   );
@@ -897,8 +905,8 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
 
               {/* Layer 3: Content */}
               <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
-                <Quotes className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
-                <p className="text-[12px] font-bold text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
+                <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
+                <p className="font-playfair text-[14px] md:text-[15px] font-medium text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
                 <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">- {m.author || m.name}</p>
               </div>
             </>
@@ -939,8 +947,8 @@ function Leadership() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet The Team</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg font-medium">The familiar faces you’ll often meet in PMK Agape.</p>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4">Meet The Team</h2>
+          <p className="font-playfair text-gray-700 max-w-2xl mx-auto text-lg md:text-xl font-medium">The familiar faces you’ll often meet in PMK Agape.</p>
         </div>
 
         {/* Horizontal scroll on mobile, wrap on desktop */}
@@ -990,7 +998,7 @@ function Testimonials() {
       className="pt-8 pb-10 md:pt-12 md:pb-14 px-4 md:px-6 bg-[#FAFAFA] rounded-[3rem] mx-2 md:mx-6 my-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">What They Say?</h2>
+        <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-6 text-center">What They Say?</h2>
         <div className="flex overflow-x-auto items-stretch gap-4 md:gap-6 pb-6 -mx-4 px-4 md:-mx-6 md:px-6 snap-x snap-mandatory scroll-smooth no-scrollbar">
           {stories.map((story, i) => {
             const isLong = story.text.length > 170;
@@ -1012,8 +1020,8 @@ function Testimonials() {
                 className="bg-white p-5 md:p-6 rounded-3xl shadow-sm flex flex-col justify-between border border-gray-100 shrink-0 snap-start cursor-pointer w-[88vw] sm:w-[350px] md:w-[360px] lg:w-[380px] h-[270px] sm:h-[280px] overflow-hidden"
               >
                 <div>
-                  <Quotes className="w-5 h-5 text-[#D88A9A]/60 mb-2 rotate-180" />
-                  <p className="text-sm sm:text-base font-medium text-brand-black italic relative z-10 leading-relaxed line-clamp-4">
+                  <Quote className="w-5 h-5 text-[#D88A9A]/60 mb-2 rotate-180" />
+                  <p className="text-sm sm:text-base font-medium text-brand-black relative z-10 leading-relaxed line-clamp-4">
                     "{story.text}"
                   </p>
                   {isLong && (
@@ -1062,9 +1070,9 @@ function Testimonials() {
                 <X className="w-5 h-5" />
               </button>
 
-              <Quotes className="w-8 h-8 text-[#D88A9A]/60 rotate-180" />
+              <Quote className="w-8 h-8 text-[#D88A9A]/60 rotate-180" />
 
-              <p className="text-base sm:text-lg font-medium text-brand-black italic leading-relaxed">
+              <p className="text-base sm:text-lg font-medium text-brand-black leading-relaxed">
                 "{selectedStory.text}"
               </p>
 
@@ -1174,7 +1182,7 @@ function Interaction() {
     {
       title: "Let’s Talk",
       desc: "If you need someone to listen, we are here for you. Feel free to reach out anytime.",
-      icon: <ChatCircle className="w-8 h-8 md:w-10 md:h-10" />,
+      icon: <MessageCircle className="w-8 h-8 md:w-10 md:h-10" />,
       btn: "Start a Conversation",
       activeStyle: "bg-white border-[#4A1F1F]/20 shadow-sm",
       inactiveStyle: "bg-white border-transparent shadow-sm opacity-60 hover:opacity-100",
@@ -1194,18 +1202,18 @@ function Interaction() {
     >
       {/* Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[900px] h-[900px] bg-zinc-50 border border-zinc-200 rounded-full opacity-50 blur-[100px]" />
+        <div className="w-[900px] h-[900px] bg-gradient-to-r from-[#FFF0F2] to-transparent rounded-full opacity-50 blur-[100px]" />
       </div>
 
       <div className="max-w-[1450px] mx-auto relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-8 px-6 lg:px-12">
 
         {/* LEFT */}
         <div className="w-full lg:w-4/12 text-center lg:text-left lg:pt-8 shrink-0">
-          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4 leading-tight text-[#4A1F1F]">
+          <h2 className="font-playfair text-4xl md:text-5xl lg:text-5xl font-bold mb-4 leading-tight text-[#4A1F1F]">
             We’re ready to walk this journey with you.
           </h2>
 
-          <p className="text-lg md:text-xl text-gray-500 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          <p className="font-playfair text-lg md:text-2xl text-gray-700 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
             Whether you want to come, need someone to pray with you, want to share your story, or feel called to serve, you are always welcome here.
           </p>
         </div>
@@ -1213,7 +1221,7 @@ function Interaction() {
         {/* RIGHT */}
         <div className="w-full lg:w-8/12 relative min-w-0">
           {/* Fade Indicator (Mobile & Tablet) */}
-          <div className="absolute right-0 top-0 bottom-0 w-12 bg-zinc-50 border border-zinc-200 z-20 pointer-events-none xl:hidden" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/40 to-transparent z-20 pointer-events-none xl:hidden" />
 
           <div
             ref={containerRef}
@@ -1351,6 +1359,14 @@ function Footer() {
           <ul className="space-y-2 text-sm text-white/60">
             <li>
               <a
+                href="#brand-new-day"
+                className="text-[#FADADD] hover:text-white transition-colors block cursor-pointer font-bold"
+              >
+                Brand New Day (Fellowship)
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://wa.me/6285175203004"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1400,17 +1416,17 @@ function Footer() {
             </li>
             <li>
               <a href="mailto:pmkagape@upnvj.ac.id" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Envelope className="w-4 h-4 shrink-0" /> pmkagape@upnvj.ac.id
+                <Mail className="w-4 h-4 shrink-0" /> pmkagape@upnvj.ac.id
               </a>
             </li>
             <li>
               <a href="https://www.instagram.com/pmk_agape?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                <InstagramLogo className="w-4 h-4 shrink-0" /> Instagram
+                <Instagram className="w-4 h-4 shrink-0" /> Instagram
               </a>
             </li>
             <li>
               <a href="https://www.tiktok.com/@pmk_agape?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                <MusicNotes className="w-4 h-4 shrink-0" /> TikTok
+                <Music className="w-4 h-4 shrink-0" /> TikTok
               </a>
             </li>
           </ul>
@@ -1419,13 +1435,67 @@ function Footer() {
 
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-white/40 font-semibold tracking-wide">
         <p>&copy; {new Date().getFullYear()} PMK Agape UPNVJ. All rights reserved.</p>
-        <p className="mt-2 md:mt-0 uppercase tracking-widest">To love and to serve.</p>
+        <p className="font-playfair text-sm mt-2 md:mt-0 tracking-widest text-white/60">To love and to serve.</p>
       </div>
     </footer>
   );
 }
 
+function isBrandNewDayRoute(): boolean {
+  if (typeof window === 'undefined') return false;
+  return (
+    window.location.hash === '#brand-new-day' ||
+    window.location.pathname === '/brand-new-day' ||
+    window.location.pathname.startsWith('/brand-new-day')
+  );
+}
+
 export default function App() {
+  const [currentView, setCurrentView] = useState<'home' | 'brand-new-day'>(() => {
+    return isBrandNewDayRoute() ? 'brand-new-day' : 'home';
+  });
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isBrandNewDayRoute()) {
+        setCurrentView('brand-new-day');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleRouteChange);
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange);
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
+
+  if (currentView === 'brand-new-day') {
+    return (
+      <ErrorBoundary
+        onHome={() => {
+          if (window.location.pathname.startsWith('/brand-new-day')) {
+            window.history.pushState(null, '', '/');
+          }
+          window.location.hash = '';
+          setCurrentView('home');
+        }}
+      >
+        <BrandNewDayApp
+          onBackToHome={() => {
+            if (window.location.pathname.startsWith('/brand-new-day')) {
+              window.history.pushState(null, '', '/');
+            }
+            window.location.hash = '';
+            setCurrentView('home');
+          }}
+        />
+      </ErrorBoundary>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
       <Header />

@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-brand-pink: #D88A9A;
-  --color-brand-pink-light: #F4EAEB;
-  --color-brand-black: #09090b;
+  --color-brand-pink: #FADADD;
+  --color-brand-pink-light: #FFF0F2;
+  --color-brand-black: #4A1F1F;
 
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Lora", Georgia, serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-display: "Lora", Georgia, serif;
 }
 
 html {
@@ -17,9 +19,17 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--color-brand-black);
-  background-color: #fafafa;
+  background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom font utility classes */
+.font-playfair,
+.font-lora,
+.font-cormorant,
+.font-sans-main {
+  font-family: 'Lora', Georgia, serif;
 }
 
 /* Hide scrollbar for clean horizontal scrolls if needed */
@@ -33,20 +43,30 @@ body {
 }
 
 .pmk-title {
-  font-weight: 800;
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+
   font-size: clamp(3.5rem, 10vw, 10rem);
   line-height: 0.9;
-  letter-spacing: -0.04em;
-  color: var(--color-brand-black);
+  letter-spacing: 0.08em;
+
+  /* Gradient Text */
+  background: linear-gradient(180deg, #7A2E2E 0%, #4A1F1F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* DEPTH */
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .pmk-sub {
+  font-family: 'Lora', Georgia, serif;
   font-size: clamp(1.2rem, 2.5vw, 2rem);
-  color: #52525b;
+  color: #4A1F1F;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 18px rgba(0, 0, 0, 0.08);
   max-width: 700px;
   line-height: 1.6;
-  font-weight: 500;
-  letter-spacing: -0.01em;
 }
 
 /* Global optimization */

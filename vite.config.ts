@@ -18,7 +18,7 @@ export default defineConfig(({mode}) => {
           manualChunks: {
             'react-vendor': ['react', 'react-dom'],
             'motion-vendor': ['motion'],
-            'icons-vendor': ['@phosphor-icons/react'],
+            'icons-vendor': ['lucide-react'],
           },
         },
       },
