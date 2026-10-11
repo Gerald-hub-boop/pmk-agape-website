@@ -64,12 +64,18 @@ import {
   Heart, Users, BookOpen, MessageCircle, MapPin,
   Calendar, ChevronRight, Star, Mail, ArrowRight,
   HandHeart, Send, Quote, Music, Sparkles, UserPlus, Mountain, Megaphone,
-  Flame, Menu, X, Activity, Smile, Handshake
+  Flame, Menu, X, Activity, Smile, Handshake,
+  CreditCard, Copy, Check, ExternalLink, Phone, MessageSquare
 } from 'lucide-react';
 import { InstagramLogo as Instagram } from '@phosphor-icons/react';
 
 export const triggerScrollToConnectCard = (index: number) => {
   const event = new CustomEvent('scroll-to-connect-card', { detail: index });
+  window.dispatchEvent(event);
+};
+
+export const triggerOpenFeaturedCampaign = (campaignId: string) => {
+  const event = new CustomEvent('open-featured-campaign', { detail: campaignId });
   window.dispatchEvent(event);
 };
 
@@ -116,7 +122,8 @@ function Header() {
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
     { name: "Meet The Team", href: "#family" },
-    { name: "Special Event: Brand New Day", href: "#brand-new-day" }
+    { name: "Special Event: Brand New Day", href: "#brand-new-day" },
+    { name: "Retreat 2026", href: "#retreat-2026" }
   ];
 
   return (
@@ -204,9 +211,31 @@ export interface FeaturedCampaignConfig {
   badge: string;
   title: string;
   description: string;
+  tags?: string[];
   modalDetails?: {
     subtitle: string;
     paragraphs: string[];
+    eventDetails?: {
+      date?: string;
+      location?: string;
+      locationAddress?: string;
+      locationMapsUrl?: string;
+      fee?: string;
+      feeNote?: string;
+      feeWarning?: string;
+    };
+    paymentInfo?: {
+      bank: string;
+      accountNumber: string;
+      accountHolder: string;
+      notes?: string[];
+    };
+    contactPersons?: {
+      name: string;
+      channel: string;
+      value: string;
+      url?: string;
+    }[];
   };
   buttonText: string;
   buttonLink: string;
@@ -214,6 +243,56 @@ export interface FeaturedCampaignConfig {
 }
 
 export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
+  {
+    id: "retreat-2026",
+    enabled: true,
+    badge: "PENDAFTARAN RETREAT 2026",
+    title: "Retreat PMK Agape 2026",
+    description: "Saatnya berhenti sejenak dari rutinitas, saling mengenal lebih dekat, dan bertumbuh dalam iman kepada Tuhan bersama keluarga PMK Agape.",
+    tags: ["24–25 Okt 2026", "Grand Pesona Hotel & Resort", "HTM Rp170k (Bisa Cicil 3x)"],
+    modalDetails: {
+      subtitle: "#Rooted to Grow, Growing to be Fruitful 🤍",
+      paragraphs: [
+        "Shalom Agapers! Retreat PMK Agape 2026 hadir untuk memberikan kesempatan buat kita semua berhenti sejenak dari rutinitas, saling mengenal lebih dekat, dan tentunya semakin bertumbuh dalam iman kepada Tuhan.",
+        "Mari persiapkan hati dan dirimu untuk mengalami perjumpaan yang menguatkan bersama teman-teman seiman di tempat yang tenang dan asri. Jangan lewatkan momen ini ya!"
+      ],
+      eventDetails: {
+        date: "24–25 Oktober 2026",
+        location: "Grand Pesona Hotel & Resort",
+        locationAddress: "Jl. Cilotoh No.126, Lemah Duhur, Kec. Caringin, Kabupaten Bogor, Jawa Barat 16730",
+        locationMapsUrl: "https://www.google.com/maps/search/?api=1&query=Grand+Pesona+Hotel+%26+Resort+Caringin+Bogor",
+        fee: "Rp170.000 / orang",
+        feeNote: "Pembayaran bisa dicicil hingga 3 kali, tenggat pembayaran terakhir 17 Oktober 2026.",
+        feeWarning: "Apabila sudah melakukan pembayaran namun tidak dapat hadir, uang yang telah dibayarkan tidak dapat dikembalikan."
+      },
+      paymentInfo: {
+        bank: "BANK BCA",
+        accountNumber: "1663310201",
+        accountHolder: "Osihanna Meita Kasih",
+        notes: [
+          "Bisa dicicil hingga 3 kali",
+          "Tenggat pembayaran terakhir: 17 Oktober 2026"
+        ]
+      },
+      contactPersons: [
+        {
+          name: "Dinda",
+          channel: "WhatsApp",
+          value: "081396101135",
+          url: "https://wa.me/6281396101135?text=Shalom%20kak%20Dinda,%20saya%20mau%20tanya%20seputar%20Retreat%20PMK%20Agape%202026"
+        },
+        {
+          name: "Nova",
+          channel: "Line",
+          value: "novaakristin",
+          url: "https://line.me/R/ti/p/~novaakristin"
+        }
+      ]
+    },
+    buttonText: "Daftar Retreat Sekarang",
+    buttonLink: "https://forms.gle/fnBSYhMEEDuQptDk8",
+    icon: <Mountain className="w-10 h-10 text-[#4A1F1F]" />
+  },
   {
     id: "pelayan",
     enabled: true,
@@ -236,8 +315,28 @@ export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
 
 function FeaturedCampaign() {
   const [activeModalConfig, setActiveModalConfig] = useState<FeaturedCampaignConfig | null>(null);
+  const [copiedAccount, setCopiedAccount] = useState(false);
 
   const activeCampaigns = featuredCampaignConfigs.filter((c) => c.enabled);
+
+  const handleCopyAccount = (accountNumber: string) => {
+    navigator.clipboard.writeText(accountNumber);
+    setCopiedAccount(true);
+    setTimeout(() => setCopiedAccount(false), 2000);
+  };
+
+  // Listen to external triggers (e.g. from Activities card)
+  useEffect(() => {
+    const handleOpenCampaign = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      const target = featuredCampaignConfigs.find((c) => c.id === customEvent.detail && c.enabled);
+      if (target) {
+        setActiveModalConfig(target);
+      }
+    };
+    window.addEventListener('open-featured-campaign', handleOpenCampaign);
+    return () => window.removeEventListener('open-featured-campaign', handleOpenCampaign);
+  }, []);
 
   // Disable body scroll when modal is open
   useEffect(() => {
@@ -283,11 +382,7 @@ function FeaturedCampaign() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="scroll-mt-28"
           >
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2] via-white to-[#FADADD]/40 border border-[#FADADD]/70 rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-[0_15px_45px_-15px_rgba(74,31,31,0.08)]">
-              {/* Ambient Glows */}
-              <div className="w-72 h-72 bg-[#D88A9A]/15 rounded-full blur-3xl absolute -top-12 -right-12 pointer-events-none" />
-              <div className="w-56 h-56 bg-[#FADADD]/25 rounded-full blur-2xl absolute -bottom-10 -left-10 pointer-events-none" />
-
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF0F2]/80 via-white to-[#FADADD]/30 border border-[#FADADD] rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-12 shadow-sm">
               <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 {/* Main Copy */}
                 <div className="max-w-2xl">
@@ -298,14 +393,28 @@ function FeaturedCampaign() {
                   </div>
 
                   {/* Title */}
-                  <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
+                  <h2 className="font-lora text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black tracking-tight mb-3 md:mb-4">
                     {campaign.title}
                   </h2>
 
                   {/* Description */}
-                  <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-8">
+                  <p className="text-gray-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-4 md:mb-5">
                     {campaign.description}
                   </p>
+
+                  {/* Tags Preview */}
+                  {campaign.tags && campaign.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
+                      {campaign.tags.map((tag, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="inline-flex items-center px-3 py-1 rounded-full bg-white text-[#4A1F1F] text-xs font-bold border border-[#FADADD] shadow-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   {/* CTA Buttons Row */}
                   <div className="flex flex-wrap items-center gap-4">
@@ -321,10 +430,11 @@ function FeaturedCampaign() {
 
                     {/* Mobile & Tablet Learn More button */}
                     <button
+                      type="button"
                       onClick={() => setActiveModalConfig(campaign)}
                       className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-[#D88A9A]/60 bg-white/80 text-[#4A1F1F] font-bold text-sm sm:text-base hover:bg-[#FFF0F2] hover:border-[#D88A9A] transition-all duration-300 cursor-pointer shadow-sm"
                     >
-                      <span>Learn More</span>
+                      <span>Info Lengkap</span>
                       <ChevronRight className="w-4 h-4 text-[#D88A9A]" />
                     </button>
                   </div>
@@ -337,11 +447,11 @@ function FeaturedCampaign() {
                     whileHover={{ scale: 1.03, y: -4 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="relative w-64 h-64 rounded-3xl bg-white/90  border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
+                    className="relative w-64 h-64 rounded-3xl bg-white/90 border border-[#FADADD] shadow-lg hover:shadow-2xl hover:border-[#D88A9A]/80 flex flex-col items-center justify-between p-6 text-center group cursor-pointer overflow-hidden transition-colors duration-300"
                   >
                     {/* Top indicator badge */}
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-[10px] font-bold tracking-wider uppercase border border-[#FADADD]/60 group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors duration-300">
-                      <span>Tap to Explore</span>
+                      <span>Lihat Detail</span>
                       <ArrowRight className="w-3 h-3 text-[#D88A9A] group-hover:text-brand-pink" />
                     </div>
 
@@ -356,7 +466,7 @@ function FeaturedCampaign() {
                         {campaign.title}
                       </span>
                       <span className="text-xs font-bold text-[#D88A9A] group-hover:text-[#4A1F1F] flex items-center justify-center gap-1 transition-colors duration-300">
-                        Learn More <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                        Buka Info <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                       </span>
                     </div>
                   </motion.div>
@@ -376,7 +486,7 @@ function FeaturedCampaign() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={() => setActiveModalConfig(null)}
-            className="fixed inset-0 z-50 bg-black/60  flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 sm:p-6"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -388,6 +498,7 @@ function FeaturedCampaign() {
             >
               {/* Close Button */}
               <button
+                type="button"
                 onClick={() => setActiveModalConfig(null)}
                 className="absolute top-5 right-5 p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors cursor-pointer"
                 aria-label="Close modal"
@@ -421,25 +532,193 @@ function FeaturedCampaign() {
               <div className="h-px bg-gray-100 w-full" />
 
               {/* Explanation Text */}
-              <div className="space-y-4 text-gray-700 text-sm sm:text-base font-medium leading-relaxed">
+              <div className="space-y-3 text-gray-700 text-sm sm:text-base font-medium leading-relaxed">
                 {activeModalConfig.modalDetails?.paragraphs.map((p, idx) => (
                   <p key={idx}>{p}</p>
                 ))}
               </div>
 
+              {/* Event Details Grid if present */}
+              {activeModalConfig.modalDetails?.eventDetails && (
+                <div className="bg-[#FFF0F2]/70 border border-[#FADADD] rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 text-sm">
+                  {/* Date */}
+                  {activeModalConfig.modalDetails.eventDetails.date && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shrink-0 border border-[#FADADD] text-[#4A1F1F] shadow-xs">
+                        <Calendar className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#D88A9A] block">Tanggal</span>
+                        <span className="text-brand-black font-bold text-sm sm:text-base">
+                          {activeModalConfig.modalDetails.eventDetails.date}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Location */}
+                  {activeModalConfig.modalDetails.eventDetails.location && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shrink-0 border border-[#FADADD] text-[#4A1F1F] shadow-xs">
+                        <MapPin className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#D88A9A] block">Lokasi</span>
+                        <span className="text-brand-black font-bold text-sm sm:text-base block">
+                          {activeModalConfig.modalDetails.eventDetails.location}
+                        </span>
+                        {activeModalConfig.modalDetails.eventDetails.locationAddress && (
+                          <span className="text-gray-600 text-xs leading-relaxed block mt-0.5">
+                            {activeModalConfig.modalDetails.eventDetails.locationAddress}
+                          </span>
+                        )}
+                        {activeModalConfig.modalDetails.eventDetails.locationMapsUrl && (
+                          <a
+                            href={activeModalConfig.modalDetails.eventDetails.locationMapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs font-bold text-[#4A1F1F] hover:text-[#D88A9A] mt-1 transition-colors"
+                          >
+                            <span>Buka di Google Maps</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Fee / HTM */}
+                  {activeModalConfig.modalDetails.eventDetails.fee && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shrink-0 border border-[#FADADD] text-[#4A1F1F] shadow-xs">
+                        <CreditCard className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#D88A9A] block">Biaya / HTM</span>
+                        <span className="text-brand-black font-extrabold text-base sm:text-lg block">
+                          {activeModalConfig.modalDetails.eventDetails.fee}
+                        </span>
+                        {activeModalConfig.modalDetails.eventDetails.feeNote && (
+                          <span className="text-gray-600 text-xs leading-relaxed block mt-0.5">
+                            {activeModalConfig.modalDetails.eventDetails.feeNote}
+                          </span>
+                        )}
+                        {activeModalConfig.modalDetails.eventDetails.feeWarning && (
+                          <span className="text-[#8B2635] text-[11px] leading-snug block mt-1.5 font-medium bg-white/80 p-2 rounded-xl border border-[#FADADD]/60">
+                            {activeModalConfig.modalDetails.eventDetails.feeWarning}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Payment Info Box if present */}
+              {activeModalConfig.modalDetails?.paymentInfo && (
+                <div className="bg-gradient-to-br from-[#4A1F1F] to-[#381717] text-white rounded-2xl p-4 sm:p-5 shadow-sm">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-bold tracking-widest uppercase text-[#FADADD]">
+                      Metode Pembayaran
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-white text-xs font-bold border border-white/20">
+                      {activeModalConfig.modalDetails.paymentInfo.bank}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/10 rounded-xl p-3 sm:p-3.5 border border-white/10">
+                    <div>
+                      <span className="text-xs text-white/70 block">Nomor Rekening:</span>
+                      <span className="text-lg sm:text-xl font-mono font-bold tracking-wider text-white">
+                        {activeModalConfig.modalDetails.paymentInfo.accountNumber}
+                      </span>
+                      <span className="text-xs text-[#FADADD] block mt-0.5">
+                        a.n. {activeModalConfig.modalDetails.paymentInfo.accountHolder}
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleCopyAccount(activeModalConfig.modalDetails!.paymentInfo!.accountNumber)}
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#4A1F1F] hover:bg-[#FFF0F2] text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer shrink-0"
+                    >
+                      {copiedAccount ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Tersalin!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Salin No. Rekening</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {activeModalConfig.modalDetails.paymentInfo.notes && activeModalConfig.modalDetails.paymentInfo.notes.length > 0 && (
+                    <ul className="mt-3 space-y-1 text-xs text-white/80">
+                      {activeModalConfig.modalDetails.paymentInfo.notes.map((note, nIdx) => (
+                        <li key={nIdx} className="flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#D88A9A] shrink-0" />
+                          <span>{note}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+
+              {/* Contact Persons if present */}
+              {activeModalConfig.modalDetails?.contactPersons && activeModalConfig.modalDetails.contactPersons.length > 0 && (
+                <div className="space-y-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500 block">
+                    Contact Person
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {activeModalConfig.modalDetails.contactPersons.map((cp, cpIdx) => (
+                      <a
+                        key={cpIdx}
+                        href={cp.url || '#'}
+                        target={cp.url ? "_blank" : undefined}
+                        rel={cp.url ? "noopener noreferrer" : undefined}
+                        className="p-3 rounded-2xl bg-[#FAFAFA] hover:bg-[#FFF0F2] border border-gray-100 hover:border-[#FADADD] transition-all flex items-center justify-between group cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center border border-gray-100 text-[#4A1F1F] group-hover:bg-[#4A1F1F] group-hover:text-white transition-colors shrink-0">
+                            {cp.channel === 'WhatsApp' ? <Phone className="w-4 h-4" /> : <MessageSquare className="w-4 h-4" />}
+                          </div>
+                          <div>
+                            <span className="text-xs font-bold text-brand-black block">
+                              {cp.name} ({cp.channel})
+                            </span>
+                            <span className="text-xs text-gray-500 font-mono">
+                              {cp.value}
+                            </span>
+                          </div>
+                        </div>
+                        {cp.url && (
+                          <ExternalLink className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#4A1F1F] transition-colors shrink-0" />
+                        )}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* CTA Buttons */}
               <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-3 items-center justify-end mt-2">
                 <button
+                  type="button"
                   onClick={() => setActiveModalConfig(null)}
                   className="w-full sm:w-auto px-6 py-3 rounded-full border border-gray-200 text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors order-2 sm:order-1 cursor-pointer"
                 >
-                  Maybe Later
+                  Tutup
                 </button>
                 <a
                   href={activeModalConfig.buttonLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setActiveModalConfig(null)}
                   className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#4A1F1F] text-white font-bold text-sm hover:bg-[#381717] shadow-md hover:shadow-lg transition-all text-center order-1 sm:order-2 cursor-pointer flex items-center justify-center gap-2"
                 >
                   <span>{activeModalConfig.buttonText}</span>
@@ -487,12 +766,6 @@ function About() {
       id="vision"
       className="py-16 md:py-24 px-6 bg-white relative scroll-mt-20 overflow-hidden"
     >
-      {/* Very subtle background texture */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="w-[600px] h-[600px] bg-[#FADADD]/10 rounded-full blur-[120px] absolute -top-32 -right-32" />
-        <div className="w-[400px] h-[400px] bg-[#FFF0F2]/20 rounded-full blur-[100px] absolute bottom-0 -left-20" />
-      </div>
-
       <div className="max-w-5xl mx-auto relative z-10">
 
         {/* ── Section Label ── */}
@@ -796,6 +1069,25 @@ function Activities() {
                     <div>
                       <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
                       <p className="text-gray-500 font-medium text-sm md:text-base leading-relaxed opacity-80">{act.desc}</p>
+                      {act.title === "Retreat" && (
+                        <div className="mt-4 pt-3 border-t border-[#FADADD]/50 flex flex-wrap items-center justify-between gap-2">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-xs font-bold border border-[#FADADD]">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#D88A9A] animate-pulse" />
+                            Pendaftaran Dibuka: 24–25 Okt 2026
+                          </span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              triggerOpenFeaturedCampaign("retreat-2026");
+                            }}
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4A1F1F] hover:text-[#7A2E2E] bg-[#FFF0F2] hover:bg-[#FADADD] px-3.5 py-1.5 rounded-full border border-[#FADADD] transition-colors cursor-pointer"
+                          >
+                            <span>Daftar & Info Lengkap</span>
+                            <ArrowRight className="w-3.5 h-3.5 text-[#D88A9A]" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1200,11 +1492,6 @@ function Interaction() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="pt-8 pb-10 md:pt-12 md:pb-14 bg-white relative overflow-hidden scroll-mt-20"
     >
-      {/* Background */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[900px] h-[900px] bg-gradient-to-r from-[#FFF0F2] to-transparent rounded-full opacity-50 blur-[100px]" />
-      </div>
-
       <div className="max-w-[1450px] mx-auto relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-8 px-6 lg:px-12">
 
         {/* LEFT */}
