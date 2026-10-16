@@ -1196,10 +1196,16 @@ function LeadershipCard({ m, avatarUrl }: LeadershipCardProps) {
               <div className="absolute inset-0 z-10 bg-white/85 " />
 
               {/* Layer 3: Content */}
-              <div className="relative z-20 flex flex-col items-center justify-center h-full p-6 text-center">
-                <Quote className="w-6 h-6 text-brand-pink fill-brand-pink/50 mb-3 drop-shadow-sm opacity-90" />
-                <p className="font-playfair text-[14px] md:text-[15px] font-medium text-brand-black mb-3 leading-relaxed tracking-wide">"{m.message}"</p>
-                <p className="text-xs font-black text-brand-black uppercase tracking-widest mt-auto opacity-70">- {m.author || m.name}</p>
+              <div className="relative z-20 flex flex-col items-center justify-between h-full p-5 text-center">
+                <Quote className="w-5 h-5 text-brand-pink fill-brand-pink/50 drop-shadow-sm opacity-90 shrink-0" />
+                <div className="my-auto py-1 flex items-center justify-center">
+                  <p className={`font-playfair ${m.message.length > 150 ? "text-[11px] md:text-xs" : "text-xs md:text-[13px]"} font-medium text-brand-black leading-relaxed tracking-wide`}>
+                    "{m.message}"
+                  </p>
+                </div>
+                <p className="text-[10px] md:text-[11px] font-bold text-brand-black uppercase tracking-wider opacity-70 shrink-0">
+                  - {m.author || m.name}
+                </p>
               </div>
             </>
           )}
@@ -1278,6 +1284,10 @@ function Testimonials() {
     {
       text: `super happy karena bisa kenal orang baru di PMK Agape yang very welcome and warm. hopefully after this, more and more "reasons" will appear to make me be here and grow in God together w them`,
       author: "Natta FH 25"
+    },
+    {
+      text: `PMK Agape adalah tempat di mana aku bisa bertumbuh dalam iman. Di sini aku belajar untuk mengasihi diri sendiri dan orang lain lewat kasih Tuhan. Buat aku, PMK Agape juga jadi tempat yang nyaman, di mana aku merasa diterima dan bisa menjadi diri sendiri tanpa takut dihakimi.`,
+      author: "Mita FEB 25"
     },
   ];
 
