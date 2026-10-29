@@ -56,8 +56,6 @@ import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.w
 import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
 import { LetsTalkModal } from './components/LetsTalkModal';
-import { BrandNewDayApp } from './brand-new-day/BrandNewDayApp';
-import { ErrorBoundary } from './brand-new-day/components/ErrorBoundary';
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -121,9 +119,7 @@ function Header() {
   const navLinks = [
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
-    { name: "Meet The Team", href: "#family" },
-    { name: "Special Event: Brand New Day", href: "#brand-new-day" },
-    { name: "Retreat 2026", href: "#retreat-2026" }
+    { name: "Meet The Team", href: "#family" }
   ];
 
   return (
@@ -243,56 +239,6 @@ export interface FeaturedCampaignConfig {
 }
 
 export const featuredCampaignConfigs: FeaturedCampaignConfig[] = [
-  {
-    id: "retreat-2026",
-    enabled: true,
-    badge: "PENDAFTARAN RETREAT 2026",
-    title: "Retreat PMK Agape 2026",
-    description: "Saatnya berhenti sejenak dari rutinitas, saling mengenal lebih dekat, dan bertumbuh dalam iman kepada Tuhan bersama keluarga PMK Agape.",
-    tags: ["24–25 Okt 2026", "Grand Pesona Hotel & Resort", "HTM Rp170k (Bisa Cicil 3x)"],
-    modalDetails: {
-      subtitle: "#Rooted to Grow, Growing to be Fruitful 🤍",
-      paragraphs: [
-        "Shalom Agapers! Retreat PMK Agape 2026 hadir untuk memberikan kesempatan buat kita semua berhenti sejenak dari rutinitas, saling mengenal lebih dekat, dan tentunya semakin bertumbuh dalam iman kepada Tuhan.",
-        "Mari persiapkan hati dan dirimu untuk mengalami perjumpaan yang menguatkan bersama teman-teman seiman di tempat yang tenang dan asri. Jangan lewatkan momen ini ya!"
-      ],
-      eventDetails: {
-        date: "24–25 Oktober 2026",
-        location: "Grand Pesona Hotel & Resort",
-        locationAddress: "Jl. Cilotoh No.126, Lemah Duhur, Kec. Caringin, Kabupaten Bogor, Jawa Barat 16730",
-        locationMapsUrl: "https://www.google.com/maps/search/?api=1&query=Grand+Pesona+Hotel+%26+Resort+Caringin+Bogor",
-        fee: "Rp170.000 / orang",
-        feeNote: "Pembayaran bisa dicicil hingga 3 kali, tenggat pembayaran terakhir 17 Oktober 2026.",
-        feeWarning: "Apabila sudah melakukan pembayaran namun tidak dapat hadir, uang yang telah dibayarkan tidak dapat dikembalikan."
-      },
-      paymentInfo: {
-        bank: "BANK BCA",
-        accountNumber: "1663310201",
-        accountHolder: "Osihanna Meita Kasih",
-        notes: [
-          "Bisa dicicil hingga 3 kali",
-          "Tenggat pembayaran terakhir: 17 Oktober 2026"
-        ]
-      },
-      contactPersons: [
-        {
-          name: "Dinda",
-          channel: "WhatsApp",
-          value: "081396101135",
-          url: "https://wa.me/6281396101135?text=Shalom%20kak%20Dinda,%20saya%20mau%20tanya%20seputar%20Retreat%20PMK%20Agape%202026"
-        },
-        {
-          name: "Nova",
-          channel: "Line",
-          value: "novaakristin",
-          url: "https://line.me/R/ti/p/~novaakristin"
-        }
-      ]
-    },
-    buttonText: "Daftar Retreat Sekarang",
-    buttonLink: "https://forms.gle/fnBSYhMEEDuQptDk8",
-    icon: <Mountain className="w-10 h-10 text-[#4A1F1F]" />
-  },
   {
     id: "pelayan",
     enabled: true,
@@ -1069,25 +1015,7 @@ function Activities() {
                     <div>
                       <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-2.5 leading-tight text-[#5A1E1E] group-hover:translate-x-1 transition-transform duration-300">{act.title}</h3>
                       <p className="text-gray-500 font-medium text-sm md:text-base leading-relaxed opacity-80">{act.desc}</p>
-                      {act.title === "Retreat" && (
-                        <div className="mt-4 pt-3 border-t border-[#FADADD]/50 flex flex-wrap items-center justify-between gap-2">
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF0F2] text-[#4A1F1F] text-xs font-bold border border-[#FADADD]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D88A9A] animate-pulse" />
-                            Pendaftaran Dibuka: 24–25 Okt 2026
-                          </span>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              triggerOpenFeaturedCampaign("retreat-2026");
-                            }}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4A1F1F] hover:text-[#7A2E2E] bg-[#FFF0F2] hover:bg-[#FADADD] px-3.5 py-1.5 rounded-full border border-[#FADADD] transition-colors cursor-pointer"
-                          >
-                            <span>Daftar & Info Lengkap</span>
-                            <ArrowRight className="w-3.5 h-3.5 text-[#D88A9A]" />
-                          </button>
-                        </div>
-                      )}
+
                     </div>
                   </div>
                 </div>
@@ -1654,14 +1582,7 @@ function Footer() {
         <div>
           <h3 className="font-semibold text-lg mb-4">Get Involved</h3>
           <ul className="space-y-2 text-sm text-white/60">
-            <li>
-              <a
-                href="#brand-new-day"
-                className="text-[#FADADD] hover:text-white transition-colors block cursor-pointer font-bold"
-              >
-                Brand New Day (Fellowship)
-              </a>
-            </li>
+
             <li>
               <a
                 href="https://wa.me/6285175203004"
@@ -1738,61 +1659,7 @@ function Footer() {
   );
 }
 
-function isBrandNewDayRoute(): boolean {
-  if (typeof window === 'undefined') return false;
-  return (
-    window.location.hash === '#brand-new-day' ||
-    window.location.pathname === '/brand-new-day' ||
-    window.location.pathname.startsWith('/brand-new-day')
-  );
-}
-
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'brand-new-day'>(() => {
-    return isBrandNewDayRoute() ? 'brand-new-day' : 'home';
-  });
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      if (isBrandNewDayRoute()) {
-        setCurrentView('brand-new-day');
-      } else {
-        setCurrentView('home');
-      }
-    };
-
-    window.addEventListener('hashchange', handleRouteChange);
-    window.addEventListener('popstate', handleRouteChange);
-    return () => {
-      window.removeEventListener('hashchange', handleRouteChange);
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, []);
-
-  if (currentView === 'brand-new-day') {
-    return (
-      <ErrorBoundary
-        onHome={() => {
-          if (window.location.pathname.startsWith('/brand-new-day')) {
-            window.history.pushState(null, '', '/');
-          }
-          window.location.hash = '';
-          setCurrentView('home');
-        }}
-      >
-        <BrandNewDayApp
-          onBackToHome={() => {
-            if (window.location.pathname.startsWith('/brand-new-day')) {
-              window.history.pushState(null, '', '/');
-            }
-            window.location.hash = '';
-            setCurrentView('home');
-          }}
-        />
-      </ErrorBoundary>
-    );
-  }
-
   return (
     <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
       <Header />
