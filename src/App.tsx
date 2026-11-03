@@ -56,6 +56,7 @@ import imgPelayananPribadi from './images-optimized/WhatWeDo/Pelayanan Pribadi.w
 import imgPMKS33hat from './images-optimized/WhatWeDo/PMK S33hat.webp';
 import { CinematicHero } from './components/CinematicHero';
 import { LetsTalkModal } from './components/LetsTalkModal';
+import { SpecialEventPage } from './special-event/SpecialEventPage';
 
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -77,14 +78,27 @@ export const triggerOpenFeaturedCampaign = (campaignId: string) => {
   window.dispatchEvent(event);
 };
 
-function Header() {
-  const [activeSection, setActiveSection] = useState('home');
+interface HeaderProps {
+  currentView?: 'home' | 'special-event';
+  onNavigate?: (view: 'home' | 'special-event', sectionId?: string) => void;
+}
+
+function Header({ currentView = 'home', onNavigate }: HeaderProps) {
+  const [activeSection, setActiveSection] = useState(currentView === 'special-event' ? 'special-event' : 'home');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "PMK Agape";
-  }, []);
+    if (currentView === 'home') {
+      document.title = "PMK Agape";
+    }
+  }, [currentView]);
+
+  useEffect(() => {
+    if (currentView === 'special-event') {
+      setActiveSection('special-event');
+    }
+  }, [currentView]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,6 +109,11 @@ function Header() {
   }, []);
 
   useEffect(() => {
+    if (currentView === 'special-event') {
+      setActiveSection('special-event');
+      return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
       let isAnyIntersecting = false;
       entries.forEach(entry => {
@@ -114,20 +133,67 @@ function Header() {
     sections.forEach(section => observer.observe(section));
 
     return () => sections.forEach(section => observer.unobserve(section));
-  }, []);
+  }, [currentView]);
 
   const navLinks = [
     { name: "Vision & Mission", href: "#vision" },
     { name: "What We Do?", href: "#events" },
-    { name: "Meet The Team", href: "#family" }
+    { name: "Meet The Team", href: "#family" },
+    { name: "Special Event", href: "#special-event" }
   ];
 
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "#special-event") {
+      e.preventDefault();
+      onNavigate?.('special-event');
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    if (currentView === 'special-event') {
+      e.preventDefault();
+      onNavigate?.('home', href);
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+      return;
+    }
+
+    setMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (currentView === 'special-event') {
+      e.preventDefault();
+      onNavigate?.('home');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleJoinUsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (currentView === 'special-event') {
+      e.preventDefault();
+      onNavigate?.('home', '#connect');
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        triggerScrollToConnectCard(0);
+      }, 100);
+      return;
+    }
+    triggerScrollToConnectCard(0);
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90  shadow-sm border-b-transparent' : 'bg-white/80  border-b border-[#FFF0F2]'}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 shadow-sm border-b-transparent' : 'bg-white/80 border-b border-[#FFF0F2]'}`}>
 
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 cursor-pointer group">
+        <a href="#home" onClick={handleLogoClick} className="flex items-center gap-3 cursor-pointer group">
           <div className="w-10 h-10 rounded-xl bg-[#FFF0F2] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105">
             <img
               src={logo}
@@ -142,17 +208,25 @@ function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className={`text-sm font-semibold transition-colors relative pb-1 ${activeSection === link.href.substring(1) ? 'text-brand-black' : 'text-gray-400 hover:text-brand-black'}`}>
-              {link.name}
-              {activeSection === link.href.substring(1) && (
-                <motion.div layoutId="navIndicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D88A9A] rounded-full" />
-              )}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.substring(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
+                className={`text-sm font-semibold transition-colors relative pb-1 ${isActive ? 'text-brand-black font-bold' : 'text-gray-400 hover:text-brand-black'}`}
+              >
+                {link.name}
+                {isActive && (
+                  <motion.div layoutId="navIndicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D88A9A] rounded-full" />
+                )}
+              </a>
+            );
+          })}
           <a
             href="#connect"
-            onClick={() => triggerScrollToConnectCard(0)}
+            onClick={handleJoinUsClick}
             className="px-6 py-2.5 bg-[#FFF0F2] text-brand-black hover:bg-brand-pink hover:text-white rounded-full text-sm font-bold transition-colors"
           >
             Join Us
@@ -178,7 +252,7 @@ function Header() {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
                 className={`text-lg font-bold ${activeSection === link.href.substring(1) ? 'text-[#C06C84]' : 'text-gray-600'}`}
               >
                 {link.name}
@@ -186,10 +260,7 @@ function Header() {
             ))}
             <a
               href="#connect"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                triggerScrollToConnectCard(0);
-              }}
+              onClick={handleJoinUsClick}
               className="w-full py-4 text-center bg-brand-black text-white rounded-full font-bold mt-2"
             >
               Join Us
@@ -1561,7 +1632,7 @@ function Interaction() {
 
 
 
-function Footer() {
+function Footer({ onNavigate }: { onNavigate?: (view: 'home' | 'special-event') => void }) {
   return (
     <footer className="bg-[#111111] text-white py-16 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-white/10 pb-12 mb-8">
@@ -1582,7 +1653,20 @@ function Footer() {
         <div>
           <h3 className="font-semibold text-lg mb-4">Get Involved</h3>
           <ul className="space-y-2 text-sm text-white/60">
-
+            <li>
+              <a
+                href="#special-event"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate?.('special-event');
+                  window.location.hash = '#special-event';
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="text-[#FADADD] hover:text-white transition-colors block cursor-pointer font-bold"
+              >
+                Special Event: A Different Pace
+              </a>
+            </li>
             <li>
               <a
                 href="https://wa.me/6285175203004"
@@ -1659,10 +1743,75 @@ function Footer() {
   );
 }
 
+function isSpecialEventRoute(): boolean {
+  if (typeof window === 'undefined') return false;
+  const hash = window.location.hash.toLowerCase();
+  const path = window.location.pathname.toLowerCase();
+  return (
+    hash === '#special-event' ||
+    hash === '#a-different-pace' ||
+    path === '/special-event' ||
+    path.startsWith('/special-event') ||
+    path === '/a-different-pace' ||
+    path.startsWith('/a-different-pace')
+  );
+}
+
 export default function App() {
+  const [currentView, setCurrentView] = useState<'home' | 'special-event'>(() => {
+    return isSpecialEventRoute() ? 'special-event' : 'home';
+  });
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isSpecialEventRoute()) {
+        setCurrentView('special-event');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleRouteChange);
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange);
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
+
+  const handleNavigate = (view: 'home' | 'special-event', sectionId?: string) => {
+    setCurrentView(view);
+    if (view === 'special-event') {
+      window.location.hash = '#special-event';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      if (sectionId) {
+        window.location.hash = sectionId;
+      } else {
+        window.location.hash = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  if (currentView === 'special-event') {
+    return (
+      <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
+        <Header currentView="special-event" onNavigate={handleNavigate} />
+        <SpecialEventPage
+          onBackToHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans bg-white selection:bg-brand-pink selection:text-brand-black">
-      <Header />
+      <Header currentView="home" onNavigate={handleNavigate} />
       <CinematicHero />
 
       <FeaturedCampaign />
@@ -1672,7 +1821,7 @@ export default function App() {
       <Leadership />
       <Testimonials />
       <Interaction />
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
     </div>
   );
 }
