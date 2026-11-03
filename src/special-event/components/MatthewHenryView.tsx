@@ -24,11 +24,11 @@ export const MatthewHenryView: React.FC<MatthewHenryViewProps> = ({ onBackToMain
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#FFF0F2] text-[#4A1F1F] text-xs sm:text-sm font-semibold border border-[#FADADD] transition-colors shadow-2xs"
         >
           <ArrowLeft className="w-4 h-4 text-[#C06C84]" />
-          <span>Kembali ke A Different Pace</span>
+          <span>Kembali ke Flashcard</span>
         </button>
 
         <span className="text-xs font-semibold text-[#C06C84] bg-[#FFF0F2] px-3 py-1 rounded-full border border-[#FADADD]/60">
-          Tahap Interpretasi PA
+          Matthew Henry's Commentary
         </span>
       </div>
 
@@ -176,7 +176,7 @@ export const MatthewHenryView: React.FC<MatthewHenryViewProps> = ({ onBackToMain
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#4A1F1F] text-white hover:bg-[#5A1E1E] text-xs sm:text-sm font-semibold transition-colors shadow-2xs"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Kembali ke Flashcard A Different Pace</span>
+            <span>Kembali ke Flashcard</span>
           </button>
 
           <button
@@ -191,3 +191,4 @@ export const MatthewHenryView: React.FC<MatthewHenryViewProps> = ({ onBackToMain
     </div>
   );
 };
+

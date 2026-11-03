@@ -10,7 +10,7 @@ interface SpecialEventPageProps {
 }
 
 export const SpecialEventPage: React.FC<SpecialEventPageProps> = ({ onBackToHome }) => {
-  const [activeStage, setActiveStage] = useState<'observasi' | 'interpretasi'>('observasi');
+  const [activeTab, setActiveTab] = useState<'flashcard' | 'commentary'>('flashcard');
   const [activeFlashcardMode, setActiveFlashcardMode] = useState<'viewer' | 'all'>('viewer');
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0);
 
@@ -71,55 +71,55 @@ export const SpecialEventPage: React.FC<SpecialEventPageProps> = ({ onBackToHome
           </div>
         </header>
 
-        {/* ──────────────── STAGE SELECTOR: OBSERVASI VS INTERPRETASI ──────────────── */}
+        {/* ──────────────── TAB SELECTOR: FLASHCARD VS MATTHEW HENRY'S COMMENTARY ──────────────── */}
         <div className="flex items-center justify-center mb-8">
           <div className="inline-flex p-1 bg-[#FFF0F2] rounded-full border border-[#FADADD]">
             <button
               type="button"
               onClick={() => {
-                setActiveStage('observasi');
+                setActiveTab('flashcard');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
-                activeStage === 'observasi'
+                activeTab === 'flashcard'
                   ? 'bg-white text-[#4A1F1F] shadow-2xs font-bold'
                   : 'text-gray-600 hover:text-[#4A1F1F]'
               }`}
             >
               <Layers className="w-3.5 h-3.5 text-[#C06C84]" />
-              <span>Observasi (Flashcard)</span>
+              <span>Flashcard</span>
             </button>
 
             <button
               type="button"
               onClick={() => {
-                setActiveStage('interpretasi');
+                setActiveTab('commentary');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
-                activeStage === 'interpretasi'
+                activeTab === 'commentary'
                   ? 'bg-white text-[#4A1F1F] shadow-2xs font-bold'
                   : 'text-gray-600 hover:text-[#4A1F1F]'
               }`}
             >
               <BookOpen className="w-3.5 h-3.5 text-[#C06C84]" />
-              <span>Interpretasi (Commentary)</span>
+              <span>Matthew Henry's Commentary</span>
             </button>
           </div>
         </div>
 
         {/* ──────────────── MAIN CONTENT AREA ──────────────── */}
         <main>
-          {activeStage === 'interpretasi' ? (
+          {activeTab === 'commentary' ? (
             /* Tampilan Khusus Commentary Matthew Henry */
             <MatthewHenryView
               onBackToMain={() => {
-                setActiveStage('observasi');
+                setActiveTab('flashcard');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             />
           ) : (
-            /* Tampilan Tahap Observasi: Flashcard Deck / Grid */
+            /* Tampilan Flashcard: Deck / Grid */
             <div>
               {/* Sub-Mode Switcher: Viewer vs All */}
               <div className="flex items-center justify-center mb-6">
@@ -166,24 +166,24 @@ export const SpecialEventPage: React.FC<SpecialEventPageProps> = ({ onBackToHome
                 />
               )}
 
-              {/* ──────────────── DEDICATED INTERPRETASI RESOURCE CARD ──────────────── */}
+              {/* ──────────────── DEDICATED MATTHEW HENRY COMMENTARY RESOURCE CARD ──────────────── */}
               <section className="mt-12 p-6 sm:p-7 bg-[#FFF9FA] rounded-3xl border border-[#FADADD] flex flex-col sm:flex-row sm:items-center justify-between gap-5 shadow-2xs">
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#C06C84] bg-white px-2.5 py-0.5 rounded-full border border-[#FADADD]/60">
-                    Tahap Interpretasi PA
+                    Referensi Tambahan
                   </span>
                   <h3 className="text-lg sm:text-xl font-bold text-[#4A1F1F] font-serif mt-2 mb-1.5">
                     Matthew Henry's Commentary
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-600 max-w-xl leading-relaxed">
-                    Referensi tafsiran Mazmur 46:1–12 untuk menggali makna teologis mengenai kedaulatan Allah, pemeliharaan-Nya, dan ketenangan bagi umat-Nya.
+                    Tafsiran Mazmur 46:1–12 untuk menggali makna teologis mengenai kedaulatan Allah, pemeliharaan-Nya, dan ketenangan bagi umat-Nya.
                   </p>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => {
-                    setActiveStage('interpretasi');
+                    setActiveTab('commentary');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#4A1F1F] text-white hover:bg-[#5A1E1E] text-xs sm:text-sm font-bold transition-colors shadow-2xs active:scale-95"

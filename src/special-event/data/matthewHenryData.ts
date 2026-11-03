@@ -88,3 +88,4 @@ export const MATTHEW_HENRY_DATA: MatthewHenryCommentaryData = {
     ],
   },
 };
+
